@@ -23,7 +23,8 @@ LIB_INC		+=	$(INC)
 SRC			:=	n-puzzle.c\
 				init_board.c\
 				parse_cmd.c\
-				move.c
+				move.c\
+				check_error.c
 
 
 OBJ			:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))

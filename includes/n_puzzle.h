@@ -29,9 +29,6 @@ typedef struct	s_puzzle
 }				t_puzzle;
 
 
-/*
-**		.c
-*/
 
 void 		init_board(t_puzzle *puzzle);
 void   		parse_cmd(t_puzzle *puzzle, int argc, char **argv);
@@ -40,6 +37,7 @@ void 		up(t_puzzle *puzzle);
 void 		down(t_puzzle *puzzle);
 void 		left(t_puzzle *puzzle);
 void 		right(t_puzzle *puzzle);
+void 		check_error(t_puzzle puzzle);
 
 
 #endif

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   n-puzzle.c                                           :+:      :+:    :+:   */
+/*   check_error.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,51 +12,57 @@
 
 #include "n_puzzle.h"
 
-void print_board(t_puzzle puzzle)
+int  *create_list(t_puzzle puzzle)
+{
+    int *list;
+    int     i;
+    int     j;
+    int     pos;
+
+    i = 0;
+    pos = 0;
+    list = malloc(sizeof(int) * (puzzle.board_size * puzzle.board_size - 1));
+    while (i < puzzle.board_size)
+    {
+        j = 0;
+        while (j < puzzle.board_size)
+        {
+            if (puzzle.board[i][j] != 0)
+                list[pos++] = puzzle.board[i][j];
+                printf("% d", list[pos - 1]);
+            j++;
+        }
+        i++;
+    }
+    return (list);
+}
+
+void check_error(t_puzzle puzzle)
 {
     int i;
     int j;
+    int *list;
+    int size;
+    int inversion;
 
-    printf("\n++++++++ BOARD ++++++\n");
+    inversion = 0;
+    size = puzzle.board_size;
+    list = create_list(puzzle);
+
     i = 0;
-    while (i < puzzle.board_size)
+    while (i < size * size - 1)
     {
-        j = 0;
-        while (j < puzzle.board_size)
-            printf("% .2d", puzzle.board[i][j++]);
+        j = i + 1;
+        while (j < size * size - 1)
+        {
+            if (list[i] > list[j++])
+                inversion++;
+        }
         i++;
-        printf("\n");
     }
-    printf("\n");
+    if (inversion % 2)
+        printf("\nBoard not valid.\n");
+    else
+        printf("\nBoard valid.\n");
 
-    printf("\n+++++++++ GOAL ++++++\n");
-    i = 0;
-    j = 0;
-    while (i < puzzle.board_size)
-    {
-        j = 0;
-        while (j < puzzle.board_size)
-            printf("% .2d", puzzle.goal[i][j++]);
-        i++;
-        printf("\n");
-    }
-    printf("\n");
-}
-
-int main(int argc, char **argv)
-{
-    t_puzzle    puzzle;
-
-    ft_memset((void *)&puzzle, 0, sizeof(t_puzzle));
-    parse_cmd(&puzzle, argc, argv);
-    puzzle.board_size = 8;
-    init_board(&puzzle);
-    print_board(puzzle);
-//    int i = puzzle->board[0][1];
-//    puzzle->board[0][1] = puzzle->board[0][0];
-//    puzzle->board[0][0] = i;
-    check_error(puzzle);
-//    solve();
-//    print_sol();
-//    free_all();
 }
