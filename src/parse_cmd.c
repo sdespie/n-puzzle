@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   n_puzzle.h                                           :+:      :+:    :+:   */
+/*   parse_cmd.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,36 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
-# include "libft.h"
-# include <stdio.h>
+#include "n_puzzle.h"
 
-typedef struct	s_puzzle
+void   parse_cmd(t_puzzle *puzzle, int argc, char **argv)
 {
-	int			**board;
-	int			**goal;
-	int			board_size;
-	int			nbr_check;
-	int			nbr_move;
-	int 		x_zero;
-	int 		y_zero;
-	int			input;
-	void		(*heuristic)();
-}				t_puzzle;
-
-
-/*
-**		.c
-*/
-
-void 		init_board(t_puzzle *puzzle);
-void   		parse_cmd(t_puzzle *puzzle, int argc, char **argv);
-void 		print_board(t_puzzle puzzle);
-void 		up(t_puzzle *puzzle);
-void 		down(t_puzzle *puzzle);
-void 		left(t_puzzle *puzzle);
-void 		right(t_puzzle *puzzle);
-
-
-#endif
+    (void) argv;
+    (void) argc;
+    (void) puzzle;
+}
