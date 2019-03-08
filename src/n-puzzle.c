@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   n-puzzle.c                                           :+:      :+:    :+:   */
+/*   n-puzzle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,6 +11,14 @@
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
+
+
+//TODO:
+//CONTINUE PARSE_FILE  
+// CHECK_ERROR NON FONCTIONNEL
+// VERIFIER ERREOR FILE
+// PROTEGER ERROR MALLOC
+
 
 void print_board(t_puzzle puzzle)
 {
@@ -48,9 +56,7 @@ int main(int argc, char **argv)
     t_puzzle    puzzle;
 
     ft_memset((void *)&puzzle, 0, sizeof(t_puzzle));
-    parse_cmd(&puzzle, argc, argv);
-    puzzle.board_size = 8;
-    init_board(&puzzle);
+    parse_cmd(&puzzle, argc, argv, 1);
     print_board(puzzle);
 //    int i = puzzle->board[0][1];
 //    puzzle->board[0][1] = puzzle->board[0][0];
