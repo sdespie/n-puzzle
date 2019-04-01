@@ -18,6 +18,17 @@
 
 # define CMD_SIZE	2
 
+typedef struct s_state
+{
+	int 		**board;
+	int 		eval;
+	int 		g;
+	int 		h;
+	int 		x_zero;
+	int 		y_zero;
+	t_state     *next;
+}				t_state;
+
 typedef struct	s_puzzle
 {
 	int			**board;
@@ -26,15 +37,12 @@ typedef struct	s_puzzle
 	int			board_size;
 	int			nbr_check;
 	int			nbr_move;
-	int 		x_zero;
-	int 		y_zero;
 	int			input;
 	int 		error_p;
 	int 		error_sign;
 	void		(*heuristic)();
+	t_state		*queue;
 }				t_puzzle;
-
-
 
 void 		init_board(t_puzzle *puzzle);
 void 		parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index);
