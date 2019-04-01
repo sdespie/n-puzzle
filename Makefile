@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sde-spie <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/01/15 19:21:15 by sde-spie         ###   ########.fr        #
+#    Updated: 2019/04/01 21:25:03 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,24 +21,27 @@ LIB_INC		:=	-I $(LIBFT_DIR)/includes
 LIB_INC		+=	$(INC)
 
 SRC			:=	n-puzzle.c\
-				init_board.c\
+				board.c\
 				parse_cmd.c\
 				move.c\
 				check_error.c\
-				exit_error.c\
+				error.c\
 				ft_atoi_long.c\
 				utils.c\
 				heuristic.c\
 				free.c\
-				ft_strjoin_free.c
+				ft_strjoin_free.c \
+				print.c \
+				state.c
+
 
 
 OBJ			:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 CC			:=	gcc -g
 CFG			:=	-O3
-CFG			+=	-Wall -Wextra
-CFG			+=	#-fsanitize=address
+CFG			+=	#-Wall -Wextra
+CFG			+=	-fsanitize=address
 NAME		:=	n-puzzle
 
 # rules
@@ -70,6 +73,7 @@ fclean: clean
 	@make -C $(LIBFT_DIR) fclean
 	@echo "\033[1;34mN-Puzzle\t\033[1;33mFull Cleaning\t\033[0;32m[OK]\033[0m"
 
+f: fclean
 re: fclean all
 
 .PHONY: all clean fclean re lib
