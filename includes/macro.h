@@ -16,5 +16,6 @@
 # define CMD_SIZE	2
 # define OK 1
 # define KO 0
+# define ABS(x) (x < 0 ? -x : x)
 
 #endif

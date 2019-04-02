@@ -12,7 +12,52 @@
 
 #include "n_puzzle.h"
 
-void manhanttan(){}
+int		man_dist(t_puzzle *puzzle, t_state *state, int i)
+{
+	int		value;
+	int 	j;
+	int 	dist;
 
-void h(){}
+	dist = 0;
+	j = 0;
+	value = puzzle->goal[i];
+	while (state->board[j] != value)
+		j++;
+	dist += ABS((j % puzzle->board->size) - (i % puzzle->board->size))
+	dist += ABS((j / puzzle->board->size) - (i / puzzle->board->size))
+	return (dist)
+}
+
+//Manhattan Distance : calc the number of move to do for all the tiles
+
+void 	manhanttan(t_puzzle *puzzle, t_state *state)
+{
+	int i;
+
+	i = 0;
+	state->h = 0;
+	while (i < puzzle->board_size)
+		state->h += man_dist(puzzle, state, i);
+	state->g += 1;
+}
+
+//Hamming Distance : calc the number of missplaced tiles
+
+void h(t_puzzle *puzzle, t_state *state)
+{
+	int		i;
+
+	i = 0;
+	state->h = 0;
+	while (i < puzzle->board_size)
+	{
+		if (puzzle->goal[i] != state->board[i])
+			state->h += 1;
+		i++;
+	}
+	state->g += 1;
+}
+
+// Euclidean
+
 void p(){}

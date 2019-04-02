@@ -18,65 +18,60 @@
 
 void 		up(t_state *state)
 {
-    // int    x;
-    // int    y;
-	//
-    // x = state->x_zero;
-    // y = state->y_zero;
-	//
-    // if (state->y_zero != state->board_size - 1)
-    // {
-    //     state->board[y][x] = state->board[y + 1][x];
-    //     state->board[y + 1][x] = 0;
-    //     state->y_zero++;
-    // }
+    int		pos;
+	int		size;
+
+	pos = state->zero;
+	size = state->board_count;
+	if (pos < size * (size - 1))
+ 	{
+    	state->board[pos] = state->board[pos + size];
+		state->board[pos + size] = 0;
+    	state->zero = pos + size;
+    }
 }
 
 void 		down(t_state *state)
 {
-    // int    x;
-    // int    y;
-	//
-    // x = state->x_zero;
-    // y = state->y_zero;
-	//
-    // if (state->y_zero != 0)
-    // {
-    //     state->board[y][x] = state->board[y - 1][x];
-    //     state->board[y - 1][x] = 0;
-    //     state->y_zero--;
-    // }
+	int		pos;
+	int		size;
 
+	pos = state->zero;
+	size = state->board_count;
+	if (pos > size)
+	{
+		state->board[pos] = state->board[pos - size];
+		state->board[pos - size] = 0;
+		state->zero = pos - size;
+	}
 }
 
 void 		right(t_state *state)
 {
-    // int    x;
-    // int    y;
-	//
-    // x = state->x_zero;
-    // y = state->y_zero;
-	//
-    // if (state->x_zero != 0)
-    // {
-    //     state->board[y][x] = state->board[y][x - 1];
-    //     state->board[y][x - 1] = 0;
-    //     state->x_zero--;
-    // }
+	int		pos;
+	int		size;
+
+	pos = state->zero;
+	size = state->board_count;
+	if ((pos) % size != 0)
+	{
+		state->board[pos] = state->board[pos - 1];
+		state->board[pos - 1] = 0;
+		state->zero = pos - 1;
+	}
 }
 
 void 		left(t_state *state)
 {
-    // int    x;
-    // int    y;
-	//
-    // x = state->x_zero;
-    // y = state->y_zero;
-	//
-    // if (state->x_zero != state->board_size - 1)
-    // {
-    //     state->board[y][x] = state->board[y][x + 1];
-    //     state->board[y][x + 1] = 0;
-    //     state->x_zero++;
-    // }
+	int		pos;
+	int		size;
+
+	pos = state->zero;
+	size = state->board_count;
+	if ((pos + 1) % size != 0)
+	{
+		state->board[pos] = state->board[pos + 1];
+		state->board[pos + 1] = 0;
+		state->zero = pos + 1;
+	}
 }
