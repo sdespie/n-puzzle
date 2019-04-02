@@ -26,9 +26,6 @@ int main(int argc, char **argv)
     if (parse_cmd(&puzzle, argc, argv, 1) == KO)
 		return (0);
     print_board(puzzle.queue);
-//    int i = puzzle->board[0][1];
-//    puzzle->board[0][1] = puzzle->board[0][0];
-//    puzzle->board[0][0] = i;
     check_error(puzzle.queue);
 //    solve();
 //    print_sol();

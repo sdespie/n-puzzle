@@ -22,7 +22,7 @@ void 		up(t_state *state)
 	int		size;
 
 	pos = state->zero;
-	size = state->board_count;
+	size = state->board_size;
 	if (pos < size * (size - 1))
  	{
     	state->board[pos] = state->board[pos + size];
@@ -37,7 +37,7 @@ void 		down(t_state *state)
 	int		size;
 
 	pos = state->zero;
-	size = state->board_count;
+	size = state->board_size;
 	if (pos > size)
 	{
 		state->board[pos] = state->board[pos - size];
@@ -52,7 +52,7 @@ void 		right(t_state *state)
 	int		size;
 
 	pos = state->zero;
-	size = state->board_count;
+	size = state->board_size;
 	if ((pos) % size != 0)
 	{
 		state->board[pos] = state->board[pos - 1];
@@ -67,7 +67,7 @@ void 		left(t_state *state)
 	int		size;
 
 	pos = state->zero;
-	size = state->board_count;
+	size = state->board_size;
 	if ((pos + 1) % size != 0)
 	{
 		state->board[pos] = state->board[pos + 1];

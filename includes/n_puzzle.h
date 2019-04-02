@@ -52,6 +52,6 @@ void 		free_all(t_puzzle *puzzle);
 
 void 		manhanttan();
 void 		h();
-void 		p();
+void 		e();
 
 #endif

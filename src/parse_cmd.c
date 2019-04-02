@@ -21,8 +21,8 @@ static	int	parse_mode(t_puzzle *puzzle, char *value)
         puzzle->heuristic = manhanttan;
     else if(!ft_strcmp(value, "-h"))
         puzzle->heuristic = h;
-    else if(!ft_strcmp(value, "-p"))
-        puzzle->heuristic = p;
+    else if(!ft_strcmp(value, "-e"))
+        puzzle->heuristic = e;
     return (!puzzle->heuristic);
 }
 

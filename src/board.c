@@ -15,32 +15,32 @@
 
 static void set_snail(t_puzzle *puzzle)
 {
-    // int     x;
-    // int     y;
-    // int     current;
-    // int     size;
-    // int     ref;
-	//
-    // size = puzzle->board_size;
-    // ref = -1;
-    // current = 1;
-    // while (++ref < puzzle->board_size)
-    // {
-    //     x = 0;
-    //     y = 0;
-    //     while (puzzle->goal[ref + y][ref + x] == 0)
-    //     {
-    //         puzzle->goal[ref + y][ref + x] = current++;
-    //         if (y == 0 && x != size - 1)
-    //             x++;
-    //         else if (y == size - 1 && x != 0)
-    //             x--;
-    //         else
-    //             (x == 0 && y != 0) ? y--: y++;
-    //     }
-    //     size -= 2;
-    // }
-    // puzzle->goal[puzzle->board_size / 2 ][(puzzle->board_size + 1) / 2 - 1] = 0;
+    int     x;
+    int     y;
+    int     current;
+    int     size;
+    int     ref;
+
+     size = puzzle->board_size;
+     ref = -1;
+     current = 1;
+     while (++ref < puzzle->board_size)
+     {
+         x = 0;
+         y = 0;
+         while (puzzle->goal[(ref + y) *puzzle->board_size + ref + x] == 0)
+         {
+             puzzle->goal[(ref + y) *puzzle->board_size + ref + x] = current++;
+             if (y == 0 && x != size - 1)
+                 x++;
+             else if (y == size - 1 && x != 0)
+                 x--;
+             else
+                 (x == 0 && y != 0) ? y--: y++;
+         }
+         size -= 2;
+     }
+     puzzle->goal[pow(puzzle->board_size, 2) / 2 + (puzzle->board_size + 1) / 2 - 1] = 0;
 }
 
 static void randomize(t_state *state)

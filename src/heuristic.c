@@ -11,6 +11,23 @@
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
+#include <math.h>
+
+int		eucl_dist(t_puzzle *puzzle, t_state *state, int i)
+{
+	int		value;
+	int 	j;
+	int 	dist;
+
+	dist = 0;
+	j = 0;
+	value = puzzle->goal[i];
+	while (state->board[j] != value)
+		j++;
+	dist += pow((j % puzzle->board_size) - (i % puzzle->board_size), 2);
+	dist += pow((j / puzzle->board_size) - (i / puzzle->board_size), 2);
+	return ((int)sqrt(dist));
+}
 
 int		man_dist(t_puzzle *puzzle, t_state *state, int i)
 {
@@ -23,9 +40,9 @@ int		man_dist(t_puzzle *puzzle, t_state *state, int i)
 	value = puzzle->goal[i];
 	while (state->board[j] != value)
 		j++;
-	dist += ABS((j % puzzle->board->size) - (i % puzzle->board->size))
-	dist += ABS((j / puzzle->board->size) - (i / puzzle->board->size))
-	return (dist)
+	dist += ABS((j % puzzle->board_size) - (i % puzzle->board_size));
+	dist += ABS((j / puzzle->board_size) - (i / puzzle->board_size));
+	return (dist);
 }
 
 //Manhattan Distance : calc the number of move to do for all the tiles
@@ -60,4 +77,13 @@ void h(t_puzzle *puzzle, t_state *state)
 
 // Euclidean
 
-void p(){}
+void e(t_puzzle *puzzle, t_state *state)
+{
+	int i;
+
+	i = 0;
+	state->h = 0;
+	while (i < puzzle->board_size)
+		state->h += eucl_dist(puzzle, state, i);
+	state->g += 1;
+}
