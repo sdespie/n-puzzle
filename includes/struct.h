@@ -25,6 +25,7 @@ typedef struct s_state
 	int				board_size;
 	int				board_count;
 	char			*moves;
+	long long		hash;
 	struct s_state	*next;
 }				t_state;
 

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
-#include <math.h>
 
 int		eucl_dist(t_puzzle *puzzle, t_state *state, int i)
 {

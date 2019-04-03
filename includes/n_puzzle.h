@@ -19,6 +19,7 @@
 
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 
 int 		board_init(t_puzzle *puzzle);
 int			*board_create(int count);
@@ -53,5 +54,7 @@ void 		free_all(t_puzzle *puzzle);
 void 		manhanttan();
 void 		h();
 void 		e();
+
+void 		hashing(t_state *state)
 
 #endif

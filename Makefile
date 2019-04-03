@@ -32,7 +32,8 @@ SRC			:=	n-puzzle.c\
 				free.c\
 				ft_strjoin_free.c \
 				print.c \
-				state.c
+				state.c \
+				hashing.c
 
 
 

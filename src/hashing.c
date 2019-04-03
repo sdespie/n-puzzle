@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macro.h                                            :+:      :+:    :+:   */
+/*   hashing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
+/*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/01 20:11:25 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/01 20:12:23 by adefonta         ###   ########.fr       */
+/*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
+/*   Updated: 2019/04/01 21:24:23 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACRO_H
-# define MACRO_H
+#include "n_puzzle.h"
 
-# define CMD_SIZE	2
-# define OK 1
-# define KO 0
-# define PR_POW  13
-# define PR_MULT 31
-# define ABS(x) ((x < 0) ? (-x) : (x))
+void 	hashing(t_state *state)
+{
+	int			i;
+	long long 	hash;
 
-#endif
+	hash = 0;
+	i = 0;
+	while (i++ < state->board_count)
+		hash += state->board[i - 1] * pow(i, PR_POW) * PR_MULT;
+	state->hash = hash;
+}
