@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_error.c                                      :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/01 20:58:55 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 03:40:15 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
 
-void check_error(t_state *state)
+void	check_error(t_state *state)
 {
     int i;
     int j;
@@ -35,4 +35,34 @@ void check_error(t_state *state)
     else
         printf("\nBoard valid.\n");
 
+}
+
+int		check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
+{
+	int		nb_moves;
+	int		pos;
+	int		size;
+
+	pos = state->zero;
+	size = state->board_size;
+	nb_moves = 0;
+	if (pos < size * (size - 1))
+		next_moves[nb_moves++] = UP;
+	if (pos > size)
+		next_moves[nb_moves++] = DOWN;
+	if ((pos) % size != 0)
+		next_moves[nb_moves++] = RIGHT;
+	if ((pos + 1) % size != 0)
+		next_moves[nb_moves++] = LEFT;
+	return (nb_moves);
+}
+
+int		check_valid_start(t_puzzle *puzzle)
+{
+	if (puzzle->heuristic == NULL)
+	{
+		ft_printf("Base data not correct\n");
+		return (KO);
+	}
+	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/01 20:59:44 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 03:41:16 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,15 @@ int main(int argc, char **argv)
     ft_memset((void *)&puzzle, 0, sizeof(t_puzzle));
     if (parse_cmd(&puzzle, argc, argv, 1) == KO)
 		return (0);
-    print_board(puzzle.queue);
-    check_error(puzzle.queue);
+	puzzle.heuristic = manhanttan;
+	if (check_valid_start(&puzzle) && solve(&puzzle))
+	{
+		print_state(puzzle.not_visited);
+		check_error(puzzle.not_visited);
+	}
+
 //    solve();
 //    print_sol();
-//    free_all();
+   	free_all(&puzzle);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/01 21:24:23 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 03:15:20 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	int	parse_size(t_puzzle *puzzle, char *size)
 	int	state;
 
 	state = OK;
-	if (puzzle->queue)
+	if (puzzle->not_visited)
 		return (state);
 	if (is_valid_number(puzzle, size))
     {
@@ -49,7 +49,7 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
 	int		state;
 
 	state = OK;
-	if (puzzle->queue)
+	if (puzzle->not_visited)
 		return (state);
     if ((fd = open(file, O_RDONLY)) < 0)
         return (error_exit(puzzle, "Error: can't read source file."));

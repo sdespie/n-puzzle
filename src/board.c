@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/01 21:10:07 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 03:49:33 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void set_snail(t_puzzle *puzzle)
          }
          size -= 2;
      }
-     puzzle->goal[pow(puzzle->board_size, 2) / 2 + (puzzle->board_size + 1) / 2 - 1] = 0;
+     puzzle->goal[(int)pow(puzzle->board_size, 2) / 2 + (puzzle->board_size + 1) / 2 - 1] = 0;
 }
 
 static void randomize(t_state *state)
@@ -75,6 +75,8 @@ int		*board_create(int count)
 {
 	int	*board;
 
+	(DEBUG_HARD) ? ft_printf("board_create::count %d\n", count) : 0;
+
 	if (!(board = (int *)ft_memalloc(sizeof(int) * (count))))
 		return (NULL);
 	return (board);
@@ -93,13 +95,13 @@ int		board_init(t_puzzle *puzzle)
     set_snail(puzzle);
     if (puzzle->input == 0)
     {
-		if (!(puzzle->queue = state_create(puzzle->board_count, puzzle->board_size)))
+		if (!(puzzle->not_visited = state_create(puzzle->board_count, puzzle->board_size)))
 		{
 			free_all(puzzle);
 			return (KO);
 		}
-		board_copy(puzzle->queue, puzzle->goal);
-        randomize(puzzle->queue);
+		board_copy(puzzle->not_visited, puzzle->goal);
+        randomize(puzzle->not_visited);
     }
 	return (OK);
 }

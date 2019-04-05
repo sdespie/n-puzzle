@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heuristic.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-spie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:10:55 by sde-spie          #+#    #+#             */
-/*   Updated: 2018/11/30 15:18:23 by sde-spie         ###   ########.fr       */
+/*   Updated: 2019/04/05 03:52:51 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ int		man_dist(t_puzzle *puzzle, t_state *state, int i)
 
 	dist = 0;
 	j = 0;
+	(DEBUG_HARD) ? ft_printf("man_dist::start::i: %d\n", i) : 0;
 	value = puzzle->goal[i];
+	(DEBUG_HARD) ? ft_printf("man_dist::value %d\n", value) : 0;
+
 	while (state->board[j] != value)
 		j++;
 	dist += ABS((j % puzzle->board_size) - (i % puzzle->board_size));
 	dist += ABS((j / puzzle->board_size) - (i / puzzle->board_size));
+	(DEBUG_HARD) ? ft_printf("man_dist::out::j: %d\n", j) : 0;
 	return (dist);
 }
 
@@ -50,11 +54,12 @@ void 	manhanttan(t_puzzle *puzzle, t_state *state)
 {
 	int i;
 
-	i = 0;
+	(DEBUG_HARD) ? ft_printf("manhanttan::start::\n") : 0;
+	print_board(state);
+	i = -1;
 	state->h = 0;
-	while (i < puzzle->board_size)
+	while (++i < puzzle->board_count)
 		state->h += man_dist(puzzle, state, i);
-	state->g += 1;
 }
 
 //Hamming Distance : calc the number of missplaced tiles
@@ -65,13 +70,12 @@ void h(t_puzzle *puzzle, t_state *state)
 
 	i = 0;
 	state->h = 0;
-	while (i < puzzle->board_size)
+	while (i < puzzle->board_count)
 	{
 		if (puzzle->goal[i] != state->board[i])
 			state->h += 1;
 		i++;
 	}
-	state->g += 1;
 }
 
 // Euclidean
@@ -82,7 +86,6 @@ void e(t_puzzle *puzzle, t_state *state)
 
 	i = 0;
 	state->h = 0;
-	while (i < puzzle->board_size)
+	while (i < puzzle->board_count)
 		state->h += eucl_dist(puzzle, state, i);
-	state->g += 1;
 }

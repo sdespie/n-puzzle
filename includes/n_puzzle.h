@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/01 21:05:53 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 03:38:39 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int 		parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index);
 
 void 		print_board(t_state *state);
 void 		print_usage(t_puzzle *puzzle);
+void		print_state(t_state *state);
 
 void 		up(t_state *state);
 void 		down(t_state *state);
@@ -36,6 +37,9 @@ void 		left(t_state *state);
 void 		right(t_state *state);
 
 void		check_error(t_state *state);
+int			check_nextmoves(t_state *state, char next_moves[MAX_MOVES]);
+int			check_valid_start(t_puzzle *puzzle);
+
 int 		is_valid_number(t_puzzle *puzzle, char* number);
 
 long		ft_atol2(char *s, t_puzzle *puzzle);
@@ -50,11 +54,21 @@ int   		error_exit(t_puzzle *puzzle, char *str);
 t_state		*state_create(int count, int size);
 
 void 		free_all(t_puzzle *puzzle);
+void		free_state(t_state *state);
 
-void 		manhanttan();
-void 		h();
-void 		e();
+void 		manhanttan(t_puzzle *puzzle, t_state *state);
+void 		h(t_puzzle *puzzle, t_state *state);
+void		e(t_puzzle *puzzle, t_state *state);
 
-void 		hashing(t_state *state)
+void 		hashing(t_state *state);
+
+char		*move_newcopy(char *src, int new_size);
+int			move_add(t_state *state, char move);
+
+int			state_is_new(t_state *queue, t_state *new_state);
+t_state		*state_insort(t_state *queue, t_state *new_state);
+t_state		*state_newmove(t_state *base, char move);
+
+int			solve(t_puzzle *puzzle);
 
 #endif

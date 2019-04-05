@@ -6,7 +6,7 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/04/01 21:25:03 by adefonta         ###   ########.fr        #
+#    Updated: 2019/04/05 03:15:36 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC			:=	n-puzzle.c\
 				board.c\
 				parse_cmd.c\
 				move.c\
-				check_error.c\
+				check.c\
 				error.c\
 				ft_atoi_long.c\
 				utils.c\
@@ -33,7 +33,8 @@ SRC			:=	n-puzzle.c\
 				ft_strjoin_free.c \
 				print.c \
 				state.c \
-				hashing.c
+				hashing.c \
+				solve.c
 
 
 
