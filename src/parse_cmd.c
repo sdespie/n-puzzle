@@ -23,22 +23,21 @@ static	int	parse_mode(t_puzzle *puzzle, char *value)
         puzzle->heuristic = h;
     else if(!ft_strcmp(value, "-e"))
         puzzle->heuristic = e;
-    return (!puzzle->heuristic);
+    else
+        return (KO);
+    return (OK);
 }
 
 static	int	parse_size(t_puzzle *puzzle, char *size)
 {
-	int	state;
-
-	state = OK;
 	if (puzzle->not_visited)
-		return (state);
+		return (KO);
 	if (is_valid_number(puzzle, size))
     {
 		puzzle->board_size = ft_atoi2(size, puzzle);
-		state = board_init(puzzle);
+		return(board_init(puzzle));
 	}
-    return (state);
+    return (KO);
 }
 
 static	int	parse_file(t_puzzle *puzzle, char *file)
@@ -46,11 +45,9 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
     int     fd;
     char    *line;
     int     ret;
-	int		state;
 
-	state = OK;
 	if (puzzle->not_visited)
-		return (state);
+		return (KO);
     if ((fd = open(file, O_RDONLY)) < 0)
         return (error_exit(puzzle, "Error: can't read source file."));
     while ((ret = get_next_line(fd, &line)) > 0)
@@ -87,6 +84,7 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
 
 int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index)
 {
+    printf("index = %d, arg = %s, argv = %d\n", index, argv[index], argc);
     if (argc != CMD_SIZE + 1)
     {
         print_usage(puzzle);
@@ -94,15 +92,16 @@ int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index)
     }
     if (index > CMD_SIZE)
         return (OK);
-	if (!parse_size(puzzle, argv[index]))
-        return (KO);
-    else if (!parse_file(puzzle, argv[index]))
-		return (KO);
-	else if (!parse_mode(puzzle, argv[index]))
-        return (KO);
+	if (parse_size(puzzle, argv[index]))
+        index++;
+    else if (parse_file(puzzle, argv[index]))
+		index++;
+	else if (parse_mode(puzzle, argv[index]))
+        index++;
 	else if (argv[index][0] == '-')
         return (error_exit(puzzle, "Error: Invalid command."));
     else
         return (OK);
-    return (parse_cmd(puzzle, argc, argv, ++index));
+    printf("index = %d, arg = %s\n", index, argv[index]);
+    return (parse_cmd(puzzle, argc, argv, index));
 }
