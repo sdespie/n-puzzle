@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 16:12:44 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:43:13 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	copy(t_state *base, t_state *dst)
 {
 	(DEBUG_HARD) ? ft_printf("state::copy::start::\n") : 0;
 	(DEBUG_HARD) ? print_state(base) : 0;
-	board_copy(dst, base->board);
+	board_copy(dst->board, base->board, base->board_count);
 	(DEBUG_HARD) ? print_state(dst) : 0;
 
 	dst->g = base->g;
@@ -77,7 +77,6 @@ t_state		*state_newmove(t_state *base, char move)
 		move_add(new_state, move);
 	}
 	(DEBUG_HARD) ? print_state(new_state) : 0;
-
 	return (new_state);
 }
 
@@ -117,8 +116,12 @@ int			state_is_new(t_state *queue, t_state *new_state)
 	state = OK;
 	while (tmp && state == OK)
 	{
+		// printf("%d %d -- %lld %lld\n",tmp->h, new_state->h,tmp->hash, new_state->hash);
 		if (tmp->h == new_state->h && tmp->hash == new_state->hash)
 		{
+			// print_state(tmp);
+			// print_state(new_state);
+
 			i = -1;
 			state = KO;
 			while (state == KO && ++i < new_state->board_count)

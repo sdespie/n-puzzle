@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 20:11:25 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 16:13:28 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 18:03:04 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define DEBUG_HARD 0
 # define DEBUG_HARD_INIT 0
+# define IS_SORT 0
 
 # define DISPLAY 1
 

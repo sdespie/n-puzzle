@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 15:36:47 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:48:55 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,24 @@ void	print_state(t_state *state)
 	ft_printf("zero : %10d\n", state->zero);
 	ft_printf("moves:\n%s\n", state->moves);
 	print_board(state->board, state->board_count, state->board_size);
+}
+
+void	print_step(t_state *state)
+{
+	int	i;
+
+	i = 0;
+	while (++i <= state->g)
+	{
+		ft_printf("MOVE: %c \n", state->moves[i]);
+		if (state->moves[i] == UP)
+			up(state);
+		else if (state->moves[i] == DOWN)
+			down(state);
+		else if (state->moves[i] == RIGHT)
+			right(state);
+		else if (state->moves[i] == LEFT)
+			left(state);
+		print_board(state->board, state->board_count, state->board_size);
+	}
 }

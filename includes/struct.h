@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 03:34:22 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 18:00:14 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ typedef struct s_state
 typedef struct	s_puzzle
 {
 	int			*goal;
+	int			*base;
 	char		*data;
+	int			zero_base;
 	int			nb_state_create;
+	int			nb_state_del; // info
 	int			board_size;
 	int			board_count;
 	int			nbr_check;

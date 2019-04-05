@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 16:02:13 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 17:58:34 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 
 int 		board_init(t_puzzle *puzzle);
 int			*board_create(int count);
-void 		board_copy(t_state *state, int *board);
+void		board_copy(int *dst, int *src, int count);
 
 int 		parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index);
 
 void		print_board(int *board, int count, int size);
 void 		print_usage(t_puzzle *puzzle);
 void		print_state(t_state *state);
+void		print_step(t_state *state);
 
 void 		up(t_state *state);
 void 		down(t_state *state);
@@ -42,6 +43,7 @@ int			check_valid_start(t_puzzle *puzzle);
 
 int 		is_valid_number(t_puzzle *puzzle, char* number);
 int			ft_abs(int x);
+void		queue_is_sort(t_state *queue);
 
 long		ft_atol2(char *s, t_puzzle *puzzle);
 int			ft_atoi2(char *s, t_puzzle *puzzle);
