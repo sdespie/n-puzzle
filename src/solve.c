@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:52:36 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 17:56:27 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 19:53:28 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static int test_next_visited(t_puzzle *puzzle, t_state *base_state)
 	t_state	*new_state;
 
 	(DEBUG_HARD) ? ft_printf("test_next_visited::start::\n") : 0;
-	(DEBUG_HARD) ? ft_printf("test_next_visited:: h: %10d::nb_state:-create: %10d :-del: %10d\n", base_state->h, puzzle->nb_state_create, puzzle->nb_state_del) : 0;
+	if ((puzzle->nb_state_create % 100) == 0 || (puzzle->nb_state_del % 100) == 0)
+		ft_printf("test_next_visited:: h: %10d::nb_state:-create: %10d :-del: %10d\n", base_state->h, puzzle->nb_state_create, puzzle->nb_state_del);
 	i = -1;
 	if (!base_state)
 	 	return (KO);
@@ -40,7 +41,7 @@ static int test_next_visited(t_puzzle *puzzle, t_state *base_state)
 		if (state_is_new(puzzle->not_visited, new_state) && state_is_new(puzzle->visited, new_state))
 		{
 			puzzle->not_visited = state_insort(puzzle->not_visited, new_state);
-			queue_is_sort(puzzle->not_visited);
+			// queue_is_sort(puzzle->not_visited);
 			new_state->id = puzzle->nb_state_create++;
 		}
 		else

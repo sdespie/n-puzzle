@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 15:31:30 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 20:03:24 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,17 @@ int	check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
 	pos = state->zero;
 	size = state->board_size;
 	nb_moves = 0;
-	if (pos < state->board_count - size)
+	if (pos < state->board_count - size && (!state->moves ||
+		state->moves[state->g] != DOWN))
 		next_moves[nb_moves++] = UP;
-	if (pos >= size)
+	if (pos >= size && (!state->moves ||
+		state->moves[state->g] != UP))
 		next_moves[nb_moves++] = DOWN;
-	if ((pos) % size != 0)
+	if ((pos) % size != 0 && (!state->moves ||
+		state->moves[state->g] != LEFT))
 		next_moves[nb_moves++] = RIGHT;
-	if ((pos + 1) % size != 0)
+	if ((pos + 1) % size != 0 && (!state->moves ||
+		state->moves[state->g] != RIGHT))
 		next_moves[nb_moves++] = LEFT;
 	return (nb_moves);
 }
