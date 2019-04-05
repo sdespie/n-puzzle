@@ -6,7 +6,7 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/04/05 03:15:36 by adefonta         ###   ########.fr        #
+#    Updated: 2019/04/05 20:06:33 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJ			:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 CC			:=	gcc -g
 CFG			:=	-O3
 CFG			+=	#-Wall -Wextra
-CFG			+=	-fsanitize=address
+CFG			+=	#-fsanitize=address
 NAME		:=	n-puzzle
 
 # rules
