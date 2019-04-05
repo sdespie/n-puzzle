@@ -101,7 +101,6 @@ int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index)
 	else if (argv[index][0] == '-')
         return (error_exit(puzzle, "Error: Invalid command."));
     else
-        return (OK);
-    printf("index = %d, arg = %s\n", index, argv[index]);
+        return (KO);
     return (parse_cmd(puzzle, argc, argv, index));
 }
