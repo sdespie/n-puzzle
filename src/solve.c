@@ -6,13 +6,13 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:52:36 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 19:53:28 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 20:26:03 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
 
-static int test_next_visited(t_puzzle *puzzle, t_state *base_state)
+static int	test_next_visited(t_puzzle *puzzle, t_state *base_state)
 {
 	int		i;
 	int		nb_moves;
@@ -23,10 +23,6 @@ static int test_next_visited(t_puzzle *puzzle, t_state *base_state)
 	if ((puzzle->nb_state_create % 100) == 0 || (puzzle->nb_state_del % 100) == 0)
 		ft_printf("test_next_visited:: h: %10d::nb_state:-create: %10d :-del: %10d\n", base_state->h, puzzle->nb_state_create, puzzle->nb_state_del);
 	i = -1;
-	if (!base_state)
-	 	return (KO);
-	if (base_state->h == 0)
-		return (OK);
 	puzzle->not_visited = base_state->next;
 	base_state->next = puzzle->visited;
 	puzzle->visited = base_state;
@@ -50,20 +46,25 @@ static int test_next_visited(t_puzzle *puzzle, t_state *base_state)
 			puzzle->nb_state_del += 1;
 		}
 	}
-	return (test_next_visited(puzzle, puzzle->not_visited));
+	return (OK);
 }
 
 int			solve(t_puzzle *puzzle)
 {
 	(DISPLAY) ? ft_printf("solve::start\n") : 0;
-	ft_printf("solve::board_init\n");
 	print_state(puzzle->not_visited);
-
 	puzzle->heuristic(puzzle, puzzle->not_visited);
-	(DISPLAY) ? ft_printf("solve::after-call::heuristic\n") : 0;
 	puzzle->not_visited->eval = puzzle->not_visited->h + puzzle->not_visited->g;
 	hashing(puzzle->not_visited);
-	(DISPLAY) ? ft_printf("solve::after-call::hashing\n") : 0;
 	puzzle->not_visited->id = puzzle->nb_state_create++;
-	return (test_next_visited(puzzle, puzzle->not_visited));
+	while (19)
+	{
+		if (!puzzle->not_visited)
+		 	return (KO);
+		if (puzzle->not_visited->h == 0)
+			return (OK);
+		if (test_next_visited(puzzle, puzzle->not_visited) == KO)
+			return (KO);
+	}
+	return (KO);
 }
