@@ -84,7 +84,6 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
 
 int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index)
 {
-    printf("index = %d, arg = %s, argv = %d\n", index, argv[index], argc);
     if (argc != CMD_SIZE + 1)
     {
         print_usage(puzzle);
