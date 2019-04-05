@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 03:28:13 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 15:22:08 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void 		up(t_state *state)
 
 	pos = state->zero;
 	size = state->board_size;
-	if (pos < size * (size - 1))
+	if (pos < state->board_count - size)
  	{
     	state->board[pos] = state->board[pos + size];
 		state->board[pos + size] = 0;
@@ -38,7 +38,7 @@ void 		down(t_state *state)
 
 	pos = state->zero;
 	size = state->board_size;
-	if (pos > size)
+	if (pos >= size)
 	{
 		state->board[pos] = state->board[pos - size];
 		state->board[pos - size] = 0;

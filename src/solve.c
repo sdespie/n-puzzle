@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:52:36 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 03:36:56 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/05 15:56:22 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ static int test_next_visited(t_puzzle *puzzle, t_state *base_state)
 int			solve(t_puzzle *puzzle)
 {
 	(DISPLAY) ? ft_printf("solve::start\n") : 0;
+	ft_printf("solve::board_init\n");
+	print_state(puzzle->not_visited);
+
 	puzzle->heuristic(puzzle, puzzle->not_visited);
 	(DISPLAY) ? ft_printf("solve::after-call::heuristic\n") : 0;
 	puzzle->not_visited->eval = puzzle->not_visited->h + puzzle->not_visited->g;

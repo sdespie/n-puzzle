@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/01/16 16:35:02 by sde-spie         ###   ########.fr       */
+/*   Updated: 2019/04/05 16:02:08 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,11 @@ int     is_valid_number(t_puzzle *puzzle, char *number)
         return (1);
     else
         return (0);
+}
+
+int		ft_abs(int x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
 }
