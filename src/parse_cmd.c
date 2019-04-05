@@ -14,6 +14,30 @@
 #include "macro.h"
 // modes && fonctions to be define
 
+static int put_data_in_board(t_puzzle *puzzle)
+{
+    int     i;
+    int     data_len;
+    char    **split;
+
+    i = -1;
+    split = ft_strsplit(puzzle->data, " ");
+    data_len = ft_strlen(split);
+    if (data_len != puzzle->board_count)
+    {
+        ft_memdel(split);
+        return(KO);
+    }
+    while (++i < puzzle->board_count)
+    {
+        if (is_valid_number(puzzle, split[i]))
+            puzzle->base[i] = ft_atoi2(split[i], puzzle);
+        else
+            return (KO);
+        i++;
+    }
+    return (OK);
+}
 
 static	int	parse_mode(t_puzzle *puzzle, char *value)
 {
@@ -70,16 +94,19 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
 	    puzzle->input = 1;
 	    if (board_init(puzzle) == KO)
 			return (KO);
-	    // while ((ret = get_next_line(fd, &line)) > 0)
-	    // {
-	    //     if (puzzle->data == NULL && (!(puzzle->data = ft_strnew(0)))
-		// 		ft_memdel((void **)&line);
-	    //     if (line[0] != '#')
-	    //         puzzle->data = ft_strjoin_free(puzzle->data, line, 2);
-	    // }
-    	//put_data_in_board(puzzle);
-	}
-    return(OK);
+    }
+    while ((ret = get_next_line(fd, &line)) > 0)
+	{
+        if (puzzle->data == NULL && (!(puzzle->data = ft_strnew(0)))
+            ft_memdel((void **)&line);
+        if (line[0] != '#')
+        {
+            char **data = ft_strsplit(line, "#");
+	        puzzle->data = ft_strjoin_free(puzzle->data, data[0], 2);
+        }
+        ft_memdel((void **)&line);
+     }
+    return (put_data_in_board(puzzle));
 }
 
 int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index)
