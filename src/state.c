@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 20:16:35 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/08 21:39:06 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_state		*state_insort(t_state *queue, t_state *new_state)
 	new_state->next = NULL;
 	pre = NULL;
 	tmp = queue;
-	while (tmp && tmp->eval <= new_state->eval)
+	while (tmp && tmp->h <= new_state->h)
 	{
 		pre = tmp;
 		tmp = tmp->next;
@@ -124,11 +124,11 @@ int			state_is_new(t_state *queue, t_state *new_state)
 
 			i = -1;
 			state = KO;
-			while (state == KO && ++i < new_state->board_count)
-			{
-				if (tmp->board[i] != new_state->board[i])
-					state = OK;
-			}
+			// while (state == KO && ++i < new_state->board_count)
+			// {
+			// 	if (tmp->board[i] != new_state->board[i])
+			// 		state = OK;
+			// }
 		}
 		tmp = tmp->next;
 	}

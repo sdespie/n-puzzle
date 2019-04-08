@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 18:01:51 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/08 21:38:36 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void randomize(t_state *state)
 
 	(DEBUG_HARD_INIT) ? ft_printf("\n=== randomize === \n") : 0;
     srand((unsigned) time(&t));
-    nbr_move = rand() % 2000000;
+    nbr_move = rand() % 2000;
 	(DEBUG_HARD_INIT) ? print_state(state) : 0;
     ft_printf("\nnbr move = %d\n", nbr_move);
     while (nbr_move--)
