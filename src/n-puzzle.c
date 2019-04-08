@@ -25,7 +25,6 @@ int main(int argc, char **argv)
     ft_memset((void *)&puzzle, 0, sizeof(t_puzzle));
     if (parse_cmd(&puzzle, argc, argv, 1) == KO)
 		return (0);
-	puzzle.heuristic = manhanttan;
 	if (check_valid_start(&puzzle) && solve(&puzzle))
 	{
 		ft_printf("nb_state:-create: %10d :-del: %10d\n", puzzle.nb_state_create, puzzle.nb_state_del);

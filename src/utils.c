@@ -17,7 +17,7 @@ int     is_valid_number(t_puzzle *puzzle, char *number)
     puzzle->error_p = 0;
     puzzle->error_sign = 0;
     if (ft_atoi2(number, puzzle) == ft_atol2(number, puzzle)\
-        && ft_atoi2(number, puzzle) > 0 && !puzzle->error_p\
+        && ft_atoi2(number, puzzle) >= 0 && !puzzle->error_p\
         && puzzle->error_sign < 2)
         return (1);
     else

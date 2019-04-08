@@ -117,19 +117,18 @@ int		board_init(t_puzzle *puzzle)
     printf("\n===== board size = %d =====\n", size);
     set_snail(puzzle, &zero);
 	print_board(puzzle->goal, puzzle->board_count, puzzle->board_size);
-    if (puzzle->input == 0)
+    if (!(puzzle->not_visited = state_create(puzzle->board_count, puzzle->board_size)))
+	{
+		free_all(puzzle);
+		return (KO);
+	}
+	puzzle->not_visited->zero = zero;
+	if (puzzle->input == 0)
     {
-		if (!(puzzle->not_visited = state_create(puzzle->board_count, puzzle->board_size)))
-		{
-			free_all(puzzle);
-			return (KO);
-		}
-		puzzle->not_visited->zero = zero;
-		board_copy(puzzle->not_visited->board, puzzle->goal, puzzle->board_count);
+        board_copy(puzzle->not_visited->board, puzzle->goal, puzzle->board_count);
         randomize(puzzle->not_visited);
 		board_copy(puzzle->base, puzzle->not_visited->board, puzzle->board_count);
-		puzzle->zero_base = puzzle->not_visited->zero;
-
+        puzzle->zero_base = puzzle->not_visited->zero;
     }
 	return (OK);
 }

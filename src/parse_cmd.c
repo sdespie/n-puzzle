@@ -16,26 +16,29 @@
 
 static int put_data_in_board(t_puzzle *puzzle)
 {
-    int     i;
-    int     data_len;
-    char    **split;
+    int         i;
+    size_t      data_len;
+    char        **split;
 
     i = -1;
     split = ft_strsplit(puzzle->data, ' ');
-    data_len = ft_strlen(*split);
-    if (data_len != puzzle->board_count)
-    {
-        ft_memdel((void **)split);
-        return(KO);
-    }
+    data_len = 0;
+    while (split[++i] != '\0')
+        data_len++;
+    i = -1;
     while (++i < puzzle->board_count)
     {
         if (is_valid_number(puzzle, split[i]))
+        {
             puzzle->base[i] = ft_atoi2(split[i], puzzle);
+            if (puzzle->base[i] == 0)
+                puzzle->zero_base = i;
+        }
         else
             return (KO);
-        i++;
     }
+    board_copy(puzzle->not_visited->board, puzzle->base, puzzle->board_count);
+    puzzle->not_visited->zero = puzzle->zero_base;
     return (OK);
 }
 
@@ -80,21 +83,17 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
             break;
         ft_memdel((void **)&line);
     }
-	ft_memdel((void **)&line);
-    if ((ret = get_next_line(fd, &line)) > 0)
+	if (is_valid_number(puzzle, line))
+	    puzzle->board_size = ft_atoi2(line, puzzle);
+	else
 	{
-	    if (is_valid_number(puzzle, line))
-	        puzzle->board_size = ft_atoi2(line, puzzle);
-	    else
-		{
-			ft_memdel((void **)&line);
-			return (error_exit(puzzle, "Error: Not valid board size."));
-		}
-		ft_memdel((void **)&line);
-	    puzzle->input = 1;
-	    if (board_init(puzzle) == KO)
-			return (KO);
-    }
+	    ft_memdel((void **)&line);
+	    return (error_exit(puzzle, "Error: Not valid board size."));
+	}
+	ft_memdel((void **)&line);
+	puzzle->input = 1;
+	if (board_init(puzzle) == KO)
+	   return (KO);
     while ((ret = get_next_line(fd, &line)) > 0)
 	{
         if (puzzle->data == NULL && (!(puzzle->data = ft_strnew(0))))
@@ -102,6 +101,7 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
         if (line[0] != '#')
         {
             char **data = ft_strsplit(line, '#');
+            puzzle->data = ft_strjoin_free(puzzle->data, " ", 0);
 	        puzzle->data = ft_strjoin_free(puzzle->data, data[0], 2);
         }
         ft_memdel((void **)&line);
@@ -120,7 +120,7 @@ int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index)
         return (OK);
 	if (parse_size(puzzle, argv[index]))
         index++;
-    else if (parse_file(puzzle, argv[index]))
+    else if (puzzle->input == 0 && parse_file(puzzle, argv[index]))
 		index++;
 	else if (parse_mode(puzzle, argv[index]))
         index++;

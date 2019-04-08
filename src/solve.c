@@ -53,6 +53,7 @@ int			solve(t_puzzle *puzzle)
 {
 	(DISPLAY) ? ft_printf("solve::start\n") : 0;
 	print_state(puzzle->not_visited);
+	printf("====\n");
 	puzzle->heuristic(puzzle, puzzle->not_visited);
 	puzzle->not_visited->eval = puzzle->not_visited->h + puzzle->not_visited->g;
 	hashing(puzzle->not_visited);
