@@ -21,11 +21,11 @@ static int put_data_in_board(t_puzzle *puzzle)
     char    **split;
 
     i = -1;
-    split = ft_strsplit(puzzle->data, " ");
-    data_len = ft_strlen(split);
+    split = ft_strsplit(puzzle->data, ' ');
+    data_len = ft_strlen(*split);
     if (data_len != puzzle->board_count)
     {
-        ft_memdel(split);
+        ft_memdel((void **)split);
         return(KO);
     }
     while (++i < puzzle->board_count)
@@ -97,11 +97,11 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
     }
     while ((ret = get_next_line(fd, &line)) > 0)
 	{
-        if (puzzle->data == NULL && (!(puzzle->data = ft_strnew(0)))
+        if (puzzle->data == NULL && (!(puzzle->data = ft_strnew(0))))
             ft_memdel((void **)&line);
         if (line[0] != '#')
         {
-            char **data = ft_strsplit(line, "#");
+            char **data = ft_strsplit(line, '#');
 	        puzzle->data = ft_strjoin_free(puzzle->data, data[0], 2);
         }
         ft_memdel((void **)&line);
