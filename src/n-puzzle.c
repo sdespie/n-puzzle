@@ -25,6 +25,9 @@ int main(int argc, char **argv)
     ft_memset((void *)&puzzle, 0, sizeof(t_puzzle));
     if (parse_cmd(&puzzle, argc, argv, 1) == KO)
 		return (0);
+    printf("++++++++++++++++\n");
+    print_board(puzzle.base, 9, 3);
+    //check_error(puzzle.not_visited);
 	if (check_valid_start(&puzzle) && solve(&puzzle))
 	{
 		ft_printf("nb_state:-create: %10d :-del: %10d\n", puzzle.nb_state_create, puzzle.nb_state_del);
@@ -32,11 +35,7 @@ int main(int argc, char **argv)
 		puzzle.not_visited->zero = puzzle.zero_base;
 		print_state(puzzle.not_visited);
 		print_step(puzzle.not_visited);
-		check_error(puzzle.not_visited);
 	}
-
-//    solve();
-//    print_sol();
    	free_all(&puzzle);
 	return (1);
 }

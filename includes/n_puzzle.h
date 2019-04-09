@@ -37,7 +37,7 @@ void 		down(t_state *state);
 void 		left(t_state *state);
 void 		right(t_state *state);
 
-int			check_error(t_state *state);
+int			check_error(t_state *state, t_puzzle *puzzle);
 int			check_nextmoves(t_state *state, char next_moves[MAX_MOVES]);
 int			check_valid_start(t_puzzle *puzzle);
 

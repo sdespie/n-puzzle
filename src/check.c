@@ -12,14 +12,73 @@
 
 #include "n_puzzle.h"
 
-int	check_error(t_state *state)
+static void set_normalized(t_state *state, int *line, t_puzzle *puzzle)
+{
+    int     x;
+    int     y;
+    int     ref;
+    int     i;
+    int     pos;
+    int     size;
+
+	ref = -1;
+	i = 0;
+    size = puzzle->board_size;
+    printf("coucou\n");
+	while (++ref < state->board_size)
+	{
+		x = 0;
+		y = 0;
+		while (puzzle->goal[(ref + y) * state->board_size + ref + x] == 0)
+		{
+			pos = (ref + y) * puzzle->board_size + ref + x;
+			line[i] = puzzle->goal[pos];
+            printf("line[%d] = %d\n", i, line[i]);
+            i++;
+			if (y == 0 && x != size - 1)
+				x++;
+			else if (y == size - 1 && x != 0)
+				x--;
+			else
+				(x == 0 && y != 0) ? y--: y++;
+		}
+		size -= 2;
+	}
+}
+
+static int calc_inversion(t_state *state, t_puzzle *puzzle)
+{
+    int inversion;
+    int i;
+    int j;
+    int *line;
+
+    line = (int*)malloc(sizeof(int) * state->board_count);
+    inversion = 0;
+    printf("+=+=+=\n");
+    set_normalized(state, line, puzzle);
+    printf("+=+=+=\n");
+    i = -1;
+    while (++i < state->board_count)
+    {
+        j = i + 1;
+        while (j < state->board_count)
+        {
+            if (state->board[i] > state->board[j++])
+                inversion++;
+        }
+    }
+    return (inversion);
+}
+
+int	check_error(t_state *state, t_puzzle *puzzle)
 {
     int i;
     int j;
     int size;
     int inversion;
 
-    inversion = 0;
+    inversion = calc_inversion(state, puzzle);
     i = -1;
     while (++i < state->board_count)
     {
