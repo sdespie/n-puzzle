@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/11 17:47:27 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 22:00:17 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void		print_board(int *board, int count, int size);
 void 		print_usage(t_puzzle *puzzle);
 void		print_state(t_state *state);
 void		print_step(t_state *state);
+void		print_queue(t_state	*queue);
+void		print_sort(t_sorttable *sort);
 
 void 		up(t_state *state);
 void 		down(t_state *state);
@@ -53,6 +55,7 @@ int			ft_atoi2(char *s, t_puzzle *puzzle);
 char 		*ft_strjoin_free(char *s1, char *s2, int nb);
 
 int   		error_exit(t_puzzle *puzzle, char *str);
+int			error_print(char *str);
 
 t_state		*state_create(int count, int size);
 
@@ -66,7 +69,6 @@ void		e(t_puzzle *puzzle, t_state *state);
 void 		hashing(t_state *state);
 int			hash_init(t_puzzle *puzzle);
 int			hash_process(t_hashmap *map, t_state *state);
-int			hash_contains(t_hashmap *map, t_state *state);
 
 char		*move_newcopy(char *src, int new_size);
 int			move_add(t_state *state, char move);
@@ -76,5 +78,9 @@ t_state		*state_insort(t_state *queue, t_state *new_state);
 t_state		*state_newmove(t_state *base, char move);
 
 int			solve(t_puzzle *puzzle);
+
+int			sorttable_init(t_puzzle *puzzle);
+int			sort_newstate(t_puzzle *puzzle, t_state *new_state);
+void 		sort_remove(t_sorttable *sort, t_state *state_close);
 
 #endif

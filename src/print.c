@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 17:48:55 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 21:59:11 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,31 @@ void	print_state(t_state *state)
 	ft_printf("zero : %10d\n", state->zero);
 	ft_printf("moves:\n%s\n", state->moves);
 	print_board(state->board, state->board_count, state->board_size);
+}
+
+void	print_queue(t_state	*queue)
+{
+	t_state	*tmp;
+
+	tmp = queue;
+	ft_printf("print_queue\n");
+	while (tmp)
+	{
+		ft_printf("[%10d - %10llu]\n", tmp->h, tmp->hash);
+		tmp = tmp->next;
+	}
+}
+
+void	print_sort(t_sorttable *sort)
+{
+	ft_printf("print_sort\n");
+
+	for (int i = 0; i < sort->size; i++)
+	{
+		if (sort->table[i])
+			ft_printf("[%10d - %10llu]\n", sort->table[i]->h, sort->table[i]->hash);
+	}
+	ft_printf("\n");
 }
 
 void	print_step(t_state *state)

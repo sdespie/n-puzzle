@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:52:36 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 19:23:42 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 22:01:16 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	treat_new_state(t_puzzle *puzzle, t_state *new_state)
 	if (hash_state == OK)
 	{
 		puzzle->opened = state_insort(puzzle->opened, new_state);
+		// if (!sort_newstate(puzzle, new_state))
+		// 	return (KO);
 		// queue_is_sort(puzzle->opened);
 		new_state->id = puzzle->nb_state_create++;
 	}
@@ -43,11 +45,11 @@ static int	test_next_state(t_puzzle *puzzle, t_state *base_state)
 	char	next_moves[MAX_MOVES];
 	t_state	*new_state;
 
-	(DEBUG_HARD) ? ft_printf("test_next_closed::start::\n") : 0;
 	if ((DISPLAY_STATE_INFO) && ((puzzle->nb_state_create % 100) == 0 ||
 						(puzzle->nb_state_del % 100) == 0))
 		ft_printf("test_next_closed:: h: %10d::nb_state:-create: %10d :-del: %10d\n", base_state->h, puzzle->nb_state_create, puzzle->nb_state_del);
 	i = -1;
+	sort_remove(puzzle->sort, base_state);
 	puzzle->opened = base_state->next;
 	base_state->next = puzzle->closed;
 	puzzle->closed = base_state;
@@ -64,7 +66,6 @@ static int	test_next_state(t_puzzle *puzzle, t_state *base_state)
 
 int			solve(t_puzzle *puzzle)
 {
-	(DISPLAY) ? ft_printf("solve::start\n") : 0;
 	print_state(puzzle->opened);
 	printf("====\n");
 	puzzle->heuristic(puzzle, puzzle->opened);

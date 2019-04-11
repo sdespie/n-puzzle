@@ -6,7 +6,7 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/04/11 16:30:08 by adefonta         ###   ########.fr        #
+#    Updated: 2019/04/11 20:42:27 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC			:=	n-puzzle.c\
 				state.c \
 				hashing.c \
 				hashmap.c \
+				sorttable.c \
 				solve.c
 
 

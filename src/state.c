@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 17:48:47 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 21:54:17 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,31 +80,33 @@ t_state		*state_newmove(t_state *base, char move)
 	return (new_state);
 }
 
-t_state		*state_insort(t_state *queue, t_state *new_state)
-{
-	t_state	*tmp;
-	t_state	*pre;
+ t_state		*state_insort(t_state *queue, t_state *new_state)
+ {
+ 	t_state	*tmp;
+ 	t_state	*pre;
 
-	new_state->next = NULL;
-	pre = NULL;
-	tmp = queue;
-	while (tmp && tmp->h <= new_state->h)
-	{
-		pre = tmp;
-		tmp = tmp->next;
-	}
-	if (pre == NULL)
-	{
-		new_state->next = tmp;
-		return (new_state);
-	}
-	else
-	{
-		pre->next = new_state;
-		new_state->next = tmp;
-	}
-	return (queue);
-}
+	(DEBUG_SORT) ? ft_printf("state_insort::start\n") : 0;
+ 	new_state->next = NULL;
+ 	pre = NULL;
+ 	tmp = queue;
+ 	while (tmp && tmp->h < new_state->h)
+ 	{
+ 		pre = tmp;
+ 		tmp = tmp->next;
+ 	}
+ 	if (pre == NULL)
+ 	{
+ 		new_state->next = tmp;
+ 		return (new_state);
+ 	}
+ 	else
+ 	{
+ 		pre->next = new_state;
+ 		new_state->next = tmp;
+ 	}
+	(DEBUG_SORT) ? ft_printf("state_insort::end\n") : 0;
+ 	return (queue);
+ }
 
 int			state_is_new(t_state *queue, t_state *new_state)
 {

@@ -6,13 +6,13 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 19:53:49 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:55:41 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
 
-static int	hash_add(t_hashmap *map, t_state *state)
+static int	add(t_hashmap *map, t_state *state)
 {
 	int	i;
 	int	hash_mod;
@@ -37,7 +37,7 @@ static int	hash_add(t_hashmap *map, t_state *state)
 	return (KO);
 }
 
-int	hash_contains(t_hashmap *map, t_state *state)
+static int	contains(t_hashmap *map, t_state *state)
 {
 	int		i;
 	int		hash_mod;
@@ -56,7 +56,7 @@ int	hash_contains(t_hashmap *map, t_state *state)
 	return (KO);
 }
 
-static int	hash_expand(t_hashmap *map)
+static int	expand(t_hashmap *map)
 {
 	int		i;
 	int		size_old;
@@ -78,7 +78,7 @@ static int	hash_expand(t_hashmap *map)
 			{
 				if (table_old[i])
 				{
-					if (!hash_add(map, table_old[i]))
+					if (!add(map, table_old[i]))
 					{
 						ft_printf("hash_expand, double size is not enough %d\n", map->size);
 						return (KO);
@@ -101,8 +101,8 @@ int		hash_init(t_puzzle *puzzle)
 	map->size = HASH_SIZE;
 	map->table = NULL;
 	map->colision = 0;
-	if (hash_expand(map) != OK)
-		return (error_exit(puzzle, "Error: hash_expand"));
+	if (expand(map) != OK)
+		return (error_exit(puzzle, "Error: hash_expand calloc"));
 	puzzle->map = map;
 	return (OK);
 }
@@ -111,11 +111,11 @@ int		hash_process(t_hashmap *map, t_state *state)
 {
 	(DEBUG_HASH) ? ft_printf("hash_init::hash_process:: count %d\n", map->count) : 0;
 	hashing(state);
-	if (map->count != 0 && hash_contains(map, state) == OK)
+	if (map->count != 0 && contains(map, state) == OK)
 		return (KO);
-	while (hash_add(map, state) != OK)
+	while (add(map, state) != OK)
 	{
-		if (hash_expand(map) == ERROR)
+		if (expand(map) == ERROR)
 			return (ERROR);
 	}
 	map->count += 1;
