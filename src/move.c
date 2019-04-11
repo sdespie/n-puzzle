@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 15:22:08 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 01:09:54 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,30 @@ void 		left(t_state *state)
 	}
 }
 
-char		*move_newcopy(char *src, int new_size)
+char		*move_newcopy(char *src, int old_size, int new_size)
 {
 	char *new_moves;
 
-	if (!(new_moves = (char *)malloc(sizeof(char) * new_size)))
+	if (!(new_moves = (char *)calloc(sizeof(char), new_size)))
 		return (NULL);
-	ft_strncpy(new_moves, src, new_size);
+	ft_strncpy(new_moves, src, old_size);
+	return (new_moves);
+}
+
+static char	*expand(char *src, int new_size)
+{
+	char *new_moves;
+	if (src == NULL)
+	{
+		if (!(new_moves = (char *)calloc(sizeof(char), new_size)))
+			return (NULL);
+	}
+	else
+	{
+		if (!(new_moves = (char *)realloc(src, sizeof(char) * new_size)))
+			return (NULL);
+	}
+	// ft_strncpy(new_moves, src, new_size);
 	return (new_moves);
 }
 
@@ -96,11 +113,11 @@ int			move_add(t_state *state, char move)
 	if (state->moves_size <= state->g)
 	{
 		new_size = state->moves_size + NBR_MOVES_ADD;
-		if (!(new_moves = move_newcopy(state->moves, new_size)))
+		if (!(state->moves = expand(state->moves, new_size)))
 			return (KO);
 		state->moves_size = new_size;
-		free(state->moves);
-		state->moves = new_moves;
+		// free(state->moves);
+		// state->moves = new_moves;
 
 	}
 	state->moves[state->g] = move;

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 00:52:03 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 01:07:05 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	copy(t_state *base, t_state *dst)
 	dst->zero = base->zero;
 	dst->moves_size = base->moves_size;
 	(DEBUG_HARD) ? ft_printf("state::copy::end::\n") : 0;
-	if (!(dst->moves = move_newcopy(base->moves, base->moves_size)))
+	if (!(dst->moves = move_newcopy(base->moves, base->g, base->moves_size)))
 		return (KO);
 	return (OK);
 }
