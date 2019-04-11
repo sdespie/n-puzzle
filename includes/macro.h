@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 20:11:25 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 17:29:39 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 19:26:13 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define CMD_SIZE	2
 # define OK 1
 # define KO 0
+# define ERROR -1
+
 # define PR_POW  13
 # define PR_MULT 31
 
@@ -37,6 +39,6 @@
 # define MAX_MOVES 4
 
 # define HASH_SIZE 500
-# define HASH_MAX_LEVEL 5
+# define HASH_MAX_LEVEL 10
 
 #endif
