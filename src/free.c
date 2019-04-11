@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:10:55 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/11 16:29:53 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 23:16:21 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		free_state(t_state *state)
 	if (state->board)
 		ft_memdel((void**)&state->board);
 }
+
 void 		free_all(t_puzzle *puzzle)
 {
 	free_queue(puzzle->closed);

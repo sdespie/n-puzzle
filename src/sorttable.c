@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:42:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 21:59:28 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 23:12:49 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,25 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 	(DEBUG_SORT_2) ? ft_printf("sort_newstate::head_index %d\n", head_index) : 0;
 
 	new_head = state_insort(puzzle->sort->table[head_index], new_state);
+	// ft_printf("New_head: ");
+	// print_queue(new_head);
 	if (puzzle->sort->table[new_state->h])
 		puzzle->sort->table[head_index] = new_head;
 	else
 	{
-		if (!puzzle->opened || puzzle->opened->h > new_state->h)
-			puzzle->opened = new_head;
 		puzzle->sort->table[new_state->h] = new_state;
 	}
-	print_sort(puzzle->sort);
-	print_queue(puzzle->opened);
+	if (!puzzle->opened || puzzle->opened->h >= new_state->h)
+		puzzle->opened = new_head;
+	// print_sort(puzzle->sort);
+	// print_queue(puzzle->opened);
 	return (OK);
 }
 
 void sort_remove(t_sorttable *sort, t_state *state_close)
 {
 
-	(DEBUG_SORT_2) ? ft_printf("sort_remove::start\n") : 0;
+	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::start\n") : 0;
 	if (sort->table[state_close->h] && sort->table[state_close->h]->hash == state_close->hash)
 	{
 		if (state_close->next && state_close->next->h == state_close->h)
@@ -101,5 +103,6 @@ void sort_remove(t_sorttable *sort, t_state *state_close)
 		else
 			sort->table[state_close->h] = NULL;
 	}
+	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::end\n") : 0;
 
 }

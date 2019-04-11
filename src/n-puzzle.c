@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/11 21:21:19 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 22:54:36 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     ft_memset((void *)&puzzle, 0, sizeof(t_puzzle));
     if (parse_cmd(&puzzle, argc, argv, 1) == KO)
 		return (0);
-    printf("++++++++++++++++\n");
+    ft_printf("++++++++++++++++\n");
     print_board(puzzle.base, 9, 3);
     //check_error(puzzle.opened);
 	if (check_valid_start(&puzzle) && hash_init(&puzzle) &&

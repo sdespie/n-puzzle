@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 21:59:11 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 22:54:27 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	print_board(int *board, int count, int size)
     int i;
     int j;
 
-    printf("++++++++ BOARD ++++++\n");
+    ft_printf("++++++++ BOARD ++++++\n");
     i = 0;
     while (i < count)
     {
-        printf("% .2d", board[i++]);
+        ft_printf("% .2d", board[i++]);
 		if ((i % size) == 0)
-        	printf("\n");
+        	ft_printf("\n");
     }
 }
 
