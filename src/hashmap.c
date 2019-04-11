@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 19:19:50 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 19:53:49 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	hash_expand(t_hashmap *map)
 	{
 		size_old = map->size;
 		map->size *= 2;
-		(DISPLAY_HASH_INFO) ? ft_printf("hash_expand::size %d::count %d::colision %d\n", map->size, map->count, map->colision) : 0;
+		(DISPLAY_HASH_INFO) ? printf("hash_expand::size %10d::count %8d::colision %6d :: perf %.2f /100 \n", map->size, map->count, map->colision, ((double)map->count / (double)map->size) * 100) : 0;
 		map->colision = 0;
 		table_old = map->table;
 		if (!(map->table = (t_state **)calloc(sizeof(t_state*), map->size)))
