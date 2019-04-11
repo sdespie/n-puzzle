@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 03:15:20 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:29:00 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static int put_data_in_board(t_puzzle *puzzle)
         else
             return (KO);
     }
-    board_copy(puzzle->not_visited->board, puzzle->base, puzzle->board_count);
-    puzzle->not_visited->zero = puzzle->zero_base;
+    board_copy(puzzle->opened->board, puzzle->base, puzzle->board_count);
+    puzzle->opened->zero = puzzle->zero_base;
     return (OK);
 }
 
@@ -57,7 +57,7 @@ static	int	parse_mode(t_puzzle *puzzle, char *value)
 
 static	int	parse_size(t_puzzle *puzzle, char *size)
 {
-	if (puzzle->not_visited)
+	if (puzzle->opened)
 		return (KO);
 	if (is_valid_number(puzzle, size))
     {
@@ -73,7 +73,7 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
     char    *line;
     int     ret;
 
-	if (puzzle->not_visited)
+	if (puzzle->opened)
 		return (KO);
     if ((fd = open(file, O_RDONLY)) < 0)
         return (error_exit(puzzle, "Error: can't read source file."));

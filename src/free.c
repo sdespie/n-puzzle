@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:10:55 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 03:25:01 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:29:53 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		free_state(t_state *state)
 }
 void 		free_all(t_puzzle *puzzle)
 {
-	free_queue(puzzle->visited);
-	free_queue(puzzle->not_visited);
+	free_queue(puzzle->closed);
+	free_queue(puzzle->opened);
 	free_puzzle(puzzle);
 }

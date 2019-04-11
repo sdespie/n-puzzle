@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/08 21:38:36 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:28:28 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void randomize(t_state *state)
 
 	(DEBUG_HARD_INIT) ? ft_printf("\n=== randomize === \n") : 0;
     srand((unsigned) time(&t));
-    nbr_move = rand() % 2000;
+    nbr_move = rand() % 200000;
 	(DEBUG_HARD_INIT) ? print_state(state) : 0;
     ft_printf("\nnbr move = %d\n", nbr_move);
     while (nbr_move--)
@@ -117,18 +117,18 @@ int		board_init(t_puzzle *puzzle)
     printf("\n===== board size = %d =====\n", size);
     set_snail(puzzle, &zero);
 	print_board(puzzle->goal, puzzle->board_count, puzzle->board_size);
-    if (!(puzzle->not_visited = state_create(puzzle->board_count, puzzle->board_size)))
+    if (!(puzzle->opened = state_create(puzzle->board_count, puzzle->board_size)))
 	{
 		free_all(puzzle);
 		return (KO);
 	}
-	puzzle->not_visited->zero = zero;
+	puzzle->opened->zero = zero;
 	if (puzzle->input == 0)
     {
-        board_copy(puzzle->not_visited->board, puzzle->goal, puzzle->board_count);
-        randomize(puzzle->not_visited);
-		board_copy(puzzle->base, puzzle->not_visited->board, puzzle->board_count);
-        puzzle->zero_base = puzzle->not_visited->zero;
+        board_copy(puzzle->opened->board, puzzle->goal, puzzle->board_count);
+        randomize(puzzle->opened);
+		board_copy(puzzle->base, puzzle->opened->board, puzzle->board_count);
+        puzzle->zero_base = puzzle->opened->zero;
     }
 	return (OK);
 }

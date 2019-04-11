@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 20:03:24 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:28:32 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,11 @@ int	check_valid_start(t_puzzle *puzzle)
 	if (puzzle->heuristic == NULL)
 	{
 		ft_printf("Base data not correct\n");
+		return (KO);
+	}
+	if (check_error(puzzle->opened, puzzle) == KO)
+	{
+		ft_printf("Base Puzzle not correct\n");
 		return (KO);
 	}
 	return (OK);

@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 20:15:20 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:28:32 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,26 @@ void 	hashing2(t_state *state)
 	state->hash = hash;
 }
 
+uint64_t hash_unit64(uint64_t x)
+{
+    x = (x ^ (x >> 30)) * UINT64_C(0xbf58476d1ce4e5b9);
+    x = (x ^ (x >> 27)) * UINT64_C(0x94d049bb133111eb);
+    x = x ^ (x >> 31);
+    return (x);
+}
+
 void	hashing(t_state *state)
 {
 	int			i;
-	long long 	hash;
+	uint64_t	hash;
+	uint64_t	hash_local;
 
 	i = -1;
-	hash = 1381;
+	hash = 0;
 	while (++i < state->board_count) //33
-		hash = (hash * 17) + state->board[i];
+	{
+		hash_local = hash_unit64((uint64_t)state->board[i]);
+		hash += (hash_local * (i + 1)) + (uint64_t)state->board[i];
+	}
 	state->hash = hash;
 }

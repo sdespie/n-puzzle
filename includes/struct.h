@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/05 18:00:14 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:30:23 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,31 @@
 
 typedef struct s_state
 {
-	int				id;
-	int 			*board;
-	int 			eval;
-	int 			g;
-	int 			h;
-	int 			x_zero;
-	int 			y_zero;
-	int				zero;
-	int				board_size;
-	int				board_count;
-	int				moves_size;
-	long long		hash;
-	char			*moves;
-	struct s_state	*next;
+	int					id;
+	int 				*board;
+	int 				eval;
+	int 				g;
+	int 				h;
+	int 				x_zero;
+	int 				y_zero;
+	int					zero;
+	int					board_size;
+	int					board_count;
+	int					moves_size;
+	int					hash_level;
+	uint64_t			hash;
+	char				*moves;
+	struct s_state		*next;
+	struct s_state		*next_hash;
 }				t_state;
+
+typedef struct s_hashmap
+{
+	int					count;
+	int					size;
+	int					colision;
+	t_state				**table;
+}				t_hashmap;
 
 typedef struct	s_puzzle
 {
@@ -47,8 +57,9 @@ typedef struct	s_puzzle
 	int 		error_p;
 	int 		error_sign;
 	void		(*heuristic)(struct	s_puzzle *puzzle, t_state *state);
-	t_state		*not_visited;
-	t_state		*visited;
+	t_state		*opened;
+	t_state		*closed;
+	t_hashmap	*map;
 }				t_puzzle;
 
 #endif
