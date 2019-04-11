@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 21:24:08 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 00:40:23 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_state
 	uint64_t			hash;
 	char				*moves;
 	struct s_state		*next;
+	struct s_state		*pre;
 }				t_state;
 
 typedef struct s_hashmap

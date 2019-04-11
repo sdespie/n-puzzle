@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 21:54:17 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 00:52:03 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,16 @@ t_state		*state_newmove(t_state *base, char move)
 
 	(DEBUG_SORT) ? ft_printf("state_insort::start\n") : 0;
  	new_state->next = NULL;
- 	pre = NULL;
+ 	pre = (queue) ? queue->pre : NULL;
  	tmp = queue;
  	while (tmp && tmp->h < new_state->h)
  	{
  		pre = tmp;
  		tmp = tmp->next;
  	}
+	new_state->pre = pre;
+	if (tmp)
+		tmp->pre = new_state;
  	if (pre == NULL)
  	{
  		new_state->next = tmp;

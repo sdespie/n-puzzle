@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:42:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 23:12:49 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 00:45:47 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 	t_state	*new_head;
 
 	(DEBUG_SORT) ? ft_printf("sort_newstate::start\n") : 0;
+	(DEBUG_SORT) ? ft_printf("new [%10d - %10llu]\n", new_state->h, new_state->hash) : 0;
+
 	if (new_state->h >= puzzle->sort->size && expand(puzzle->sort) != OK)
 		return (KO);
 	head_index = find_prestate_index(puzzle, new_state->h);
@@ -79,16 +81,15 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 	new_head = state_insort(puzzle->sort->table[head_index], new_state);
 	// ft_printf("New_head: ");
 	// print_queue(new_head);
-	if (puzzle->sort->table[new_state->h])
-		puzzle->sort->table[head_index] = new_head;
-	else
-	{
+	// if (puzzle->sort->table[new_state->h])
+	// 	puzzle->sort->table[new_state->h] = new_head;
+	// else
 		puzzle->sort->table[new_state->h] = new_state;
-	}
 	if (!puzzle->opened || puzzle->opened->h >= new_state->h)
-		puzzle->opened = new_head;
-	// print_sort(puzzle->sort);
-	// print_queue(puzzle->opened);
+		puzzle->opened = new_state;
+	puzzle->opened->pre = NULL;
+	(DEBUG_SORT) ? print_sort(puzzle->sort) : 0;
+	(DEBUG_SORT) ? print_queue(puzzle->opened) : 0;
 	return (OK);
 }
 
@@ -96,6 +97,9 @@ void sort_remove(t_sorttable *sort, t_state *state_close)
 {
 
 	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::start\n") : 0;
+	if (state_close->next)
+		state_close->next->pre = state_close->pre;
+	state_close->pre = NULL;
 	if (sort->table[state_close->h] && sort->table[state_close->h]->hash == state_close->hash)
 	{
 		if (state_close->next && state_close->next->h == state_close->h)
