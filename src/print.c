@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 00:49:22 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 03:59:58 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_state(t_state *state)
 	ft_printf("g    : %10d\n", state->g);
 	ft_printf("h    : %10d\n", state->h);
 	ft_printf("zero : %10d\n", state->zero);
-	ft_printf("moves:\n%s\n", state->moves);
+	ft_printf("move : %c\n", state->move);
 	print_board(state->board, state->board_count, state->board_size);
 }
 
@@ -77,21 +77,47 @@ void	print_sort(t_sorttable *sort)
 	}
 }
 
+char	*get_moves(t_state *state)
+{
+	int		i;
+	char	*moves;
+	t_state	*pre_move;
+
+	if (!(moves = (char *)calloc(sizeof(char) , (state->g + 2))))
+		return (NULL);
+	pre_move = state;
+	i = state->g + 2;
+	while (--i > 0)
+	{
+		ft_printf("[%c-%d] ", pre_move->move, i);
+		moves[i] = pre_move->move;
+		pre_move = pre_move->pre_move;
+	}
+	ft_printf("get_moves:: %s\n", moves);
+	return (moves);
+}
+
 void	print_step(t_state *state)
 {
-	int	i;
+	int		i;
+	char	*moves;
 
-	i = 0;
-	while (++i <= state->g)
+	if (!(moves = get_moves(state)))
 	{
-		ft_printf("MOVE: %c \n", state->moves[i]);
-		if (state->moves[i] == UP)
+		error_print("Error print_step moves");
+		return ;
+	}
+	i = 0;
+	while (++i < state->g)
+	{
+		ft_printf("MOVE: %c \n", moves[i]);
+		if (moves[i] == UP)
 			up(state);
-		else if (state->moves[i] == DOWN)
+		else if (moves[i] == DOWN)
 			down(state);
-		else if (state->moves[i] == RIGHT)
+		else if (moves[i] == RIGHT)
 			right(state);
-		else if (state->moves[i] == LEFT)
+		else if (moves[i] == LEFT)
 			left(state);
 		print_board(state->board, state->board_count, state->board_size);
 	}

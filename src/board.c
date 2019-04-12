@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/11 16:28:28 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 04:02:50 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int		board_init(t_puzzle *puzzle)
 		return (KO);
 	if (!(puzzle->base = board_create(puzzle->board_count)))
 		return (KO);
-    printf("\n===== board size = %d =====\n", size);
+    ft_printf("\n===== board size = %d =====\n", size);
     set_snail(puzzle, &zero);
 	print_board(puzzle->goal, puzzle->board_count, puzzle->board_size);
     if (!(puzzle->opened = state_create(puzzle->board_count, puzzle->board_size)))

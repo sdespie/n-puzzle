@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 00:18:52 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 03:32:48 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ static int	contains(t_hashmap *map, t_state *state)
 	{
 		cmp = map->table[hash_mod];
 		if (cmp && cmp->h == state->h && cmp->hash == state->hash)
+		{
+			(DEBUG_HASH) ? ft_printf("hash_contains::TRUE\n %d %d -- %llu %llu\n", cmp->h , state->h , cmp->hash, state->hash) : 0;
 			return (OK);
+		}
 		hash_mod = (hash_mod + 1) % map->size;
 	}
 	return (KO);
@@ -109,7 +112,7 @@ int		hash_init(t_puzzle *puzzle)
 
 int		hash_process(t_hashmap *map, t_state *state)
 {
-	(DEBUG_HASH) ? ft_printf("hash_init::hash_process:: count %d\n", map->count) : 0;
+	(DEBUG_HASH) ? ft_printf("hash_process::count %d\n", map->count) : 0;
 	hashing(state);
 	if (map->count != 0 && contains(map, state) == OK)
 		return (KO);

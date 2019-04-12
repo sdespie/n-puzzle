@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:52:36 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/11 23:16:47 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 04:02:02 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ static int	treat_new_state(t_puzzle *puzzle, t_state *new_state)
 {
 	int	hash_state;
 
+	(DEBUG_SORT) ? ft_printf("treat_new_state::start\n") : 0;
 	puzzle->heuristic(puzzle, new_state);
 	new_state->eval = new_state->h + new_state->g;
+	(DEBUG_HARD) ? print_state(new_state) : 0;
 	hash_state = hash_process(puzzle->map, new_state);
+	(DEBUG_SORT) ? ft_printf("treat_new_state::hash_state %d\n", hash_state) : 0;
+
 	if (hash_state == ERROR)
 		return (KO);
 	// if (state_is_new(puzzle->opened, new_state) && state_is_new(puzzle->closed, new_state))
@@ -35,6 +39,8 @@ static int	treat_new_state(t_puzzle *puzzle, t_state *new_state)
 		free_state(new_state);
 		puzzle->nb_state_del += 1;
 	}
+	(DEBUG_SORT) ? ft_printf("treat_new_state::end\n") : 0;
+
 	return (OK);
 }
 
@@ -49,13 +55,7 @@ static int	test_next_state(t_puzzle *puzzle, t_state *base_state)
 						(puzzle->nb_state_del % 100) == 0))
 		ft_printf("test_next_closed:: h: %10d::nb_state:-create: %10d :-del: %10d\n", base_state->h, puzzle->nb_state_create, puzzle->nb_state_del);
 	i = -1;
-	// ft_printf("\n\n\n###########STARTs\n");
-	// print_sort(puzzle->sort);
-	// print_queue(puzzle->opened);
 	sort_remove(puzzle->sort, base_state);
-	// print_sort(puzzle->sort);
-	// print_queue(puzzle->opened);
-	// ft_printf("############END\n");
 	puzzle->opened = base_state->next;
 	base_state->next = puzzle->closed;
 	puzzle->closed = base_state;
@@ -83,6 +83,8 @@ int			solve(t_puzzle *puzzle)
 		return (KO);
 	while (19)
 	{
+		(DEBUG_SORT) ? ft_printf("solve::puzzle->opened %d\n", (puzzle->opened == NULL)) : 0;
+
 		if (!puzzle->opened)
 		 	return (KO);
 		if (puzzle->opened->h == 0)

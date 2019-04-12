@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 01:07:05 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 03:51:58 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,15 @@ t_state		*state_create(int count, int size)
 static int	copy(t_state *base, t_state *dst)
 {
 	(DEBUG_HARD) ? ft_printf("state::copy::start::\n") : 0;
-	(DEBUG_HARD) ? print_state(base) : 0;
 	board_copy(dst->board, base->board, base->board_count);
-	(DEBUG_HARD) ? print_state(dst) : 0;
-
 	dst->g = base->g;
 	dst->x_zero = base->x_zero;
 	dst->y_zero = base->y_zero;
 	dst->zero = base->zero;
 	dst->moves_size = base->moves_size;
 	(DEBUG_HARD) ? ft_printf("state::copy::end::\n") : 0;
-	if (!(dst->moves = move_newcopy(base->moves, base->g, base->moves_size)))
-		return (KO);
+	// if (!(dst->moves = move_newcopy(base->moves, base->g, base->moves_size)))
+	// 	return (KO);
 	return (OK);
 }
 
@@ -57,7 +54,6 @@ t_state		*state_newmove(t_state *base, char move)
 	t_state	*new_state;
 
 	(DEBUG_HARD) ? ft_printf("state_newmove::start::\n") : 0;
-	(DEBUG_HARD) ? print_state(base) : 0;
 	new_state = NULL;
 	if ((new_state = state_create(base->board_count, base->board_size)))
 	{
@@ -74,9 +70,9 @@ t_state		*state_newmove(t_state *base, char move)
 			right(new_state);
 		else if (move == LEFT)
 			left(new_state);
-		move_add(new_state, move);
+		move_add(base, new_state, move);
 	}
-	(DEBUG_HARD) ? print_state(new_state) : 0;
+	(DEBUG_HARD) ? ft_printf("state_newmove::end::\n") : 0;
 	return (new_state);
 }
 

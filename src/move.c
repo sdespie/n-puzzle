@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 01:09:54 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 03:50:33 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,23 +103,26 @@ static char	*expand(char *src, int new_size)
 	return (new_moves);
 }
 
-int			move_add(t_state *state, char move)
+int			move_add(t_state *pre_move, t_state *state, char move)
 {
 	int		new_size;
 	char	*new_moves;
 
 	new_size = 0;
 	state->g += 1;
-	if (state->moves_size <= state->g)
-	{
-		new_size = state->moves_size + NBR_MOVES_ADD;
-		if (!(state->moves = expand(state->moves, new_size)))
-			return (KO);
-		state->moves_size = new_size;
-		// free(state->moves);
-		// state->moves = new_moves;
+	state->pre_move = pre_move;
+	state->move = move;
+	// if (state->moves_size <= state->g)
+	// {
+	// 	new_size = state->moves_size + NBR_MOVES_ADD;
+	// 	if (!(state->moves = expand(state->moves, new_size)))
+	// 		return (KO);
+	// 	state->moves_size = new_size;
+	// 	// free(state->moves);
+	// 	// state->moves = new_moves;
+	//
+	// }
+	// state->moves[state->g] = move;
 
-	}
-	state->moves[state->g] = move;
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/11 16:28:32 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 03:50:18 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void set_normalized(t_state *state, int *line, t_puzzle *puzzle)
 	ref = -1;
 	i = 0;
     size = puzzle->board_size;
-    printf("coucou\n");
 	while (++ref < state->board_size)
 	{
 		x = 0;
@@ -33,7 +32,7 @@ static void set_normalized(t_state *state, int *line, t_puzzle *puzzle)
 		{
 			pos = (ref + y) * puzzle->board_size + ref + x;
 			line[i] = puzzle->goal[pos];
-            printf("line[%d] = %d\n", i, line[i]);
+            ft_printf("line[%d] = %d\n", i, line[i]);
             i++;
 			if (y == 0 && x != size - 1)
 				x++;
@@ -55,9 +54,9 @@ static int calc_inversion(t_state *state, t_puzzle *puzzle)
 
     line = (int*)malloc(sizeof(int) * state->board_count);
     inversion = 0;
-    printf("+=+=+=\n");
+    ft_printf("+=+=+=\n");
     set_normalized(state, line, puzzle);
-    printf("+=+=+=\n");
+    ft_printf("+=+=+=\n");
     i = -1;
     while (++i < state->board_count)
     {
@@ -90,9 +89,9 @@ int	check_error(t_state *state, t_puzzle *puzzle)
         }
     }
     if (inversion % 2)
-        printf("\nBoard not valid.\n");
+        ft_printf("\nBoard not valid.\n");
     else
-        printf("\nBoard valid.\n");
+        ft_printf("\nBoard valid.\n");
 	return (!(inversion % 2));
 }
 
@@ -105,17 +104,17 @@ int	check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
 	pos = state->zero;
 	size = state->board_size;
 	nb_moves = 0;
-	if (pos < state->board_count - size && (!state->moves ||
-		state->moves[state->g] != DOWN))
+	if (pos < state->board_count - size) // && (!state->pre_move ||
+		// state->pre_move->move != DOWN))
 		next_moves[nb_moves++] = UP;
-	if (pos >= size && (!state->moves ||
-		state->moves[state->g] != UP))
+	if (pos >= size)// && (!state->pre_move ||
+		// state->pre_move->move != UP))
 		next_moves[nb_moves++] = DOWN;
-	if ((pos) % size != 0 && (!state->moves ||
-		state->moves[state->g] != LEFT))
+	if ((pos) % size != 0)// && (!state->pre_move ||
+		// state->pre_move->move != LEFT))
 		next_moves[nb_moves++] = RIGHT;
-	if ((pos + 1) % size != 0 && (!state->moves ||
-		state->moves[state->g] != RIGHT))
+	if ((pos + 1) % size != 0)// && (!state->pre_move ||
+		// state->pre_move->move != RIGHT))
 		next_moves[nb_moves++] = LEFT;
 	return (nb_moves);
 }

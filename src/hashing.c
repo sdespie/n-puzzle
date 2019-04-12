@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 00:20:39 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 03:16:31 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,19 @@ void	hashing3(t_state *state)
 	hash = 1381;
 	while (++i < state->board_count)
 		hash = (hash * 33) + state->board[i] - '0';
+	(DEBUG_HASH) ? ft_printf("%llu\n", hash) : 0;
+	state->hash = hash;
+}
+
+void	hashing4(t_state *state)
+{
+	int			i;
+	uint64_t	hash;
+
+	i = -1;
+	hash = 7;
+	while (++i < state->board_count)
+		hash = hash * 31 + (char)(state->board[i]);
 	(DEBUG_HASH) ? ft_printf("%llu\n", hash) : 0;
 	state->hash = hash;
 }
