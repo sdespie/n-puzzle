@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:42:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 00:45:47 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:48:31 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,11 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 
 	(DEBUG_SORT) ? ft_printf("sort_newstate::start\n") : 0;
 	(DEBUG_SORT) ? ft_printf("new [%10d - %10llu]\n", new_state->h, new_state->hash) : 0;
-
 	if (new_state->h >= puzzle->sort->size && expand(puzzle->sort) != OK)
 		return (KO);
 	head_index = find_prestate_index(puzzle, new_state->h);
-	(DEBUG_SORT_2) ? ft_printf("sort_newstate::head_index %d\n", head_index) : 0;
-
 	new_head = state_insort(puzzle->sort->table[head_index], new_state);
-	// ft_printf("New_head: ");
-	// print_queue(new_head);
-	// if (puzzle->sort->table[new_state->h])
-	// 	puzzle->sort->table[new_state->h] = new_head;
-	// else
-		puzzle->sort->table[new_state->h] = new_state;
+	puzzle->sort->table[new_state->h] = new_state;
 	if (!puzzle->opened || puzzle->opened->h >= new_state->h)
 		puzzle->opened = new_state;
 	puzzle->opened->pre = NULL;

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 02:17:21 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:45:42 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ typedef struct s_state
 	int 				eval;
 	int 				g;
 	int 				h;
-	int 				x_zero;
-	int 				y_zero;
 	int					zero;
 	int					board_size;
 	int					board_count;
@@ -30,7 +28,6 @@ typedef struct s_state
 	uint64_t			hash;
 	char				move;
 	struct s_state		*pre_move;
-	char				*moves;
 	struct s_state		*next;
 	struct s_state		*pre;
 }				t_state;

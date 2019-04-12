@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 02:28:19 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:48:51 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void 		up(t_state *state);
 void 		down(t_state *state);
 void 		left(t_state *state);
 void 		right(t_state *state);
+int			move_add(t_state *pre_move, t_state *state, char move);
 
 int			check_error(t_state *state, t_puzzle *puzzle);
 int			check_nextmoves(t_state *state, char next_moves[MAX_MOVES]);
@@ -69,9 +70,6 @@ void		e(t_puzzle *puzzle, t_state *state);
 void 		hashing(t_state *state);
 int			hash_init(t_puzzle *puzzle);
 int			hash_process(t_hashmap *map, t_state *state);
-
-char		*move_newcopy(char *src, int old_size, int new_size);
-int			move_add(t_state *pre_move, t_state *state, char move);
 
 int			state_is_new(t_state *queue, t_state *new_state);
 t_state		*state_insort(t_state *queue, t_state *new_state);

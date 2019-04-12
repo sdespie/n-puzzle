@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:10:55 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/11 23:16:21 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:46:14 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static void free_queue(t_state *queue)
 
 void		free_state(t_state *state)
 {
-	if (state->moves)
-		ft_memdel((void**)&state->moves);
 	if (state->board)
 		ft_memdel((void**)&state->board);
 }

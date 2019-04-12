@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 13:37:24 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:46:39 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,9 @@ static int	copy(t_state *base, t_state *dst)
 	(DEBUG_HARD) ? ft_printf("state::copy::start::\n") : 0;
 	board_copy(dst->board, base->board, base->board_count);
 	dst->g = base->g;
-	dst->x_zero = base->x_zero;
-	dst->y_zero = base->y_zero;
 	dst->zero = base->zero;
 	dst->moves_size = base->moves_size;
 	(DEBUG_HARD) ? ft_printf("state::copy::end::\n") : 0;
-	// if (!(dst->moves = move_newcopy(base->moves, base->g, base->moves_size)))
-	// 	return (KO);
 	return (OK);
 }
 
@@ -106,32 +102,3 @@ t_state		*state_newmove(t_state *base, char move)
 	(DEBUG_SORT) ? ft_printf("state_insort::end\n") : 0;
  	return (queue);
  }
-
-int			state_is_new(t_state *queue, t_state *new_state)
-{
-	int		i;
-	int		state;
-	t_state	*tmp;
-
-	tmp = queue;
-	state = OK;
-	while (tmp && state == OK)
-	{
-		// printf("%d %d -- %lld %lld\n",tmp->h, new_state->h,tmp->hash, new_state->hash);
-		if (tmp->h == new_state->h && tmp->hash == new_state->hash)
-		{
-			// print_state(tmp);
-			// print_state(new_state);
-
-			i = -1;
-			state = KO;
-			// while (state == KO && ++i < new_state->board_count)
-			// {
-			// 	if (tmp->board[i] != new_state->board[i])
-			// 		state = OK;
-			// }
-		}
-		tmp = tmp->next;
-	}
-	return (state);
-}
