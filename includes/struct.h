@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 14:45:42 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:20:57 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_state
 	int					moves_size;
 	int					hash_level;
 	uint64_t			hash;
+	uint64_t			hash2;
 	char				move;
 	struct s_state		*pre_move;
 	struct s_state		*next;

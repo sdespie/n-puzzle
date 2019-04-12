@@ -6,13 +6,13 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 03:32:48 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:27:24 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
 
-static int	add(t_hashmap *map, t_state *state)
+static int	add(t_hashmap *map, t_state *state, uint64_t hash)
 {
 	int	i;
 	int	hash_mod;
@@ -21,7 +21,7 @@ static int	add(t_hashmap *map, t_state *state)
 	if (map->count >= map->size)
 		return (KO);
 	i = -1;
-	hash_mod = state->hash % map->size;
+	hash_mod = hash % map->size;
 	while (++i < HASH_MAX_LEVEL)
 	{
 		(DEBUG_HASH) ? ft_printf("hash_add::hash_mod %d\n", hash_mod) : 0;
@@ -37,7 +37,7 @@ static int	add(t_hashmap *map, t_state *state)
 	return (KO);
 }
 
-static int	contains(t_hashmap *map, t_state *state)
+static int	contains(t_hashmap *map, t_state *state, uint64_t hash)
 {
 	int		i;
 	int		hash_mod;
@@ -45,7 +45,7 @@ static int	contains(t_hashmap *map, t_state *state)
 
 	(DEBUG_HASH) ? ft_printf("hash_contains::start\n") : 0;
 	i = -1;
-	hash_mod = state->hash % map->size;
+	hash_mod = hash % map->size;
 	while (++i < HASH_MAX_LEVEL)
 	{
 		cmp = map->table[hash_mod];
@@ -81,7 +81,8 @@ static int	expand(t_hashmap *map)
 			{
 				if (table_old[i])
 				{
-					if (!add(map, table_old[i]))
+					if (!add(map, table_old[i], table_old[i]->hash) &&
+						!add(map, table_old[i], table_old[i]->hash2))
 					{
 						ft_printf("hash_expand, double size is not enough %d\n", map->size);
 						return (KO);
@@ -113,10 +114,14 @@ int		hash_init(t_puzzle *puzzle)
 int		hash_process(t_hashmap *map, t_state *state)
 {
 	(DEBUG_HASH) ? ft_printf("hash_process::count %d\n", map->count) : 0;
-	hashing(state);
-	if (map->count != 0 && contains(map, state) == OK)
+	state->hash = hashing(state);
+	state->hash2 = hashing2(state);
+	// ft_printf("diff hash = %llu\n",(state->hash - state->hash2));
+	if (map->count != 0 && (contains(map, state, state->hash) == OK ||
+							contains(map, state, state->hash2) == OK))
 		return (KO);
-	while (add(map, state) != OK)
+	while (add(map, state, state->hash) != OK &&
+			add(map, state, state->hash2) != OK)
 	{
 		if (expand(map) == ERROR)
 			return (ERROR);
