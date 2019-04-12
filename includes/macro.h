@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 20:11:25 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 03:48:33 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:38:43 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # define DEBUG_HARD_INIT 0
 # define IS_SORT 0
 
-# define DISPLAY_STATE_INFO 1
+# define DISPLAY_STATE_INFO 0
 # define DISPLAY_HASH_INFO 1
-# define DISPLAY_SORT_INFO 1
+# define DISPLAY_SORT_INFO 0
 # define DISPLAY 1
 
 # define CMD_SIZE	2

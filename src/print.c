@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 03:59:58 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:40:15 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,16 @@ char	*get_moves(t_state *state)
 	char	*moves;
 	t_state	*pre_move;
 
-	if (!(moves = (char *)calloc(sizeof(char) , (state->g + 2))))
+	if (!(moves = (char *)calloc(sizeof(char) , (state->g))))
 		return (NULL);
 	pre_move = state;
-	i = state->g + 2;
-	while (--i > 0)
+	i = state->g;
+	moves[i] = '\0';
+	while (--i >= 0)
 	{
-		ft_printf("[%c-%d] ", pre_move->move, i);
 		moves[i] = pre_move->move;
 		pre_move = pre_move->pre_move;
 	}
-	ft_printf("get_moves:: %s\n", moves);
 	return (moves);
 }
 
@@ -107,9 +106,10 @@ void	print_step(t_state *state)
 		error_print("Error print_step moves");
 		return ;
 	}
-	i = 0;
+	i = -1;
 	while (++i < state->g)
 	{
+		print_board(state->board, state->board_count, state->board_size);
 		ft_printf("MOVE: %c \n", moves[i]);
 		if (moves[i] == UP)
 			up(state);
@@ -119,6 +119,6 @@ void	print_step(t_state *state)
 			right(state);
 		else if (moves[i] == LEFT)
 			left(state);
-		print_board(state->board, state->board_count, state->board_size);
 	}
+	print_state(state);
 }

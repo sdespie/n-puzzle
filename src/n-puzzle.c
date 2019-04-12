@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/11 22:54:36 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:40:40 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ int main(int argc, char **argv)
 	if (check_valid_start(&puzzle) && hash_init(&puzzle) &&
 		sorttable_init(&puzzle) && solve(&puzzle))
 	{
-		ft_printf("nb_state:-create: %10d :-del: %10d\n", puzzle.nb_state_create, puzzle.nb_state_del);
 		board_copy(puzzle.opened->board, puzzle.base, puzzle.board_count);
 		puzzle.opened->zero = puzzle.zero_base;
-		print_state(puzzle.opened);
 		print_step(puzzle.opened);
+		ft_printf("nb_state:-create: %10d :-del: %10d\n", puzzle.nb_state_create, puzzle.nb_state_del);
 	}
    	free_all(&puzzle);
 	return (1);

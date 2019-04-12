@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 03:50:33 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:37:08 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int			move_add(t_state *pre_move, t_state *state, char move)
 	// 	// state->moves = new_moves;
 	//
 	// }
-	// state->moves[state->g] = move;
+	// state->moves[state->g - 1] = move;
 
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 03:50:18 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:47:45 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,48 @@ int	check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
 	int		nb_moves;
 	int		pos;
 	int		size;
+	int		state_precheck;
 
 	pos = state->zero;
 	size = state->board_size;
 	nb_moves = 0;
-	if (pos < state->board_count - size) // && (!state->pre_move ||
-		// state->pre_move->move != DOWN))
+	state_precheck = (state->board_size <= 5 || !state->pre_move);
+	// (state->pre_move) ? ft_printf("check_nextmoves %c\n", state->pre_move->move) : 0;
+	if (pos < state->board_count - size && (state_precheck||
+		state->pre_move->move != DOWN))
 		next_moves[nb_moves++] = UP;
-	if (pos >= size)// && (!state->pre_move ||
-		// state->pre_move->move != UP))
+	if (pos >= size && (state_precheck || state->pre_move->move != UP))
 		next_moves[nb_moves++] = DOWN;
-	if ((pos) % size != 0)// && (!state->pre_move ||
-		// state->pre_move->move != LEFT))
+	if ((pos) % size != 0 && (state_precheck ||
+		state->pre_move->move != LEFT))
 		next_moves[nb_moves++] = RIGHT;
-	if ((pos + 1) % size != 0)// && (!state->pre_move ||
-		// state->pre_move->move != RIGHT))
+	if ((pos + 1) % size != 0 && (state_precheck ||
+		state->pre_move->move != RIGHT))
+		next_moves[nb_moves++] = LEFT;
+	return (nb_moves);
+}
+
+int	check_nextmoves3(t_state *state, char next_moves[MAX_MOVES])
+{
+	int		nb_moves;
+	int		pos;
+	int		size;
+
+	pos = state->zero;
+	size = state->board_size;
+	(state->moves) ? ft_printf("check_nextmoves %c\n", state->moves[state->g - 1]) : 0;
+	nb_moves = 0;
+	if (pos < state->board_count - size && (!state->moves ||
+		state->moves[state->g - 1] != DOWN))
+		next_moves[nb_moves++] = UP;
+	if (pos >= size && (!state->moves ||
+		state->moves[state->g - 1] != UP))
+		next_moves[nb_moves++] = DOWN;
+	if ((pos) % size != 0 && (!state->moves ||
+		state->moves[state->g - 1] != LEFT))
+		next_moves[nb_moves++] = RIGHT;
+	if ((pos + 1) % size != 0 && (!state->moves ||
+		state->moves[state->g - 1] != RIGHT))
 		next_moves[nb_moves++] = LEFT;
 	return (nb_moves);
 }
