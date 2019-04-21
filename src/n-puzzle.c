@@ -26,8 +26,8 @@ int main(int argc, char **argv)
     if (parse_cmd(&puzzle, argc, argv, 1) == KO)
 		return (0);
     ft_printf("++++++++++++++++\n");
-    print_board(puzzle.base, 9, 3);
-    //check_error(puzzle.opened);
+    print_board(puzzle.base, puzzle.board_count, puzzle.board_size);
+    check_error(puzzle.opened);
 	if (check_valid_start(&puzzle) && hash_init(&puzzle) &&
 		sorttable_init(&puzzle) && solve(&puzzle))
 	{

@@ -45,54 +45,80 @@ static void set_normalized(t_state *state, int *line, t_puzzle *puzzle)
 	}
 }
 
-static int calc_inversion(t_state *state, t_puzzle *puzzle)
+static int calc_inversion(t_state *state)
 {
     int inversion;
     int i;
     int j;
-    int *line;
+    int *ref;
 
-    line = (int*)malloc(sizeof(int) * state->board_count);
+    ref = (int*)malloc(sizeof(int) * state->board_count);
     inversion = 0;
-    ft_printf("+=+=+=\n");
-    set_normalized(state, line, puzzle);
-    ft_printf("+=+=+=\n");
+    // ft_printf("+=+=+=\n");
+    // set_normalized(state, line, puzzle);
+    // ft_printf("+=+=+=\n");
+    i = -1;
+    while (++i < state->board_count)
+        ref[i] = i;
     i = -1;
     while (++i < state->board_count)
     {
         j = i + 1;
         while (j < state->board_count)
         {
-            if (state->board[i] > state->board[j++])
+            if (ref[i] > state->board[j])
                 inversion++;
+            j++;
         }
     }
     return (inversion);
 }
 
-int	check_error(t_state *state, t_puzzle *puzzle)
+static int multiple(t_state *state)
 {
-    int i;
-    int j;
-    int size;
-    int inversion;
+    int     *tab;
+    int     i;
+    int     j;
+    int     error;
 
-    inversion = calc_inversion(state, puzzle);
+    error = OK;
+    tab = (int *)malloc(sizeof(int) * state->board_count);
+    i = -1;
+    while (++i < state->board_count)
+        tab[i] = -1;
     i = -1;
     while (++i < state->board_count)
     {
-        j = i + 1;
-        while (j < state->board_count)
-        {
-            if (state->board[i] > state->board[j++])
-                inversion++;
-        }
+        if (tab[state->board[i]] == -1)
+            tab[state->board[i]] = state->board[i];
+        else
+            error = KO;
     }
-    if (inversion % 2)
-        ft_printf("\nBoard not valid.\n");
+    free(tab);
+    return (error);
+}
+
+int	check_error(t_state *state)
+{
+    int valid;
+    int size;
+    int inversion;
+    int blank_row;
+
+    valid = KO;
+    blank_row = state->zero / state->board_size;
+    inversion = calc_inversion(state);
+    if (state->board_size % 2 == 0)
+    {
+        if (blank_row % 2 == 0 && inversion % 2 != 0)
+            valid = OK;
+        else if (blank_row % 2 != 0 && inversion % 2 == 0)
+            valid = OK;
+    }
     else
-        ft_printf("\nBoard valid.\n");
-	return (!(inversion % 2));
+        if (inversion % 2 == 0)
+            valid = OK;
+	return (valid);
 }
 
 int	check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
@@ -129,9 +155,9 @@ int	check_valid_start(t_puzzle *puzzle)
 		ft_printf("Base data not correct\n");
 		return (KO);
 	}
-	if (check_error(puzzle->opened, puzzle) == KO)
+	if (check_error(puzzle->opened) == KO)
 	{
-		ft_printf("Base Puzzle not correct\n");
+		ft_printf("Puzzle not correct\n");
 		return (KO);
 	}
 	return (OK);
