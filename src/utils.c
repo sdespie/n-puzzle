@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/05 18:02:50 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 17:13:03 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,23 @@ void		queue_is_sort(t_state *queue)
 		ft_printf("The queue count %d elem and is", count);
 		(is_sort) ? ft_printf(" sort\n") : ft_printf(" not sort!!!\n");
 	}
+}
+
+char	*get_moves(t_state *state)
+{
+	int		i;
+	char	*moves;
+	t_state	*pre_move;
+
+	if (!(moves = (char *)calloc(sizeof(char) , (state->g))))
+		return (NULL);
+	pre_move = state;
+	i = state->g;
+	moves[i] = '\0';
+	while (--i >= 0)
+	{
+		moves[i] = pre_move->move;
+		pre_move = pre_move->pre_move;
+	}
+	return (moves);
 }

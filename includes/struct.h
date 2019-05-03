@@ -6,12 +6,14 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 16:20:57 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 16:39:11 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+#include <stdint.h>
 
 typedef struct s_state
 {

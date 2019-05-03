@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 13:40:15 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 17:12:53 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,6 @@ void	print_sort(t_sorttable *sort)
 		if (sort->table[i])
 			ft_printf("[%10d - %10llu]\n", sort->table[i]->h, sort->table[i]->hash);
 	}
-}
-
-char	*get_moves(t_state *state)
-{
-	int		i;
-	char	*moves;
-	t_state	*pre_move;
-
-	if (!(moves = (char *)calloc(sizeof(char) , (state->g))))
-		return (NULL);
-	pre_move = state;
-	i = state->g;
-	moves[i] = '\0';
-	while (--i >= 0)
-	{
-		moves[i] = pre_move->move;
-		pre_move = pre_move->pre_move;
-	}
-	return (moves);
 }
 
 void	print_step(t_state *state)

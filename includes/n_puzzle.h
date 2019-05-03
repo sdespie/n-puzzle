@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 16:20:49 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 17:12:49 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int			check_valid_start(t_puzzle *puzzle);
 int 		is_valid_number(t_puzzle *puzzle, char* number);
 int			ft_abs(int x);
 void		queue_is_sort(t_state *queue);
+char		*get_moves(t_state *state);
 
 long		ft_atol2(char *s, t_puzzle *puzzle);
 int			ft_atoi2(char *s, t_puzzle *puzzle);

@@ -6,78 +6,102 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/04/11 20:42:27 by adefonta         ###   ########.fr        #
+#    Updated: 2019/05/03 17:05:12 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_DIR		:=	./src
-INC_DIR		:=	./includes
-OBJ_DIR		:=	./obj
-LIBFT_DIR	:=	./libft
+NAME = n-puzzle
 
-INC			:=	-I $(INC_DIR)/
-LIB_LNK		:=	-L $(LIBFT_DIR) -lft
-LIB_INC		:=	-I $(LIBFT_DIR)/includes
-LIB_INC		+=	$(INC)
+CC = gcc
 
-SRC			:=	n-puzzle.c\
-				board.c\
-				parse_cmd.c\
-				move.c\
-				check.c\
-				error.c\
-				ft_atoi_long.c\
-				utils.c\
-				heuristic.c\
-				free.c\
-				ft_strjoin_free.c \
-				print.c \
-				state.c \
-				hashing.c \
-				hashmap.c \
-				sorttable.c \
-				solve.c
+FLAGS = -O3
+# FLAGS += -Wall -Wextra -Werro
+FLAGS += -fsanitize=address
 
+IN =	n-puzzle.c\
+		board.c\
+		parse_cmd.c\
+		move.c\
+		check.c\
+		error.c\
+		ft_atoi_long.c\
+		utils.c\
+		heuristic.c\
+		free.c\
+		ft_strjoin_free.c \
+		print.c \
+		state.c \
+		hashing.c \
+		hashmap.c \
+		sorttable.c \
+		solve.c
 
+IN_VISU = 	visu.c mlx.c colors.c event.c del.c image.c extra.c \
+			display_1.c display_tools.c 
 
-OBJ			:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+LIBFT = ./libft
 
-CC			:=	gcc -g
-CFG			:=	-O3
-CFG			+=	#-Wall -Wextra
-CFG			+=	-fsanitize=address
-NAME		:=	n-puzzle
+SRCS_DIR = src
 
-# rules
+SRCS_DIR_VISU = visu/srcs
+
+OUT_DIR = tmp
+
+INC =	-Iincludes -I$(LIBFT)/includes/ -I$(LIBFT)/libft/includes \
+		-Ivisu/includes -Ivisu/minilibx/
+
+INC_LIB =  -lmlx -L ./visu/minilibx  -L $(LIBFT) -lft
+
+SRCS = $(addprefix $(SRCS_DIR)/,$(IN))
+
+SRCS_VISU = $(addprefix $(SRCS_DIR_VISU)/,$(IN_VISU))
+
+OBJS = $(addprefix $(OUT_DIR)/,$(IN:.c=.o))
+
+OBJS_VISU = $(addprefix $(OUT_DIR)/,$(IN_VISU:.c=.o))
 
 all: $(NAME)
 
-lib:
-	@$(MAKE) -C $(LIBFT_DIR) re
-	@echo "\033[1;34mN-Puzzle\t\033[1;33mLIB\t\t\033[0;32m[OK]\033[0m"
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
-	@$(CC) $(CFG) $(LIB_INC) -o $@ -c $<
-
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@make -C $(LIBFT_DIR)
-	@$(CC) -o $(NAME) $(CFG) $(OBJ) $(LIB_LNK)
+$(NAME): $(OBJS) $(OBJS_VISU) #lib
+	@$(CC) $(OBJS) $(OBJS_VISU) $(INC_LIB) $(FLAGS) -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "\033[1;34mN-Puzzle\t\033[1;33mExecutable\t\033[0;32m[OK]\033[0m"
 
+$(OUT_DIR)/%.o: $(SRCS_DIR)/%.c
+	@mkdir -p $(OUT_DIR)
+	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
+$(OUT_DIR)/%.o: $(SRCS_DIR_VISU)/%.c
+	@mkdir -p $(OUT_DIR)
+	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
+$(OUT_DIR)/%.o: $(OP_DIR)/%.c
+	@mkdir -p $(OUT_DIR)
+	@$(CC) $(FLAGS) $(INC) -o $@ -c $<
+
+lib:
+	@make -C $(LIBFT)
+	@make -C visu/minilibx/
+
+norme:
+	norminette ./$(LIBFT)/ ./$(INC)/ ./$(SRCS_DIR)/
+	@echo
+
 clean:
-	@/bin/rm -rf $(OBJ_DIR)
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -f $(OBJS)
+	@rm -rf $(OUT_DIR)
+	# @make clean -C $(LIBFT)
+	# @make -C visu/minilibx/ clean
 	@echo "\033[1;34mN-Puzzle\t\033[1;33mCleaning\t\033[0;32m[OK]\033[0m"
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@make -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
+	# @make fclean -C $(LIBFT)
+	# @make -C visu/minilibx/ fclean
 	@echo "\033[1;34mN-Puzzle\t\033[1;33mFull Cleaning\t\033[0;32m[OK]\033[0m"
 
-f: fclean
 re: fclean all
 
-.PHONY: all clean fclean re lib
+f: fclean
+r: re
+c: clean
