@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:07:01 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 17:20:33 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 19:01:29 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "mlx.h"
 #include "struct.h"
 #include "visu_macro.h"
+#include "libft.h"
 // static void	display_champi(t_mlx mlx, t_vm vm, int coord[2])
 // {
 // 	int			i;
@@ -60,29 +61,28 @@
 // 	display_champi(mlx, vm, coord);
 // }
 //
-// void		display_info(t_param p, t_mlx mlx, t_vm vm)
-// {
-// 	int		coord[2];
-// 	int		c;
-// 	char	*txt;
-//
-// 	txt = NULL;
-// 	c = C_WHITE;
-// 	coord[1] = STRING_Y;
-// 	coord[0] = STRING_X;
-// 	txt = ft_strjoin_free(T_SPEED, ft_itoa(p.speed), 1);
-// 	display_string(mlx, txt, coord, c);
-// 	coord[1] += S_H;
-// 	txt = ft_strjoin_free(T_CYCLE, ft_itoa(vm.cycles), 1);
-// 	display_string(mlx, txt, coord, c);
-// 	txt = ft_strjoin_free(T_CYCLE, ft_itoa(vm.tot_cycles), 1);
-// 	display_string(mlx, txt, coord, c);
-// 	txt = ft_strjoin_free(T_PLAYER, ft_itoa(vm.nb_champi), 1);
-// 	display_string(mlx, txt, coord, c);
-// 	txt = ft_strjoin_free(T_PROCESS, ft_itoa(vm.nb_process), 1);
-// 	display_string(mlx, txt, coord, c);
-// 	info_bottom(mlx, vm, coord);
-// }
+
+void		display_info(t_param p, t_mlx mlx, char move)
+{
+	int		coord[2];
+	int		c;
+	char	*txt;
+
+	txt = NULL;
+	c = C_WHITE;
+	coord[1] = STRING_Y;
+	coord[0] = STRING_X;
+	txt = ft_strjoin_f(T_SPEED, ft_itoa(p.speed), 1);
+	display_string(mlx, txt, coord, c);
+	coord[1] += S_H;
+	txt = ft_strjoin_f(T_TOT_TURN, ft_itoa(p.state->g), 1);
+	display_string(mlx, txt, coord, c);
+	txt = ft_strjoin_f(T_TURN, ft_itoa(p.current_step), 1);
+	display_string(mlx, txt, coord, c);
+	txt = ft_strjoin(T_MOVE, &move);
+	display_string(mlx, txt, coord, c);
+
+}
 //
 // void		display_cadre(t_img *img)
 // {
@@ -109,11 +109,31 @@
 // 		y += 5;
 // 	}
 // }
-
-static void		display_piece(t_img *img, t_state *state, int start[2], int size)
+static int	ft_rapport(int first, int second, double p)
 {
-	int		index[2];
+	if (first == second)
+		return (first);
+	return ((int)((double)first + (second - first) * p));
+}
 
+static int	color_mix(int c1, int c2, double p)
+{
+	int r;
+	int g;
+	int b;
+
+	if (c1 == c2)
+		return (c1);
+	r = ft_rapport((c1 >> 16) & 0xFF, (c2 >> 16) & 0xFF, p);
+	g = ft_rapport((c1 >> 8) & 0xFF, (c2 >> 8) & 0xFF, p);
+	b = ft_rapport(c1 & 0xFF, c2 & 0xFF, p);
+	return (r << 16 | g << 8 | b);
+}
+
+
+static void		display_piece(t_img *img, int start[2], int size, int color)
+{
+	int	index[2];
 
 	index[1] = -1;
 	while (++index[1] < size)
@@ -121,7 +141,7 @@ static void		display_piece(t_img *img, t_state *state, int start[2], int size)
 		index[0] = -1;
 		while (++index[0] < size)
 		{
-			img->data[coord_to_pos(start[0] + index[0], start[1] + index[1], WIN_WIDTH)] = C_RED;
+			img->data[coord_to_pos(start[0] + index[0], start[1] + index[1], WIN_WIDTH)] = color;
 		}
 	}
 }
@@ -132,21 +152,27 @@ void		display_board(t_state *state, t_img *img)
 	int	start[2];
 	int	size;
 	int	space;
+	int color;
 
-	size = 50;
 	space = 10;
+	size = (img->dim[0] - 400 < img->dim[1] - 400) ? img->dim[0] - 400 : img->dim[1] - 400;
+	size = size / state->board_size - space;
 	i = -1;
-	start[0] = space;
-	start[1] = -size;
+	start[0] = 200;
+	start[1] = -size + 200;
 	while (++i < state->board_count)
 	{
 		start[0] += size + space;
 		if (i % state->board_size == 0)
 		{
-			start[0] = space;
+			start[0] = 200;
 			start[1] += space + size;
 		}
 		if (state->board[i] != 0)
-			display_piece(img, state, start, size);
+		{
+			color = color_mix(C_RED, C_BLUE,
+				(double)state->board[i] / (double) state->board_count);
+			display_piece(img, start, size, color);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 16:14:02 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 16:42:59 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 19:00:12 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define END 1
 
 # define STRING_X 10
-# define STRING_Y 150
+# define STRING_Y 50
 # define S_H 20
 # define S_W 30
 
@@ -94,8 +94,8 @@
 # define LEFT_ARENA_WIDTH ARENA_X
 # define LEFT_ARENA_HEIGHT WIN_HEIGHT
 
-# define SPEED_MAX 300
-# define SPEED_MIN 1
+# define SPEED_MAX 100000
+# define SPEED_MIN 100
 
 # define CM_CLASSIC 0
 # define CM_GOOGLE 1
@@ -116,34 +116,11 @@
 # define C_CYAN 0x35cbf0
 # define C_MAUVE 0x5a35f0
 
-# define T_WIN "Corewar tout simplement..."
+# define T_WIN "N-puzzle tout simplement..."
 
 # define T_SPEED 			"Speed        : "
-# define T_CYCLE 			"Cycle        : "
-# define T_TOT_CYCLES 			"Tot cycle    : "
-# define T_PLAYER 			"Nb champis   : "
-# define T_PROCESS			"Nb process   : "
-# define T_CYCLE_TO_DIE		"Cycle to die : "
-# define T_CYCLE_DELTA		"Cycle delta  : "
-# define T_NB_LIVE			"Nbr live     : "
-# define T_MAX_LIVE			"MAX live     : "
-# define T_NB_CHEKS 		"Nbr checks   : "
-# define T_MAX_CHEKS 		"Max checks   : "
-
-# define T_PLAYER_NAME		 	"Player     : "
-# define T_PLAYER_INDEX 		" index     : "
-# define T_PLAYER_LIVE 			" nb live   : "
-# define T_PLAYER_PROCESS		" nb process: "
-# define T_PLAYER_DEATH_CYCLE	" death at  : "
-# define T_END					"*****GAME OVER*****"
-
-# define T_PC_INDEX		 	"Pc index : "
-# define T_PC_PLAYER 		"   player: "
-# define T_PC_CDOWN 		"   c-down: "
-# define T_PC_OPCODE		"   opcode: "
-
-# define GRAPH_TITLE_1 "Proportion code by player in cycles    [M]"
-# define GRAPH_TITLE_2 "Proportion process by player in cycles [M]"
-# define GRAPH_TITLE_3 "Proportion live by player in cycles    [M]"
+# define T_TURN 			"Turn         : "
+# define T_TOT_TURN 		"Tot turn     : "
+# define T_MOVE 			"Current move :"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:52:31 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 17:29:58 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 18:59:35 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int		init_param(t_param **param, char *title, int width, int height)
 		free(*param);
 		return (KO);
 	}
-	(*param)->speed = 10;
+	(*param)->speed = 10000;
 	return (OK);
 }
 

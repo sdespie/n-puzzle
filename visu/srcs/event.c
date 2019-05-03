@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 19:20:38 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 17:29:49 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/03 18:52:17 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ static void operate_move(t_state *state, char move)
 
 int		event_loop(t_param *p)
 {
-	if (p->current_step < p->state->g)
+	if (p->run && p->current_step < p->state->g)
 	{
 		visu_print(p, p->state);
 		ft_printf("MOVE: %c \n", p->moves[p->current_step]);
 		operate_move(p->state, p->moves[p->current_step]);
-		usleep(100000);
+		display_info(*p, *(p->mlx), p->moves[p->current_step]);
+		usleep(p->speed);
 		p->current_step++;
 	}
 	return (OK);
@@ -60,10 +61,10 @@ int		event_keyboard(int key, t_param *p)
 		del_param(p);
 	else
 	{
-		if (key == NKMN_KEY && p->speed > SPEED_MIN)
-			p->speed--;
-		if (key == NKPL_KEY && p->speed < SPEED_MAX)
-			p->speed++;
+		if (key == NKMN_KEY && p->speed - 50 > SPEED_MIN)
+			p->speed -= 50;
+		if (key == NKPL_KEY && p->speed + 50 < SPEED_MAX)
+			p->speed += 50;
 		// if (p->run == 0 && !p->end)
 		// 	visu_print(p);
 	}
