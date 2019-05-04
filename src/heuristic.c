@@ -37,8 +37,10 @@ int		man_dist(t_puzzle *puzzle, t_state *state, int i)
 	dist = 0;
 	j = 0;
 	value = puzzle->goal[i];
+	//ft_printf("+++ NEW +++\n");
 	while (state->board[j] != value)
 		j++;
+	//ft_printf("i = %d, value = %d, j = %d\n", i, value, j);
 	dist += ft_abs((j % puzzle->board_size) - (i % puzzle->board_size));
 	dist += ft_abs((j / puzzle->board_size) - (i / puzzle->board_size));
 	return (dist);

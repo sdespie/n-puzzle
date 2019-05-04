@@ -75,3 +75,27 @@ char	*get_moves(t_state *state)
 	}
 	return (moves);
 }
+
+int multiple(t_state *state)
+{
+    int     *tab;
+    int     i;
+    int     j;
+    int     error;
+
+    error = OK;
+    tab = (int *)malloc(sizeof(int) * state->board_count);
+    i = -1;
+    while (++i < state->board_count)
+        tab[i] = -1;
+    i = -1;
+    while (++i < state->board_count)
+    {
+        if (state->board[i] < state->board_count && tab[state->board[i]] == -1)
+            tab[state->board[i]] = state->board[i];
+        else
+            error = KO;
+    }
+    free(tab);
+    return (error);
+}

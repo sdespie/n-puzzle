@@ -40,7 +40,7 @@ void 		left(t_state *state);
 void 		right(t_state *state);
 int			move_add(t_state *pre_move, t_state *state, char move);
 
-int			check_error(t_state *state);
+int			check_error(t_puzzle *puzzle);
 int			check_nextmoves(t_state *state, char next_moves[MAX_MOVES]);
 int			check_valid_start(t_puzzle *puzzle);
 
@@ -48,6 +48,8 @@ int 		is_valid_number(t_puzzle *puzzle, char* number);
 int			ft_abs(int x);
 void		queue_is_sort(t_state *queue);
 char		*get_moves(t_state *state);
+int         multiple(t_state *state);
+
 
 long		ft_atol2(char *s, t_puzzle *puzzle);
 int			ft_atoi2(char *s, t_puzzle *puzzle);

@@ -12,113 +12,53 @@
 
 #include "n_puzzle.h"
 
-static void set_normalized(t_state *state, int *line, t_puzzle *puzzle)
+static int get_index(int *list, int value)
 {
-    int     x;
-    int     y;
-    int     ref;
-    int     i;
-    int     pos;
-    int     size;
-
-	ref = -1;
-	i = 0;
-    size = puzzle->board_size;
-	while (++ref < state->board_size)
-	{
-		x = 0;
-		y = 0;
-		while (puzzle->goal[(ref + y) * state->board_size + ref + x] == 0)
-		{
-			pos = (ref + y) * puzzle->board_size + ref + x;
-			line[i] = puzzle->goal[pos];
-            ft_printf("line[%d] = %d\n", i, line[i]);
-            i++;
-			if (y == 0 && x != size - 1)
-				x++;
-			else if (y == size - 1 && x != 0)
-				x--;
-			else
-				(x == 0 && y != 0) ? y--: y++;
-		}
-		size -= 2;
-	}
-}
-
-static int calc_inversion(t_state *state)
-{
-    int inversion;
     int i;
-    int j;
-    int *ref;
 
-    ref = (int*)malloc(sizeof(int) * state->board_count);
-    inversion = 0;
-    // ft_printf("+=+=+=\n");
-    // set_normalized(state, line, puzzle);
-    // ft_printf("+=+=+=\n");
-    i = -1;
-    while (++i < state->board_count)
-        ref[i] = i;
-    i = -1;
-    while (++i < state->board_count)
-    {
-        j = i + 1;
-        while (j < state->board_count)
-        {
-            if (ref[i] > state->board[j])
-                inversion++;
-            j++;
-        }
-    }
-    return (inversion);
+    i = 0;
+    while (list[i] != value)
+        i++;
+    return (i);
 }
 
-static int multiple(t_state *state)
+static int calc_inversion(t_puzzle *p)
 {
-    int     *tab;
-    int     i;
-    int     j;
-    int     error;
+    int *done;
+    int indexPuzzle;
+    int indexGoal;
+    int nb_inv;
 
-    error = OK;
-    tab = (int *)malloc(sizeof(int) * state->board_count);
-    i = -1;
-    while (++i < state->board_count)
-        tab[i] = -1;
-    i = -1;
-    while (++i < state->board_count)
+    done = (int*)malloc(sizeof(int) * p->board_count);
+    nb_inv = 0;
+    ft_memset(done, 0, (size_t)(sizeof(int) * p->board_count));
+    indexGoal = -1;
+    while (++indexGoal < p->board_count)
     {
-        if (tab[state->board[i]] == -1)
-            tab[state->board[i]] = state->board[i];
-        else
-            error = KO;
+        indexPuzzle = -1;
+        while (++indexPuzzle < get_index(p->opened->board, p->goal[indexGoal]))
+            if (done[p->opened->board[indexPuzzle]] == 0)
+                nb_inv++;
+        done[p->goal[indexGoal]] = 1;
     }
-    free(tab);
-    return (error);
+    return (nb_inv);
 }
 
-int	check_error(t_state *state)
+int check_error(t_puzzle *puzzle)
 {
-    int valid;
-    int size;
-    int inversion;
-    int blank_row;
+    int n_inv;
+    int dist;
+    int i;
 
-    valid = KO;
-    blank_row = state->zero / state->board_size;
-    inversion = calc_inversion(state);
-    if (state->board_size % 2 == 0)
-    {
-        if (blank_row % 2 == 0 && inversion % 2 != 0)
-            valid = OK;
-        else if (blank_row % 2 != 0 && inversion % 2 == 0)
-            valid = OK;
-    }
+    i = -1;
+    dist = 0;
+    n_inv = calc_inversion(puzzle);
+    while (++i < puzzle->board_count)
+        dist += man_dist(puzzle, puzzle->opened, i);
+    if ((dist % 2 == 0 && n_inv % 2 == 0) || (dist % 2 != 0 && n_inv % 2 != 0))
+        return (OK);
     else
-        if (inversion % 2 == 0)
-            valid = OK;
-	return (valid);
+        return (KO);
 }
 
 int	check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
@@ -152,12 +92,12 @@ int	check_valid_start(t_puzzle *puzzle)
 {
 	if (puzzle->heuristic == NULL)
 	{
-		ft_printf("Base data not correct\n");
+		ft_printf("NO HEURISTIC\n");
 		return (KO);
 	}
-	if (check_error(puzzle->opened) == KO)
+	if (multiple(puzzle->opened) == KO || check_error(puzzle) == KO)
 	{
-		ft_printf("Puzzle not correct\n");
+		ft_printf("PUZZLE NOT VALID\n");
 		return (KO);
 	}
 	return (OK);
