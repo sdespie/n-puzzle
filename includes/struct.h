@@ -66,6 +66,7 @@ typedef struct	s_puzzle
 	int 		error_p;
 	int 		error_sign;
 	void		(*heuristic)(struct	s_puzzle *puzzle, t_state *state);
+	int			(*search)(t_state *state);
 	t_state		*opened;
 	t_state		*closed;
 	t_sorttable *sort;

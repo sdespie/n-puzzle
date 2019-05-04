@@ -14,7 +14,8 @@
 
 void	print_usage(t_puzzle *puzzle)
 {
-    ft_printf("Usage : n-puzzle [file / size] [-m -... -...]");
+    ft_printf("Usage : n-puzzle [file / size] [-m -h -e] ");
+    ft_printf("[-astar -greedy -uniform]\n");
     free_all(puzzle);
 }
 

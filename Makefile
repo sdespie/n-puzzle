@@ -16,7 +16,7 @@ CC = gcc
 
 FLAGS = -O3
 # FLAGS += -Wall -Wextra -Werro
-FLAGS += -fsanitize=address
+# FLAGS += -fsanitize=address
 
 IN =	n-puzzle.c\
 		board.c\
@@ -34,10 +34,11 @@ IN =	n-puzzle.c\
 		hashing.c \
 		hashmap.c \
 		sorttable.c \
-		solve.c
+		solve.c \
+		cost_functions.c
 
 IN_VISU = 	visu.c mlx.c colors.c event.c del.c image.c extra.c \
-			display_1.c display_tools.c 
+			display_1.c display_tools.c
 
 LIBFT = ./libft
 

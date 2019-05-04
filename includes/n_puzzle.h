@@ -87,4 +87,8 @@ int			sorttable_init(t_puzzle *puzzle);
 int			sort_newstate(t_puzzle *puzzle, t_state *new_state);
 void 		sort_remove(t_sorttable *sort, t_state *state_close);
 
+int         astar(t_state *state);
+int         greedy(t_state *state);
+int         uniform(t_state *state);
+
 #endif

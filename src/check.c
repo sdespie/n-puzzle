@@ -90,9 +90,9 @@ int	check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
 
 int	check_valid_start(t_puzzle *puzzle)
 {
-	if (puzzle->heuristic == NULL)
+	if (puzzle->heuristic == NULL || puzzle->search == NULL)
 	{
-		ft_printf("NO HEURISTIC\n");
+		ft_printf("NO HEURISTIC OR SEARCH\n");
 		return (KO);
 	}
 	if (multiple(puzzle->opened) == KO || check_error(puzzle) == KO)

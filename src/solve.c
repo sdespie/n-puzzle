@@ -18,7 +18,7 @@ static int	treat_new_state(t_puzzle *puzzle, t_state *new_state)
 
 	(DEBUG_SORT) ? ft_printf("treat_new_state::start\n") : 0;
 	puzzle->heuristic(puzzle, new_state);
-	new_state->eval = new_state->h + new_state->g;
+	puzzle->search(new_state);
 	(DEBUG_HARD) ? print_state(new_state) : 0;
 	hash_state = hash_process(puzzle->map, new_state);
 	(DEBUG_SORT) ? ft_printf("treat_new_state::hash_state %d\n", hash_state) : 0;
@@ -75,7 +75,7 @@ int			solve(t_puzzle *puzzle)
 	print_state(puzzle->opened);
 	ft_printf("====\n");
 	puzzle->heuristic(puzzle, puzzle->opened);
-	puzzle->opened->eval = puzzle->opened->h + puzzle->opened->g;
+	puzzle->search(puzzle->opened);
 	if (hash_process(puzzle->map, puzzle->opened) != OK)
 		return (KO);
 	puzzle->opened->id = puzzle->nb_state_create++;

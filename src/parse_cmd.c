@@ -50,6 +50,12 @@ static	int	parse_mode(t_puzzle *puzzle, char *value)
         puzzle->heuristic = h;
     else if(!ft_strcmp(value, "-e"))
         puzzle->heuristic = e;
+    else if(!ft_strcmp(value, "-greedy"))
+        puzzle->search = greedy;
+    else if(!ft_strcmp(value, "-astar"))
+        puzzle->search = astar;
+    else if(!ft_strcmp(value, "-uniform"))
+        puzzle->search = uniform;
     else
         return (KO);
     return (OK);

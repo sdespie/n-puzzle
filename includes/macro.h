@@ -25,7 +25,7 @@
 # define DISPLAY_SORT_INFO 0
 # define DISPLAY 1
 
-# define CMD_SIZE	2
+# define CMD_SIZE	3
 # define OK 1
 # define KO 0
 # define ERROR -1
