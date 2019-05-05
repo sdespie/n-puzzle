@@ -45,13 +45,12 @@ int		event_loop(t_param *p)
 		visu_print(p, p->state);
 		//ft_printf("MOVE: %c \n", p->moves[p->current_step]);
 		operate_move(p->state, p->moves[p->current_step]);
-		display_info(*p, *(p->mlx), p->moves[p->current_step]);
+		display_info(*p, *(p->mlx), p->moves[p->current_step - 1]);
 		p->current_step++;
 		usleep(50000000 / (p->speed * p->speed));
 	}
 	return (OK);
 }
-
 
 int		event_keyboard(int key, t_param *p)
 {
@@ -65,8 +64,8 @@ int		event_keyboard(int key, t_param *p)
 			p->speed -= 10;
 		if (key == NKPL_KEY && p->speed < SPEED_MAX)
 			p->speed += 10;
-		// if (p->run == 0 && !p->end)
-		// 	visu_print(p);
+		//if (p->run == 0 && !p->end)
+		 	//visu_print(p);
 	}
 	return (OK);
 }
