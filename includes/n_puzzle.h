@@ -69,6 +69,7 @@ void		free_state(t_state *state);
 void 		manhanttan(t_puzzle *puzzle, t_state *state);
 void 		h(t_puzzle *puzzle, t_state *state);
 void		e(t_puzzle *puzzle, t_state *state);
+int		   man_dist(t_puzzle *puzzle, t_state *state, int i);
 
 uint64_t	hashing(t_state *state);
 uint64_t	hashing2(t_state *state);
