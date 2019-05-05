@@ -27,7 +27,7 @@
 # define END 1
 
 # define STRING_X 10
-# define STRING_Y 50
+# define STRING_Y 30
 # define S_H 20
 # define S_W 30
 
@@ -94,8 +94,8 @@
 # define LEFT_ARENA_WIDTH ARENA_X
 # define LEFT_ARENA_HEIGHT WIN_HEIGHT
 
-# define SPEED_MAX 100000
-# define SPEED_MIN 100
+# define SPEED_MAX 100
+# define SPEED_MIN 10
 
 # define CM_CLASSIC 0
 # define CM_GOOGLE 1
@@ -121,6 +121,10 @@
 # define T_SPEED 			"Speed        : "
 # define T_TURN 			"Turn         : "
 # define T_TOT_TURN 		"Tot turn     : "
-# define T_MOVE 			"Current move :"
+# define T_MOVE 			"Current move : "
+# define T_SEARCH 			"Mode            : "
+# define T_HEURI			"Heuristic       : "
+# define T_SIZE 			"Size Complexity : "
+# define T_TIME 			"Time Complexity : "
 
 #endif

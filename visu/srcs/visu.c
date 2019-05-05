@@ -17,22 +17,52 @@
 #include "keycode.h"
 #include "n_puzzle.h"
 
-static int		init_param(t_param **param, char *title, int width, int height)
+static int		init_modes(t_param *param, t_puzzle puzzle)
+{
+	int 	i;
+	t_state *state;
+
+	if (puzzle.heuristic == h)
+		param->heuri = "Hamming";
+	else if (puzzle.heuristic == e)
+		param->heuri = "Euclidian";
+	else
+		param->heuri = "Manhattan Distance";
+	if (puzzle.search == astar)
+		param->search = "A*";
+	else if (puzzle.search == greedy)
+		param->search = "Greedy";
+	else
+		param->search = "Uniform";
+	param->complex_size = puzzle.nb_state_create - puzzle.nb_state_del;
+	i = 0;
+	state = puzzle.closed;
+	while (state->next)
+	{
+		i++;
+		state = state->next;
+	}
+	param->complex_time = i;
+	return (OK);
+}
+
+static int		init_param(t_param **param, char *title, t_puzzle puzzle)
 {
 	if (!((*param) = (t_param *)ft_memalloc(sizeof(t_param))))
 		return (KO);
-	if (!((*param)->mlx = mlx_init_window(width, height, title)))
+	if (!((*param)->mlx = mlx_init_window(WIN_WIDTH, WIN_HEIGHT, title)))
 	{
 		free(*param);
 		return (KO);
 	}
-	(*param)->speed = 10000;
+	init_modes(*param, puzzle);
+	(*param)->speed = 40;
 	return (OK);
 }
 
-int				visu_init(t_param *p, t_state *state)
+int				visu_init(t_param *p, t_state *state, t_puzzle puzzle)
 {
-	if (init_param(&p, T_WIN, WIN_WIDTH, WIN_HEIGHT) == KO)
+	if (init_param(&p, T_WIN, puzzle) == KO)
 		return (KO);
 	p->state = state;
 	if (!(p->moves = get_moves(state)))

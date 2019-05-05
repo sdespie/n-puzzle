@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 	{
 		board_copy(puzzle.opened->board, puzzle.base, puzzle.board_count);
 		puzzle.opened->zero = puzzle.zero_base;
-		visu_init(visu, puzzle.opened);
+		visu_init(visu, puzzle.opened, puzzle);
 			// visu_print(visu, visu->state);
 		// print_step(puzzle.opened);
 		ft_printf("nb_state:-create: %10d :-del: %10d\n", puzzle.nb_state_create, puzzle.nb_state_del);

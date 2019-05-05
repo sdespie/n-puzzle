@@ -18,7 +18,7 @@
 # include "stddef.h"
 # include "libft.h"
 
-int			visu_init(t_param *p, t_state *state);
+int			visu_init(t_param *p, t_state *state, t_puzzle puzzle);
 void		visu_print(t_param *p, t_state *state);
 
 void		del_param(t_param *param);

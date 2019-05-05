@@ -52,7 +52,11 @@ typedef struct	s_param
 	int				colors[3];
 	int				speed;
 	int				current_step;
+	int				complex_time;
+	int				complex_size;
 	char			*moves;
+	char			*heuri;
+	char			*search;
 	t_mlx			*mlx;
 	t_img			*img;
 	t_state			*state;

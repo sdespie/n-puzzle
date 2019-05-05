@@ -21,7 +21,7 @@
 # define IS_SORT 0
 
 # define DISPLAY_STATE_INFO 0
-# define DISPLAY_HASH_INFO 1
+# define DISPLAY_HASH_INFO 0
 # define DISPLAY_SORT_INFO 0
 # define DISPLAY 1
 

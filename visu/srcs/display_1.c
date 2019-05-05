@@ -62,6 +62,27 @@
 // }
 //
 
+void 		display_data(t_param p, t_mlx mlx, int *coord, int c)
+{
+	char	*txt;
+
+	txt = NULL;
+	coord[1] = STRING_Y;
+	coord[0] += 36 * S_W;
+	txt = ft_strjoin(T_HEURI, p.heuri);
+	display_string(mlx, txt, coord, c);
+	txt = ft_strjoin(T_SEARCH, p.search);
+	display_string(mlx, txt, coord, c);
+	txt = ft_strjoin(T_SIZE, ft_itoa(p.complex_size));
+	display_string(mlx, txt, coord, c);
+	txt = ft_strjoin(T_TIME, ft_itoa(p.complex_time));
+	display_string(mlx, txt, coord, c);
+	coord[1] += S_H;
+	txt = ft_strjoin("by ", "adefonta && sde-spie");
+	display_string(mlx, txt, coord, c);
+
+}
+
 void		display_info(t_param p, t_mlx mlx, char move)
 {
 	int		coord[2];
@@ -81,7 +102,7 @@ void		display_info(t_param p, t_mlx mlx, char move)
 	display_string(mlx, txt, coord, c);
 	txt = ft_strjoin(T_MOVE, &move);
 	display_string(mlx, txt, coord, c);
-
+	display_data(p, mlx, coord, c);
 }
 //
 // void		display_cadre(t_img *img)

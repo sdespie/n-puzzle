@@ -100,5 +100,4 @@ void sort_remove(t_sorttable *sort, t_state *state_close)
 			sort->table[state_close->h] = NULL;
 	}
 	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::end\n") : 0;
-
 }
