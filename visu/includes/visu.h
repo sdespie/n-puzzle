@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:54:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 19:01:10 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/06 16:26:31 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_mlx		*mlx_init_window(int width, int height, char *title);
 
 void		color_image(t_img img, int coord[2], int len[2], int color);
 int			color_at_pos(t_img img, int pos, int color);
+int			color_mix(int c1, int c2, double p);
 
 char		*strint(char *base, int data);
 int			coord_to_pos(int x, int y, int width);

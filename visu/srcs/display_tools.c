@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 13:52:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 16:44:47 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/06 16:26:45 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "visu_macro.h"
 #include "mlx.h"
 
-void	display_string(t_mlx mlx, char *line, int coord[2], int color)
+void		display_string(t_mlx mlx, char *line, int coord[2], int color)
 {
 	coord[1] += S_H;
 	if (line)
