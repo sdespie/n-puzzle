@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:42:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 14:48:31 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:06:53 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 		return (KO);
 	head_index = find_prestate_index(puzzle, new_state->h);
 	new_head = state_insort(puzzle->sort->table[head_index], new_state);
+	ft_printf("state_insort_end\n");
 	puzzle->sort->table[new_state->h] = new_state;
 	if (!puzzle->opened || puzzle->opened->h >= new_state->h)
 		puzzle->opened = new_state;

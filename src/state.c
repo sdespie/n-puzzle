@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 14:46:39 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:08:13 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	copy(t_state *base, t_state *dst)
 	(DEBUG_HARD) ? ft_printf("state::copy::start::\n") : 0;
 	board_copy(dst->board, base->board, base->board_count);
 	dst->g = base->g;
+	dst->eval = base->eval;
 	dst->zero = base->zero;
 	dst->moves_size = base->moves_size;
 	(DEBUG_HARD) ? ft_printf("state::copy::end::\n") : 0;
@@ -81,8 +82,9 @@ t_state		*state_newmove(t_state *base, char move)
  	new_state->next = NULL;
  	pre = (queue) ? queue->pre : NULL;
  	tmp = queue;
- 	while (tmp && tmp->h < new_state->h)
+ 	while (tmp && tmp->eval <= new_state->eval)
  	{
+		ft_printf("[%10d - %10llu]\n", tmp->eval, tmp->hash);
  		pre = tmp;
  		tmp = tmp->next;
  	}

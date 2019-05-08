@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 20:11:25 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 16:30:51 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:00:27 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 # define MACRO_H
 
 # define DEBUG_HASH 0
-# define DEBUG_SORT 0
+# define DEBUG_SORT 1
 # define DEBUG_SORT_2 0
 # define DEBUG_HARD 0
 # define DEBUG_HARD_INIT 0
 # define IS_SORT 0
 
-# define DISPLAY_STATE_INFO 0
-# define DISPLAY_HASH_INFO 0
-# define DISPLAY_SORT_INFO 0
+# define DISPLAY_STATE_INFO 1
+# define DISPLAY_HASH_INFO 1
+# define DISPLAY_SORT_INFO 1
 # define DISPLAY 1
 
 # define CMD_SIZE	3
