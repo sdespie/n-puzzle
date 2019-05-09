@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:42:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/07 17:06:53 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:50:21 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	find_prestate_index(t_puzzle *puzzle, int index_base)
 	while (index > 0 && !puzzle->sort->table[index])
 		index--;
 	if (index == 0)
-		return ((puzzle->opened) ? puzzle->opened->h : index_base);
+		return ((puzzle->opened) ? puzzle->opened->eval : index_base);
 	return (index);
 }
 
@@ -71,14 +71,14 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 	t_state	*new_head;
 
 	(DEBUG_SORT) ? ft_printf("sort_newstate::start\n") : 0;
-	(DEBUG_SORT) ? ft_printf("new [%10d - %10llu]\n", new_state->h, new_state->hash) : 0;
-	if (new_state->h >= puzzle->sort->size && expand(puzzle->sort) != OK)
+	(DEBUG_SORT) ? ft_printf("new [%10d - %10llu]\n", new_state->eval, new_state->hash) : 0;
+	if (new_state->eval >= puzzle->sort->size && expand(puzzle->sort) != OK)
 		return (KO);
-	head_index = find_prestate_index(puzzle, new_state->h);
+	head_index = find_prestate_index(puzzle, new_state->eval);
 	new_head = state_insort(puzzle->sort->table[head_index], new_state);
-	ft_printf("state_insort_end\n");
-	puzzle->sort->table[new_state->h] = new_state;
-	if (!puzzle->opened || puzzle->opened->h >= new_state->h)
+	(DEBUG_SORT) ? ft_printf("state_insort_end\n") : 0;
+	puzzle->sort->table[new_state->eval] = new_state;
+	if (!puzzle->opened || puzzle->opened->eval > new_state->eval)
 		puzzle->opened = new_state;
 	puzzle->opened->pre = NULL;
 	(DEBUG_SORT) ? print_sort(puzzle->sort) : 0;
@@ -93,12 +93,12 @@ void sort_remove(t_sorttable *sort, t_state *state_close)
 	if (state_close->next)
 		state_close->next->pre = state_close->pre;
 	state_close->pre = NULL;
-	if (sort->table[state_close->h] && sort->table[state_close->h]->hash == state_close->hash)
+	if (sort->table[state_close->eval] && sort->table[state_close->eval]->hash == state_close->hash)
 	{
-		if (state_close->next && state_close->next->h == state_close->h)
-			sort->table[state_close->h] = state_close->next;
+		if (state_close->next && state_close->next->eval == state_close->eval)
+			sort->table[state_close->eval] = state_close->next;
 		else
-			sort->table[state_close->h] = NULL;
+			sort->table[state_close->eval] = NULL;
 	}
 	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::end\n") : 0;
 }

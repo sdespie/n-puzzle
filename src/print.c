@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 17:12:53 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:34:55 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void	print_queue(t_state	*queue)
 	ft_printf("print_queue\n");
 	while (tmp)
 	{
-		ft_printf("[%10d - %10llu]\n", tmp->h, tmp->hash);
+		ft_printf("[%10d - %10llu]\n", tmp->eval, tmp->hash);
 		pre = tmp;
 		tmp = tmp->next;
 	}
 	ft_printf("print_revertqueue\n");
 	while (pre)
 	{
-		ft_printf("[%10d - %10llu]\n", pre->h, pre->hash);
+		ft_printf("[%10d - %10llu]\n", pre->eval, pre->hash);
 		pre = pre->pre;
 	}
 }
@@ -74,7 +74,7 @@ void	print_sort(t_sorttable *sort)
 	for (int i = 0; i < sort->size; i++)
 	{
 		if (sort->table[i])
-			ft_printf("[%10d - %10llu]\n", sort->table[i]->h, sort->table[i]->hash);
+			ft_printf("[%10d - %10llu]\n", sort->table[i]->eval, sort->table[i]->hash);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:52:31 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 18:59:35 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:31:04 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,6 @@ void			visu_print(t_param *p, t_state *state)
 		display_board(p->state, img);
 		mlx_put_image_to_window(p->mlx->ptr, p->mlx->win, img->ptr, 0, 0);
 		free_image(p, img);
+		display_info(*p, *(p->mlx), p->moves[p->current_step]);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 19:20:38 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/06 16:54:05 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 18:06:09 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,16 @@ int		event_loop(t_param *p)
 {
 	int turn;
 
-	if (p->run && p->current_step <= p->state->g)
+	if (p->run && p->current_step < p->state->g)
 	{
-		visu_print(p, p->state);
-		//ft_printf("MOVE: %c \n", p->moves[p->current_step]);
 		turn = (p->speed > 100) ? (p->speed - 100) / 10 : 1;
-		while (turn-- > 0 && p->current_step < p->state->g)
+		if (p->current_step + turn > p->state->g - 1)
+		  	turn = p->state->g - 1 - p->current_step;
+		while (turn-- > 0)
 			operate_move(p->state, p->moves[p->current_step++]);
-		display_info(*p, *(p->mlx), p->moves[p->current_step - 2]);
+		if (p->current_step > (p->state->g - 1))
+		  	p->current_step = p->state->g - 1;
+		visu_print(p, p->state);
 		usleep(50000000 / (p->speed * p->speed));
 	}
 	else

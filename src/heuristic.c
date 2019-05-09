@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:10:55 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 03:11:04 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:15:41 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,11 @@ void h(t_puzzle *puzzle, t_state *state)
 {
 	int		i;
 
-	i = 0;
+	i = -1;
 	state->h = 0;
-	while (i < puzzle->board_count)
-	{
+	while (++i < puzzle->board_count)
 		if (puzzle->goal[i] != state->board[i])
 			state->h += 1;
-		i++;
-	}
 }
 
 // Euclidean
@@ -80,8 +77,8 @@ void e(t_puzzle *puzzle, t_state *state)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	state->h = 0;
-	while (i < puzzle->board_count)
+	while (++i < puzzle->board_count)
 		state->h += eucl_dist(puzzle, state, i);
 }

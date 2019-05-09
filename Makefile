@@ -6,7 +6,7 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/05/03 17:05:12 by adefonta         ###   ########.fr        #
+#    Updated: 2019/05/09 17:04:28 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 FLAGS = -O3
 # FLAGS += -Wall -Wextra -Werro
-# FLAGS += -fsanitize=address
+FLAGS += -fsanitize=address
 
 IN =	n-puzzle.c\
 		board.c\

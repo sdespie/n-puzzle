@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 16:14:02 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/07 16:27:34 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:02:57 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@
 # define LEFT_ARENA_WIDTH ARENA_X
 # define LEFT_ARENA_HEIGHT WIN_HEIGHT
 
-# define SPEED_MAX 100
+# define SPEED_MAX 1000
 # define SPEED_MIN 10
 
 # define CM_CLASSIC 0
@@ -103,6 +103,7 @@
 # define CM_BLUE 3
 # define CM_PINK 4
 
+# define C_BLACK 0x000000
 # define C_DARK 0x120E0E
 # define C_DARK1 0xFAFAFA
 # define C_ANTH 0x181D21

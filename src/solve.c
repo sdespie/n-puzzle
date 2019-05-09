@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:52:36 by adefonta          #+#    #+#             */
-/*   Updated: 2019/04/12 04:02:02 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 18:19:18 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	treat_new_state(t_puzzle *puzzle, t_state *new_state)
 	(DEBUG_HARD) ? print_state(new_state) : 0;
 	hash_state = hash_process(puzzle->map, new_state);
 	(DEBUG_SORT) ? ft_printf("treat_new_state::hash_state %d\n", hash_state) : 0;
-
 	if (hash_state == ERROR)
 		return (KO);
 	// if (state_is_new(puzzle->opened, new_state) && state_is_new(puzzle->closed, new_state))

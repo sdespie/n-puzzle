@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/03 16:50:54 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:52:23 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ int main(int argc, char **argv)
 	{
 		board_copy(puzzle.opened->board, puzzle.base, puzzle.board_count);
 		puzzle.opened->zero = puzzle.zero_base;
-		visu_init(visu, puzzle.opened, puzzle);
-			// visu_print(visu, visu->state);
-		// print_step(puzzle.opened);
 		ft_printf("nb_state:-create: %10d :-del: %10d\n", puzzle.nb_state_create, puzzle.nb_state_del);
+		visu_init(visu, puzzle.opened, puzzle);
+		// print_step(puzzle.opened);
 	}
    	free_all(&puzzle);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:07:01 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/06 16:27:37 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:03:02 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		display_board(t_state *state, t_img *img)
 		}
 		if (state->board[i] != 0)
 		{
-			color = color_mix(C_RED, C_BLUE,
+			color = color_mix(C_RED, C_BLACK,
 				(double)state->board[i] / (double) state->board_count);
 			display_piece(img, start, size, color);
 		}

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/07 17:08:13 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:11:44 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_state		*state_newmove(t_state *base, char move)
  	tmp = queue;
  	while (tmp && tmp->eval <= new_state->eval)
  	{
-		ft_printf("[%10d - %10llu]\n", tmp->eval, tmp->hash);
+		(DEBUG_SORT) ? ft_printf("[%10d - %10llu]\n", tmp->eval, tmp->hash) : 0;
  		pre = tmp;
  		tmp = tmp->next;
  	}
