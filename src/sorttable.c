@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:42:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/09 17:50:21 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:40:10 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 	if (new_state->eval >= puzzle->sort->size && expand(puzzle->sort) != OK)
 		return (KO);
 	head_index = find_prestate_index(puzzle, new_state->eval);
-	new_head = state_insort(puzzle->sort->table[head_index], new_state);
+	// new_head = state_insort(puzzle->sort->table[head_index], new_state);
+	new_head = state_insort(puzzle->opened, new_state);
 	(DEBUG_SORT) ? ft_printf("state_insort_end\n") : 0;
 	puzzle->sort->table[new_state->eval] = new_state;
 	if (!puzzle->opened || puzzle->opened->eval > new_state->eval)
@@ -88,7 +89,6 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 
 void sort_remove(t_sorttable *sort, t_state *state_close)
 {
-
 	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::start\n") : 0;
 	if (state_close->next)
 		state_close->next->pre = state_close->pre;

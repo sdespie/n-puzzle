@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 14:28:22 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:34:50 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,23 @@ static int	add(t_hashmap *map, t_state *state, uint64_t hash)
 	return (KO);
 }
 
+static int	is_same(t_state *state, t_state *state2)
+{
+	int i;
+
+	i = -1;
+	if (state->h == state2->h && state->hash == state2->hash)
+	{
+		// while (++i < state->board_count)
+		// {
+		// 	if (state->board[i] != state2->board[i])
+		//  		return (KO);
+		// }
+		return (OK);
+	}
+	return (KO);
+}
+
 static int	contains(t_hashmap *map, t_state *state, uint64_t hash)
 {
 	int		i;
@@ -49,7 +66,7 @@ static int	contains(t_hashmap *map, t_state *state, uint64_t hash)
 	while (++i < HASH_MAX_LEVEL)
 	{
 		cmp = map->table[hash_mod];
-		if (cmp && cmp->h == state->h && cmp->hash == state->hash)
+		if (cmp && is_same(state, cmp))
 		{
 			(DEBUG_HASH) ? ft_printf("hash_contains::TRUE\n %d %d -- %llu %llu\n", cmp->h , state->h , cmp->hash, state->hash) : 0;
 			return (OK);
