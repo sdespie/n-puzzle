@@ -41,6 +41,5 @@ int main(int argc, char **argv)
 		//print_step(puzzle.opened);
 	}
    	free_all(&puzzle);
-	while(1);
 	return (1);
 }
