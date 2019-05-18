@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/06 17:04:44 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:09:55 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int	check_valid_start(t_puzzle *puzzle)
 		ft_printf("NO HEURISTIC OR SEARCH\n");
 		return (KO);
 	}
-	// if (multiple(puzzle->opened) == KO || check_error(puzzle) == KO)
-	// {
-	// 	ft_printf("PUZZLE NOT VALID\n");
-	// 	return (KO);
-	// }
+	//if (multiple(puzzle->opened) == KO || check_error(puzzle) == KO)
+//	{
+//		ft_printf("PUZZLE NOT VALID\n");
+//	 	return (KO);
+//	}
 	return (OK);
 }

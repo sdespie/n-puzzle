@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/09 16:35:36 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:28:22 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static int	contains(t_hashmap *map, t_state *state, uint64_t hash)
 	while (++i < HASH_MAX_LEVEL)
 	{
 		cmp = map->table[hash_mod];
-		if (cmp && cmp->eval == state->eval && cmp->hash == state->hash)
+		if (cmp && cmp->h == state->h && cmp->hash == state->hash)
 		{
-			(DEBUG_HASH) ? ft_printf("hash_contains::TRUE\n %d %d -- %llu %llu\n", cmp->eval , state->eval , cmp->hash, state->hash) : 0;
+			(DEBUG_HASH) ? ft_printf("hash_contains::TRUE\n %d %d -- %llu %llu\n", cmp->h , state->h , cmp->hash, state->hash) : 0;
 			return (OK);
 		}
 		hash_mod = (hash_mod + 1) % map->size;

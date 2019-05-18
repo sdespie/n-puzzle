@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/09 16:56:15 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:22:07 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ uint64_t	hashing2(t_state *state)
 	while (++i < state->board_count)
 	{
 		hash_local = hash_unit64_3((uint64_t)state->board[i]);
-		hash += hash_local * (i + 1) + (uint64_t)(state->board[i] + 1) * state->eval;
+		hash += hash_local * (i + 1) + (uint64_t)(state->board[i] + 1) * state->h;
 	}
 	(DEBUG_HASH) ? ft_printf("%llu\n", hash) : 0;
 	return (hash);
@@ -113,7 +113,7 @@ uint64_t	hashing(t_state *state)
 	while (++i < state->board_count)
 	{
 		hash_local = hash_unit64_1((uint64_t)state->board[i]);
-		hash += hash_local * (i + 1) + (uint64_t)(state->board[i] + 1) * state->eval;
+		hash += hash_local * (i + 1) + (uint64_t)(state->board[i] + 1) * state->h;
 	}
 	(DEBUG_HASH) ? ft_printf("%llu\n", hash) : 0;
 	return  (hash);
