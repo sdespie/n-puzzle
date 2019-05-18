@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 22:14:10 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 17:24:02 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:22:05 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include "mlx.h"
 #include "visu_struct.h"
 
-
-void		free_image(t_param *param, t_img *img)
+void	free_image(t_param *param, t_img *img)
 {
 	if (img)
 	{
@@ -24,7 +23,7 @@ void		free_image(t_param *param, t_img *img)
 	}
 }
 
-void		del_param(t_param *param)
+void	del_param(t_param *param)
 {
 	t_mlx	*mlx;
 

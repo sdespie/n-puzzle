@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:07:01 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 15:03:01 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:25:35 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "visu_macro.h"
 #include "libft.h"
 
-void 		display_data(t_param p, t_mlx mlx, int *coord, int c)
+void		display_data(t_param p, t_mlx mlx, int *coord, int c)
 {
 	char	*txt;
 
@@ -58,7 +58,7 @@ void		display_info(t_param p, t_mlx mlx, char move)
 	display_data(p, mlx, coord, c);
 }
 
-static void		display_piece(t_img *img, int start[2], int color)
+static void	display_piece(t_img *img, int start[2], int color)
 {
 	int	index[2];
 
@@ -68,16 +68,17 @@ static void		display_piece(t_img *img, int start[2], int color)
 		index[0] = -1;
 		while (++index[0] < img->piece_size)
 		{
-			img->data[coord_to_pos(start[0] + index[0], start[1] + index[1], WIN_WIDTH)] = color;
+			img->data[coord_to_pos(start[0] + index[0],
+					start[1] + index[1], WIN_WIDTH)] = color;
 		}
 	}
 }
 
-void		display_board(t_mlx *mlx, t_state *state, t_img *img)
+void		display_board(t_state *state, t_img *img)
 {
 	int		i;
 	int		start[2];
-	int 	color;
+	int		color;
 
 	i = -1;
 	start[0] = BOARD_START;
@@ -93,7 +94,7 @@ void		display_board(t_mlx *mlx, t_state *state, t_img *img)
 		if (state->board[i] != 0)
 		{
 			color = color_mix(C_RED, C_BLUE,
-				(double)state->board[i] / (double) state->board_count);
+				(double)state->board[i] / (double)state->board_count);
 			display_piece(img, start, color);
 		}
 	}
@@ -103,7 +104,6 @@ void		display_numb(t_mlx *mlx, t_state *state, int size)
 {
 	int		i;
 	int		start[2];
-	int 	color;
 	char	*line;
 
 	i = -1;
@@ -118,7 +118,8 @@ void		display_numb(t_mlx *mlx, t_state *state, int size)
 			start[1] += BOARD_SPACE + size;
 		}
 		line = ft_itoa(state->board[i]);
-		mlx_string_put(mlx->ptr, mlx->win, start[0] + 50, start[1] + 50, C_BLACK, line);
+		mlx_string_put(mlx->ptr, mlx->win, start[0] + 50,
+			start[1] + 50, C_BLACK, line);
 		free(line);
 	}
 }

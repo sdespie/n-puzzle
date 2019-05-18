@@ -6,7 +6,7 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/05/18 14:29:58 by adefonta         ###   ########.fr        #
+#    Updated: 2019/05/18 21:07:09 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,10 @@ NAME = n-puzzle
 CC = gcc
 
 FLAGS = -O3
-# FLAGS += -Wall -Wextra -Werro
+FLAGS += -Wall -Wextra -Werror
 # FLAGS += -fsanitize=address
 
-IN =	n-puzzle.c\
+IN =	n_puzzle.c\
 		board.c\
 		parse_cmd.c\
 		move.c\
@@ -35,7 +35,8 @@ IN =	n-puzzle.c\
 		hashmap.c \
 		sorttable.c \
 		solve.c \
-		cost_functions.c
+		cost_functions.c \
+		randomize.c
 
 IN_VISU = 	visu.c mlx.c colors.c event.c del.c image.c extra.c \
 			display_1.c display_tools.c

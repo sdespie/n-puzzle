@@ -6,22 +6,22 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 14:56:24 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:20:56 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include <stdint.h>
+# include <stdint.h>
 
-typedef struct s_state
+typedef struct	s_state
 {
 	int					id;
-	int 				*board;
-	int 				eval;
-	int 				g;
-	int 				h;
+	int					*board;
+	int					eval;
+	int					g;
+	int					h;
 	int					zero;
 	int					board_size;
 	int					board_count;
@@ -35,7 +35,7 @@ typedef struct s_state
 	struct s_state		*pre;
 }				t_state;
 
-typedef struct s_hashmap
+typedef struct	s_hashmap
 {
 	int					count;
 	int					size;
@@ -43,7 +43,7 @@ typedef struct s_hashmap
 	t_state				**table;
 }				t_hashmap;
 
-typedef struct s_sorttable
+typedef struct	s_sorttable
 {
 	int					count;
 	int					size;
@@ -57,14 +57,14 @@ typedef struct	s_puzzle
 	char		*data;
 	int			zero_base;
 	int			nb_state_create;
-	int			nb_state_del; // info
+	int			nb_state_del;
 	int			board_size;
 	int			board_count;
 	int			nbr_check;
 	int			nbr_move;
 	int			input;
-	int 		error_p;
-	int 		error_sign;
+	int			error_p;
+	int			error_sign;
 	void		(*heuristic)(struct	s_puzzle *puzzle, t_state *state);
 	int			(*search)(t_state *state);
 	t_state		*opened;

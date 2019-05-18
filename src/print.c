@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 18:36:16 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:06:48 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 void	print_usage(t_puzzle *puzzle)
 {
-    ft_printf("Usage : n-puzzle [file / size] [-m -h -e] ");
-    ft_printf("[-astar -greedy -uniform]\n");
-    free_all(puzzle);
+	ft_printf("Usage : n-puzzle [file / size] [-m -h -e] ");
+	ft_printf("[-astar -greedy -uniform]\n");
+	free_all(puzzle);
 }
 
 void	print_board(int *board, int count, int size)
 {
-    int i;
-    int j;
+	int i;
 
-    ft_printf("++++++++ BOARD ++++++\n");
-    i = 0;
-    while (i < count)
-    {
-        ft_printf("% .2d", board[i++]);
+	ft_printf("++++++++ BOARD ++++++\n");
+	i = 0;
+	while (i < count)
+	{
+		ft_printf("% .2d", board[i++]);
 		if ((i % size) == 0)
-        	ft_printf("\n");
-    }
+			ft_printf("\n");
+	}
 }
 
 void	print_state(t_state *state)

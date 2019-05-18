@@ -6,22 +6,21 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/09 18:07:12 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:08:50 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
 
-int     is_valid_number(t_puzzle *puzzle, char *number)
+int		is_valid_number(t_puzzle *puzzle, char *number)
 {
-    puzzle->error_p = 0;
-    puzzle->error_sign = 0;
-    if (ft_atoi2(number, puzzle) == ft_atol2(number, puzzle)\
-        && ft_atoi2(number, puzzle) >= 0 && !puzzle->error_p\
-        && puzzle->error_sign < 2)
-        return (1);
-    else
-        return (0);
+	puzzle->error_p = 0;
+	puzzle->error_sign = 0;
+	if (ft_atoi2(number, puzzle) == ft_atol2(number, puzzle)\
+		&& ft_atoi2(number, puzzle) >= 0 && !puzzle->error_p\
+		&& puzzle->error_sign < 2)
+		return (1);
+	return (0);
 }
 
 int		ft_abs(int x)
@@ -31,7 +30,7 @@ int		ft_abs(int x)
 	return (x);
 }
 
-void		queue_is_sort(t_state *queue)
+void	queue_is_sort(t_state *queue)
 {
 	int		is_sort;
 	int		pre_eval;
@@ -63,7 +62,7 @@ char	*get_moves(t_state *state)
 	char	*moves;
 	t_state	*pre_move;
 
-	if (!(moves = (char *)calloc(sizeof(char) , (state->g))))
+	if (!(moves = (char *)calloc(sizeof(char), (state->g))))
 		return (NULL);
 	pre_move = state;
 	i = state->g;
@@ -76,26 +75,25 @@ char	*get_moves(t_state *state)
 	return (moves);
 }
 
-int multiple(t_state *state)
+int		multiple(t_state *state)
 {
-    int     *tab;
-    int     i;
-    int     j;
-    int     error;
+	int	*tab;
+	int	i;
+	int	error;
 
-    error = OK;
-    tab = (int *)malloc(sizeof(int) * state->board_count);
-    i = -1;
-    while (++i < state->board_count)
-        tab[i] = -1;
-    i = -1;
-    while (++i < state->board_count)
-    {
-        if (state->board[i] < state->board_count && tab[state->board[i]] == -1)
-            tab[state->board[i]] = state->board[i];
-        else
-            error = KO;
-    }
-    free(tab);
-    return (error);
+	error = OK;
+	tab = (int *)malloc(sizeof(int) * state->board_count);
+	i = -1;
+	while (++i < state->board_count)
+		tab[i] = -1;
+	i = -1;
+	while (++i < state->board_count)
+	{
+		if (state->board[i] < state->board_count && tab[state->board[i]] == -1)
+			tab[state->board[i]] = state->board[i];
+		else
+			error = KO;
+	}
+	free(tab);
+	return (error);
 }

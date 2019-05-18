@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/18 18:37:58 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 21:21:08 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			check_error(t_puzzle *puzzle);
 int			check_nextmoves(t_state *state, char next_moves[MAX_MOVES]);
 int			check_valid_start(t_puzzle *puzzle);
 
-int			is_valid_number(t_puzzle *puzzle, char* number);
+int			is_valid_number(t_puzzle *puzzle, char *number);
 int			ft_abs(int x);
 void		queue_is_sort(t_state *queue);
 char		*get_moves(t_state *state);
@@ -89,4 +89,5 @@ int			astar(t_state *state);
 int			greedy(t_state *state);
 int			uniform(t_state *state);
 
+void		randomize(t_state *state);
 #endif
