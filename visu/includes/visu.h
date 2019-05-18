@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:54:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/06 16:26:31 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:03:48 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void		ft_bzero_double(double *s, size_t n);
 char		*ft_strjoin_f(char *s1, char *s2, int i_free);
 
 void		display_string(t_mlx mlx, char *line, int coord[2], int color);
-void		display_board(t_state *state, t_img *img);
+void		display_board(t_mlx *mlx, t_state *state, t_img *img);
 void		display_info(t_param p, t_mlx mlx, char move);
+void		display_numb(t_mlx *mlx, t_state *state, int size);
 
 #endif

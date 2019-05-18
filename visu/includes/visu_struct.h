@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 16:13:00 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/03 17:22:23 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:57:27 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_img
 	int		opp;
 	int		start;
 	int		org[2];
+	int		piece_size;
 	void	*ptr;
 	int		*data;
 }				t_img;
@@ -41,7 +42,6 @@ typedef struct	s_mlx
 
 typedef struct	s_param
 {
-
 	int				press;
 	int				ready;
 	int				m_color;

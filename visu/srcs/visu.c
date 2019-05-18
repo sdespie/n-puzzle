@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:52:31 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/09 17:31:04 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:04:27 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,19 @@ int				visu_init(t_param *p, t_state *state, t_puzzle puzzle)
 	return (OK);
 }
 
-static t_img	*new_map(t_mlx *mlx, int width, int height)
+static t_img	*new_map(t_mlx *mlx, int width, int height, t_state *state)
 {
 	t_img	*img;
 	int		len[2];
+	int		val;
 
 	len[0] = width;
 	len[1] = height;
 	if (!(img = img_create(mlx, len)))
 		return (NULL);
+	val = 2 * BOARD_START;
+	img->piece_size = (img->dim[0] - val < img->dim[1] - val) ? img->dim[0] - val : img->dim[1] - val;
+	img->piece_size = img->piece_size / state->board_size - BOARD_SPACE;
 	return (img);
 }
 
@@ -95,11 +99,12 @@ void			visu_print(t_param *p, t_state *state)
 {
 	t_img	*img;
 
-	if ((img = new_map(p->mlx, WIN_WIDTH, WIN_HEIGHT)))
+	if ((img = new_map(p->mlx, WIN_WIDTH, WIN_HEIGHT, state)))
 	{
-		display_board(p->state, img);
+		display_board(p->mlx, p->state, img);
 		mlx_put_image_to_window(p->mlx->ptr, p->mlx->win, img->ptr, 0, 0);
-		free_image(p, img);
 		display_info(*p, *(p->mlx), p->moves[p->current_step]);
+		display_numb(p->mlx, p->state, img->piece_size);
+		free_image(p, img);
 	}
 }

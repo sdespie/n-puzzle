@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 23:35:41 by adefonta          #+#    #+#             */
-/*   Updated: 2019/03/12 17:30:42 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:58:38 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_img	*img_create(t_mlx *mlx, int dim[2])
 
 	if (!(image = (t_img *)malloc(sizeof(t_img))))
 		return (NULL);
+
 	image->dim[0] = dim[0];
 	image->dim[1] = dim[1];
 	image->ptr = mlx_new_image(mlx->ptr, image->dim[0], image->dim[1]);

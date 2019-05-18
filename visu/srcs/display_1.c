@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:07:01 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/09 17:03:02 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:03:01 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,48 +58,67 @@ void		display_info(t_param p, t_mlx mlx, char move)
 	display_data(p, mlx, coord, c);
 }
 
-static void		display_piece(t_img *img, int start[2], int size, int color)
+static void		display_piece(t_img *img, int start[2], int color)
 {
 	int	index[2];
 
 	index[1] = -1;
-	while (++index[1] < size)
+	while (++index[1] < img->piece_size)
 	{
 		index[0] = -1;
-		while (++index[0] < size)
+		while (++index[0] < img->piece_size)
 		{
 			img->data[coord_to_pos(start[0] + index[0], start[1] + index[1], WIN_WIDTH)] = color;
 		}
 	}
 }
 
-void		display_board(t_state *state, t_img *img)
+void		display_board(t_mlx *mlx, t_state *state, t_img *img)
 {
-	int	i;
-	int	start[2];
-	int	size;
-	int	space;
-	int color;
+	int		i;
+	int		start[2];
+	int 	color;
 
-	space = 10;
-	size = (img->dim[0] - 400 < img->dim[1] - 400) ? img->dim[0] - 400 : img->dim[1] - 400;
-	size = size / state->board_size - space;
 	i = -1;
-	start[0] = 200;
-	start[1] = -size + 200;
+	start[0] = BOARD_START;
+	start[1] = -img->piece_size + BOARD_START;
 	while (++i < state->board_count)
 	{
-		start[0] += size + space;
+		start[0] += img->piece_size + BOARD_SPACE;
 		if (i % state->board_size == 0)
 		{
-			start[0] = 200;
-			start[1] += space + size;
+			start[0] = BOARD_START;
+			start[1] += BOARD_SPACE + img->piece_size;
 		}
 		if (state->board[i] != 0)
 		{
-			color = color_mix(C_RED, C_BLACK,
+			color = color_mix(C_RED, C_BLUE,
 				(double)state->board[i] / (double) state->board_count);
-			display_piece(img, start, size, color);
+			display_piece(img, start, color);
 		}
+	}
+}
+
+void		display_numb(t_mlx *mlx, t_state *state, int size)
+{
+	int		i;
+	int		start[2];
+	int 	color;
+	char	*line;
+
+	i = -1;
+	start[0] = BOARD_START;
+	start[1] = -size + BOARD_START;
+	while (++i < state->board_count)
+	{
+		start[0] += size + BOARD_SPACE;
+		if (i % state->board_size == 0)
+		{
+			start[0] = BOARD_START;
+			start[1] += BOARD_SPACE + size;
+		}
+		line = ft_itoa(state->board[i]);
+		mlx_string_put(mlx->ptr, mlx->win, start[0] + 50, start[1] + 50, C_BLACK, line);
+		free(line);
 	}
 }

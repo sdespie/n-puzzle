@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 16:14:02 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/09 17:02:57 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:01:20 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@
 # define END_HEIGHT WIN_HEIGHT * 0.6
 # define STRING_END_X  END_X + END_WIDTH * 0.2
 # define STRING_END_Y  END_Y + END_HEIGHT * 0.2
+
+# define BOARD_SPACE 10
+# define BOARD_START 200
 
 # define LEFT_ARENA_WIDTH ARENA_X
 # define LEFT_ARENA_HEIGHT WIN_HEIGHT
