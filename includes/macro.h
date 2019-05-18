@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 20:11:25 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/09 18:13:46 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:27:11 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@
 # define HASH_SIZE 500
 # define HASH_MAX_LEVEL 5
 
+# define PRINT_HASH "hash: size %10d::count %8d::colision %6d\n"
 #endif

@@ -6,20 +6,20 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/04/12 04:02:50 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:38:18 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
 #include "macro.h"
 
-static void set_snail(t_puzzle *puzzle, int *pos)
+static void	set_snail(t_puzzle *puzzle, int *pos)
 {
-    int     x;
-    int     y;
-    int     current;
-    int     size;
-    int     ref;
+	int	x;
+	int	y;
+	int	current;
+	int	size;
+	int	ref;
 
 	size = puzzle->board_size;
 	ref = -1;
@@ -37,7 +37,7 @@ static void set_snail(t_puzzle *puzzle, int *pos)
 			else if (y == size - 1 && x != 0)
 				x--;
 			else
-				(x == 0 && y != 0) ? y--: y++;
+				(x == 0 && y != 0) ? y-- : y++;
 		}
 		size -= 2;
 	}
@@ -46,49 +46,44 @@ static void set_snail(t_puzzle *puzzle, int *pos)
 
 static int	is_ok(t_state *state)
 {
-	for (int i = 0; i < state->board_count; i++)
+	int i;
+
+	i = -1;
+	while (++i < state->board_count)
 	{
 		if (state->board[i] == 0 && i != state->zero)
-		{
-			(DEBUG_HARD_INIT) ? ft_printf("board::is_ok::fail\n") : 0;
 			return (KO);
-		}
 	}
-	(DEBUG_HARD_INIT) ? ft_printf("board::is_ok::succeed\n") : 0;
 	return (OK);
 }
 
-static void randomize(t_state *state)
+static void	randomize(t_state *state)
 {
-    int     nbr_move;
-    int     move;
-    time_t  t;
+	int		nbr_move;
+	int		move;
+	time_t	t;
 
-	(DEBUG_HARD_INIT) ? ft_printf("\n=== randomize === \n") : 0;
-    srand((unsigned) time(&t));
-    nbr_move = rand() % 200000;
-	(DEBUG_HARD_INIT) ? print_state(state) : 0;
-    ft_printf("\nnbr move = %d\n", nbr_move);
-    while (nbr_move--)
-    {
-        move = rand() % 4;
-        move == 0 ? up(state) : 0;
-        move == 1 ? down(state) : 0;
-        move == 2 ? left(state) : 0;
-        move == 3 ? right(state) : 0;
-		(DEBUG_HARD_INIT) ? ft_printf("Move is : %d\n", move) : 0;
-		(DEBUG_HARD_INIT) ? print_state(state) : 0;
+	srand((unsigned)time(&t));
+	nbr_move = rand() % 200000;
+	ft_printf("\nnbr move = %d\n", nbr_move);
+	while (nbr_move--)
+	{
+		move = rand() % 4;
+		move == 0 ? up(state) : 0;
+		move == 1 ? down(state) : 0;
+		move == 2 ? left(state) : 0;
+		move == 3 ? right(state) : 0;
 		if (is_ok(state) != OK)
 			break ;
-    }
+	}
 }
 
-void board_copy(int *dst, int *src, int count)
+void	board_copy(int *dst, int *src, int count)
 {
-    int     i;
+    int	i;
 
-    i = -1;
-    while (++i < count)
+	i = -1;
+	while (++i < count)
 		dst[i] = src[i];
 }
 
@@ -96,7 +91,6 @@ int		*board_create(int count)
 {
 	int	*board;
 
-	(DEBUG_HARD) ? ft_printf("board_create::count %d\n", count) : 0;
 	if (!(board = (int *)ft_memalloc(sizeof(int) * (count))))
 		return (NULL);
 	return (board);

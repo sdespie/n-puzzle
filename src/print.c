@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:22:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/09 17:34:55 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:36:16 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	print_state(t_state *state)
 	print_board(state->board, state->board_count, state->board_size);
 }
 
-void	print_queue(t_state	*queue)
+void	print_queue(t_state *queue)
 {
 	t_state	*tmp;
 	t_state	*pre;
@@ -64,17 +64,6 @@ void	print_queue(t_state	*queue)
 	{
 		ft_printf("[%10d - %10llu]\n", pre->eval, pre->hash);
 		pre = pre->pre;
-	}
-}
-
-void	print_sort(t_sorttable *sort)
-{
-	ft_printf("print_sort\n");
-
-	for (int i = 0; i < sort->size; i++)
-	{
-		if (sort->table[i])
-			ft_printf("[%10d - %10llu]\n", sort->table[i]->eval, sort->table[i]->hash);
 	}
 }
 

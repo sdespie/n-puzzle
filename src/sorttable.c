@@ -6,31 +6,31 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 20:42:13 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 15:40:10 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:44:07 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "n_puzzle.h"
+#include "n_puzzle.h"
 
-static int	expand(t_sorttable *sort)
+static int	expand(t_sorttable *s)
 {
 	int		i;
 	int		size_old;
 	t_state	**table_old;
 
 	i = -1;
-	if (sort)
+	if (s)
 	{
-		size_old = sort->size;
-		sort->size *= 2;
-		(DISPLAY_SORT_INFO) ? ft_printf("sorttable_expand::size %10d::count %8d\n", sort->size, sort->count) : 0;
-		table_old = sort->table;
-		if (!sort->table)
+		size_old = s->size;
+		s->size *= 2;
+		table_old = s->table;
+		if (!s->table)
 		{
-		 	if (!(sort->table = (t_state **)calloc(sizeof(t_state*), sort->size)))
+			if (!(s->table = (t_state **)calloc(sizeof(t_state*), s->size)))
 				return (error_print("Error: sorttable table calloc"));
 		}
-		else if (!(sort->table = (t_state **)realloc(sort->table, sizeof(t_state*) * sort->size)))
+		else if (!(s->table = (t_state **)realloc(s->table,
+												sizeof(t_state*) * s->size)))
 			return (error_print("Error: sorttable table realloc"));
 	}
 	return (OK);
@@ -40,7 +40,6 @@ int			sorttable_init(t_puzzle *puzzle)
 {
 	t_sorttable	*sort;
 
-	(DEBUG_SORT) ? ft_printf("sort_init::start\n") : 0;
 	if (!(sort = (t_sorttable*)malloc(sizeof(t_sorttable))))
 		return (error_print("Error: sorttable malloc"));
 	sort->count = 0;
@@ -57,7 +56,6 @@ static int	find_prestate_index(t_puzzle *puzzle, int index_base)
 	int	index;
 
 	index = index_base;
-	(DEBUG_SORT_2) ? ft_printf("sorttable::find_prestate_index:: index_base %d\n", index_base) : 0;
 	while (index > 0 && !puzzle->sort->table[index])
 		index--;
 	if (index == 0)
@@ -70,35 +68,28 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 	int		head_index;
 	t_state	*new_head;
 
-	(DEBUG_SORT) ? ft_printf("sort_newstate::start\n") : 0;
-	(DEBUG_SORT) ? ft_printf("new [%10d - %10llu]\n", new_state->eval, new_state->hash) : 0;
 	if (new_state->eval >= puzzle->sort->size && expand(puzzle->sort) != OK)
 		return (KO);
 	head_index = find_prestate_index(puzzle, new_state->eval);
 	new_head = state_insort(puzzle->sort->table[head_index], new_state);
-    new_head = state_insort(puzzle->opened, new_state);
-	(DEBUG_SORT) ? ft_printf("state_insort_end\n") : 0;
 	puzzle->sort->table[new_state->eval] = new_state;
 	if (!puzzle->opened || puzzle->opened->eval >= new_state->eval)
 		puzzle->opened = new_state;
 	puzzle->opened->pre = NULL;
-	(DEBUG_SORT) ? print_sort(puzzle->sort) : 0;
-	(DEBUG_SORT) ? print_queue(puzzle->opened) : 0;
 	return (OK);
 }
 
-void sort_remove(t_sorttable *sort, t_state *state_close)
+void		sort_remove(t_sorttable *sort, t_state *state_close)
 {
-	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::start\n") : 0;
 	if (state_close->next)
 		state_close->next->pre = state_close->pre;
 	state_close->pre = NULL;
-	if (sort->table[state_close->eval] && sort->table[state_close->eval]->hash == state_close->hash)
+	if (sort->table[state_close->eval] &&
+		sort->table[state_close->eval]->hash == state_close->hash)
 	{
 		if (state_close->next && state_close->next->eval == state_close->eval)
 			sort->table[state_close->eval] = state_close->next;
 		else
 			sort->table[state_close->eval] = NULL;
 	}
-	(DEBUG_SORT_2) ? ft_printf("#########sort_remove::end\n") : 0;
 }
