@@ -18,7 +18,10 @@ static void	free_puzzle(t_puzzle *puzzle)
 		ft_memdel((void**)&puzzle->goal);
 	if (puzzle->data)
 		ft_memdel((void**)&puzzle->data);
-
+	if (puzzle->sort->table)
+		ft_memdel((void**)&puzzle->sort->table);
+	if (puzzle->sort)
+		ft_memdel((void**)&puzzle->sort);
 }
 
 static void free_queue(t_state *queue)
@@ -29,9 +32,8 @@ static void free_queue(t_state *queue)
 	state = queue;
 	while (state)
 	{
-		free_state(state);
 		tmp = state->next;
-		free(state);
+		free_state(state);
 		state = tmp;
 	}
 }
@@ -40,6 +42,7 @@ void		free_state(t_state *state)
 {
 	if (state->board)
 		ft_memdel((void**)&state->board);
+	free(state);
 }
 
 void 		free_all(t_puzzle *puzzle)

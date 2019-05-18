@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/09 17:52:23 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/18 16:01:04 by sde-spie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int main(int argc, char **argv)
 		puzzle.opened->zero = puzzle.zero_base;
 		ft_printf("nb_state:-create: %10d :-del: %10d\n", puzzle.nb_state_create, puzzle.nb_state_del);
 		visu_init(visu, puzzle.opened, puzzle);
-		// print_step(puzzle.opened);
+		//print_step(puzzle.opened);
 	}
    	free_all(&puzzle);
+	while(1);
 	return (1);
 }

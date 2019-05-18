@@ -75,11 +75,11 @@ int			sort_newstate(t_puzzle *puzzle, t_state *new_state)
 	if (new_state->eval >= puzzle->sort->size && expand(puzzle->sort) != OK)
 		return (KO);
 	head_index = find_prestate_index(puzzle, new_state->eval);
-	// new_head = state_insort(puzzle->sort->table[head_index], new_state);
-	new_head = state_insort(puzzle->opened, new_state);
+	new_head = state_insort(puzzle->sort->table[head_index], new_state);
+    new_head = state_insort(puzzle->opened, new_state);
 	(DEBUG_SORT) ? ft_printf("state_insort_end\n") : 0;
 	puzzle->sort->table[new_state->eval] = new_state;
-	if (!puzzle->opened || puzzle->opened->eval > new_state->eval)
+	if (!puzzle->opened || puzzle->opened->eval >= new_state->eval)
 		puzzle->opened = new_state;
 	puzzle->opened->pre = NULL;
 	(DEBUG_SORT) ? print_sort(puzzle->sort) : 0;

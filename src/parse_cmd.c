@@ -12,9 +12,20 @@
 
 #include "n_puzzle.h"
 #include "macro.h"
-// modes && fonctions to be define
 
-static int put_data_in_board(t_puzzle *puzzle)
+static void del_split(char **split)
+{
+    int i;
+
+    i = ft_strlen(*split);
+    while (i-- > 0)
+        if (split[i] != NULL)
+            ft_memdel((void**)&split[i]);
+    if (split != NULL)
+        ft_memdel((void**)&split);
+}
+
+int put_data_in_board(t_puzzle *puzzle)
 {
     int         i;
     size_t      data_len;
@@ -39,10 +50,11 @@ static int put_data_in_board(t_puzzle *puzzle)
     }
     board_copy(puzzle->opened->board, puzzle->base, puzzle->board_count);
     puzzle->opened->zero = puzzle->zero_base;
+    del_split(split);
     return (OK);
 }
 
-static	int	parse_mode(t_puzzle *puzzle, char *value)
+int	parse_mode(t_puzzle *puzzle, char *value)
 {
     if(!ft_strcmp(value, "-m"))
         puzzle->heuristic = manhanttan;
@@ -61,7 +73,7 @@ static	int	parse_mode(t_puzzle *puzzle, char *value)
     return (OK);
 }
 
-static	int	parse_size(t_puzzle *puzzle, char *size)
+int	parse_size(t_puzzle *puzzle, char *size)
 {
 	if (puzzle->opened)
 		return (KO);
@@ -73,11 +85,12 @@ static	int	parse_size(t_puzzle *puzzle, char *size)
     return (KO);
 }
 
-static	int	parse_file(t_puzzle *puzzle, char *file)
+int	parse_file(t_puzzle *puzzle, char *file)
 {
     int     fd;
     char    *line;
     int     ret;
+    char    **tmp;
 
 	if (puzzle->opened)
 		return (KO);
@@ -106,9 +119,10 @@ static	int	parse_file(t_puzzle *puzzle, char *file)
             ft_memdel((void **)&line);
         if (line[0] != '#')
         {
-            char **data = ft_strsplit(line, '#');
+            tmp = ft_strsplit(line, '#');
             puzzle->data = ft_strjoin_free(puzzle->data, " ", 0);
-	        puzzle->data = ft_strjoin_free(puzzle->data, data[0], 2);
+	        puzzle->data = ft_strjoin_free(puzzle->data, tmp[0], 2);
+            free(tmp);
         }
         ft_memdel((void **)&line);
      }

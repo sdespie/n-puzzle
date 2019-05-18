@@ -82,7 +82,7 @@ t_state		*state_newmove(t_state *base, char move)
  	new_state->next = NULL;
  	pre = (queue) ? queue->pre : NULL;
  	tmp = queue;
- 	while (tmp && tmp->eval <= new_state->eval)
+ 	while (tmp && tmp->eval < new_state->eval)
  	{
 		(DEBUG_SORT) ? ft_printf("[%10d - %10llu]\n", tmp->eval, tmp->hash) : 0;
  		pre = tmp;
