@@ -6,7 +6,7 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/05/18 21:07:09 by adefonta         ###   ########.fr        #
+#    Updated: 2019/05/20 19:09:06 by sde-spie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ IN =	n_puzzle.c\
 		sorttable.c \
 		solve.c \
 		cost_functions.c \
-		randomize.c
+		randomize.c\
+		parse_tools.c
 
 IN_VISU = 	visu.c mlx.c colors.c event.c del.c image.c extra.c \
 			display_1.c display_tools.c

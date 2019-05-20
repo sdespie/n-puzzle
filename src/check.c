@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/18 21:19:19 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/20 21:38:46 by sde-spie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	calc_inversion(t_puzzle *p)
 				nb_inv++;
 		done[p->goal[igoal]] = 1;
 	}
+	free(done);
 	return (nb_inv);
 }
 

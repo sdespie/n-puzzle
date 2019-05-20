@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:10:55 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/18 18:19:43 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/20 21:28:36 by sde-spie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 static void	free_puzzle(t_puzzle *puzzle)
 {
-	if (puzzle->goal)
-		ft_memdel((void**)&puzzle->goal);
-	if (puzzle->data)
-		ft_memdel((void**)&puzzle->data);
-	if (puzzle->sort->table)
-		ft_memdel((void**)&puzzle->sort->table);
+	ft_memdel((void**)&puzzle->goal);
+	ft_memdel((void**)&puzzle->data);
 	if (puzzle->sort)
-		ft_memdel((void**)&puzzle->sort);
+		ft_memdel((void**)&puzzle->sort->table);
+	ft_memdel((void**)&puzzle->sort);
 }
 
 static void	free_queue(t_state *queue)

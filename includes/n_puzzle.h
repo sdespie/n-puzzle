@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/18 21:21:08 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/20 19:17:49 by sde-spie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int			*board_create(int count);
 void		board_copy(int *dst, int *src, int count);
 
 int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index);
+
+int			put_data_in_board(t_puzzle *puzzle);
+void		del_split(char **split);
+int			parse_size(t_puzzle *puzzle, char *size);
 
 void		print_board(int *board, int count, int size);
 void		print_usage(t_puzzle *puzzle);

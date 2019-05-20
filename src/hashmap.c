@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 18:31:38 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/20 21:54:44 by sde-spie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static int	expand(t_hashmap *map)
 		if (!(map->table = (t_state **)calloc(sizeof(t_state*), map->size)))
 			return (ERROR);
 		if (old_tab)
-		{
 			while (--size_old >= 0)
 			{
 				if (old_tab[size_old])
@@ -77,7 +76,7 @@ static int	expand(t_hashmap *map)
 						return (KO);
 				}
 			}
-		}
+		free(old_tab);
 	}
 	return (OK);
 }

@@ -6,7 +6,7 @@
 /*   By: sde-spie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 19:10:55 by sde-spie          #+#    #+#             */
-/*   Updated: 2018/11/30 15:18:23 by sde-spie         ###   ########.fr       */
+/*   Updated: 2019/05/20 19:06:59 by sde-spie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int			ft_atoi2(char *s, t_puzzle *puzzle)
 	while (*s == 32 || (*s >= 9 && *s <= 13))
 		s++;
 	sign = *s == '-' ? -1 : 1;
-	if (*s == '+' || *s == '-')
-		s++;
+	(*s == '+' || *s == '-') ? s++ : 0;
 	(*s < '0' || *s > '9') ? puzzle->error_p++ : 0;
 	while (*s >= '0' && *s <= '9')
 	{
@@ -49,7 +48,7 @@ int			ft_atoi2(char *s, t_puzzle *puzzle)
 		if (sign * r > 2147483647 || sign * r < -2147483648)
 			return (sign > 0 ? -1 : 0);
 	}
-	*s != 0 ? puzzle->error_p++ : 0;
+	(*s != 0) ? puzzle->error_p++ : 0;
 	return ((int)(sign * r));
 }
 
