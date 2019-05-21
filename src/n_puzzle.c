@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		free_all(&puzzle);
 		return (0);
 	}
-	ft_printf("++++++++++++++++\n");
+	//ft_printf("++++++++++++++++\n");
 	print_board(puzzle.base, puzzle.board_count, puzzle.board_size);
 	if (check_valid_start(&puzzle) && hash_init(&puzzle) &&
 		sorttable_init(&puzzle) && solve(&puzzle))
@@ -35,10 +35,8 @@ int	main(int argc, char **argv)
 		puzzle.opened->zero = puzzle.zero_base;
 		ft_printf("nb_state:-create: %10d :-del: %10d\n",
 								puzzle.nb_state_create, puzzle.nb_state_del);
-		//visu_init(visu, puzzle.opened, puzzle);
+		visu_init(visu, puzzle.opened, puzzle);
 	}
 	free_all(&puzzle);
-	while (1)
-		;
 	return (1);
 }

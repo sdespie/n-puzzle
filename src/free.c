@@ -39,7 +39,8 @@ void		free_state(t_state *state)
 {
 	if (state->board)
 		ft_memdel((void**)&state->board);
-	free(state);
+	if (state)
+		free(state);
 }
 
 void		free_all(t_puzzle *puzzle)
