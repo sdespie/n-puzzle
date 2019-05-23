@@ -6,7 +6,7 @@
 #    By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/22 14:23:31 by sde-spie          #+#    #+#              #
-#    Updated: 2019/05/20 19:09:06 by sde-spie         ###   ########.fr        #
+#    Updated: 2019/05/23 20:46:40 by adefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ OBJS_VISU = $(addprefix $(OUT_DIR)/,$(IN_VISU:.c=.o))
 all: $(NAME)
 
 
-$(NAME): $(OBJS) $(OBJS_VISU) #lib
+$(NAME): $(OBJS) $(OBJS_VISU) lib
 	@$(CC) $(OBJS) $(OBJS_VISU) $(INC_LIB) $(FLAGS) -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "\033[1;34mN-Puzzle\t\033[1;33mExecutable\t\033[0;32m[OK]\033[0m"
 

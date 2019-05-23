@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 16:13:00 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 14:57:27 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:28:03 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_param
 	int				end;
 	int				colors[3];
 	int				speed;
+	int				display_num;
 	int				current_step;
 	int				complex_time;
 	int				complex_size;
@@ -59,6 +60,7 @@ typedef struct	s_param
 	char			*search;
 	t_mlx			*mlx;
 	t_img			*img;
+	t_puzzle		*puzzle;
 	t_state			*state;
 }				t_param;
 

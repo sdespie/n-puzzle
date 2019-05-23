@@ -3,26 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-spie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 19:11:54 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/20 22:13:15 by sde-spie         ###   ########.fr       */
+/*   Updated: 2019/05/23 00:19:20 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "n_puzzle.h"
 #include "macro.h"
 
-void		del_split(char **split)
+int			del_split(char **split)
 {
-	int	nb_words;
+	int	i;
 
-	nb_words = ft_strlen(*split);
-	while (nb_words-- > 0)
-		if (split[nb_words] != NULL)
-			free(split[nb_words]);
-	if (split != NULL)
-		ft_memdel((void**)&split);
+	i = -1;
+	while (split[++i])
+		free(split[i]);
+	free(split);
+	return (OK);
+}
+
+static int	ft_strrlen(char const *s, char c)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != c && s[i])
+		i++;
+	return (i);
+}
+
+static char	**ft_strnsplit(char const *s, int count, char c)
+{
+	char	**tab;
+	int		i;
+	int		len;
+
+	i = 0;
+	if (!s || count < 0)
+		return (NULL);
+	if ((tab = (char **)malloc(sizeof(*tab) * (count + 1))) == NULL)
+		return (NULL);
+	while (count--)
+	{
+		while (*s == c && *s)
+			s++;
+		len = ft_strrlen(s, c);
+		if ((tab[i++] = ft_strsub(s, 0, len)) == NULL)
+			return (NULL);
+		s += len;
+	}
+	tab[i] = NULL;
+	return (tab);
 }
 
 int			put_data_in_board(t_puzzle *puzzle)
@@ -32,7 +65,8 @@ int			put_data_in_board(t_puzzle *puzzle)
 	char	**split;
 
 	i = -1;
-	split = ft_strsplit(puzzle->data, ' ');
+	if (!(split = ft_strnsplit(puzzle->data, puzzle->board_count, ' ')))
+		return (error_exit(EMALLOC));
 	data_len = 0;
 	while (split[++i] != '\0')
 		data_len++;
@@ -46,12 +80,11 @@ int			put_data_in_board(t_puzzle *puzzle)
 				puzzle->zero_base = i;
 		}
 		else
-			return (KO);
+			return (del_split(split) && error_exit("Error: Not valid board."));
 	}
 	board_copy(puzzle->opened->board, puzzle->base, puzzle->board_count);
 	puzzle->opened->zero = puzzle->zero_base;
-	del_split(split);
-	return (OK);
+	return (del_split(split));
 }
 
 int			parse_size(t_puzzle *puzzle, char *size)
@@ -61,7 +94,10 @@ int			parse_size(t_puzzle *puzzle, char *size)
 	if (is_valid_number(puzzle, size))
 	{
 		puzzle->board_size = ft_atoi2(size, puzzle);
-		return (board_init(puzzle));
+		if (puzzle->board_size >= 3)
+			return (board_init(puzzle));
+		else
+			return (ERROR);
 	}
 	return (KO);
 }

@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 18:07:01 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 21:25:35 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:22:08 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void		display_data(t_param p, t_mlx mlx, int *coord, int c)
 	display_string(mlx, txt, coord, c);
 	txt = ft_strjoin(T_SEARCH, p.search);
 	display_string(mlx, txt, coord, c);
-	txt = ft_strjoin(T_SIZE, ft_itoa(p.complex_size));
+	txt = ft_strjoin_f(T_SIZE, ft_itoa(p.complex_size), 1);
 	display_string(mlx, txt, coord, c);
-	txt = ft_strjoin(T_TIME, ft_itoa(p.complex_time));
+	txt = ft_strjoin_f(T_TIME, ft_itoa(p.complex_time), 1);
 	display_string(mlx, txt, coord, c);
 	coord[1] += S_H;
 	txt = ft_strjoin("by ", "adefonta && sde-spie");

@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/20 21:38:46 by sde-spie         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:04:03 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@ static int	get_index(int *list, int value)
 	return (i);
 }
 
-static int	calc_inversion(t_puzzle *p)
+static int	calc_inversion(t_state *state, int *goal)
 {
 	int	*done;
 	int	ipuzzle;
 	int igoal;
 	int nb_inv;
 
-	done = (int*)malloc(sizeof(int) * p->board_count);
+	done = (int*)malloc(sizeof(int) * state->board_count);
 	nb_inv = 0;
-	ft_memset(done, 0, (size_t)(sizeof(int) * p->board_count));
+	ft_memset(done, 0, (size_t)(sizeof(int) * state->board_count));
 	igoal = -1;
-	while (++igoal < p->board_count)
+	while (++igoal < state->board_count)
 	{
 		ipuzzle = -1;
-		while (++ipuzzle < get_index(p->opened->board, p->goal[igoal]))
-			if (done[p->opened->board[ipuzzle]] == 0)
+		while (++ipuzzle < get_index(state->board, goal[igoal]))
+			if (done[state->board[ipuzzle]] == 0)
 				nb_inv++;
-		done[p->goal[igoal]] = 1;
+		done[goal[igoal]] = 1;
 	}
 	free(done);
 	return (nb_inv);
 }
 
-int			check_error(t_puzzle *puzzle)
+int			check_error(t_state *state, int *goal)
 {
 	int n_inv;
 	int dist;
@@ -53,9 +53,9 @@ int			check_error(t_puzzle *puzzle)
 
 	i = -1;
 	dist = 0;
-	n_inv = calc_inversion(puzzle);
-	while (++i < puzzle->board_count)
-		dist += man_dist(puzzle, puzzle->opened, i);
+	n_inv = calc_inversion(state, goal);
+	while (++i < state->board_count)
+		dist += man_dist(state, goal, i);
 	if ((dist % 2 == 0 && n_inv % 2 == 0) || (dist % 2 != 0 && n_inv % 2 != 0))
 		return (OK);
 	return (KO);
@@ -88,15 +88,12 @@ int			check_nextmoves(t_state *state, char next_moves[MAX_MOVES])
 
 int			check_valid_start(t_puzzle *puzzle)
 {
+	if (puzzle->input == 0)
+		return (error_exit("Error: No Puzzle."));
 	if (puzzle->heuristic == NULL || puzzle->search == NULL)
-	{
-		ft_printf("NO HEURISTIC OR SEARCH\n");
-		return (KO);
-	}
-	if (multiple(puzzle->opened) == KO || check_error(puzzle) == KO)
-	{
-		ft_printf("PUZZLE NOT VALID\n");
-		return (KO);
-	}
+		return (error_exit("Error: No heuristic or search."));
+	if (multiple(puzzle->opened) == KO ||
+		check_error(puzzle->opened, puzzle->goal) == KO)
+		return (error_exit("Error: Puzzle not valid."));
 	return (OK);
 }

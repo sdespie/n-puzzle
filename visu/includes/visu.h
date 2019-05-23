@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:54:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 21:12:15 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:28:27 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "stddef.h"
 # include "libft.h"
 
-int			visu_init(t_param *p, t_state *state, t_puzzle puzzle);
+int			visu_init(t_param *p, t_state *state, t_puzzle *puzzle);
 void		visu_print(t_param *p, t_state *state);
 
 void		del_param(t_param *param);

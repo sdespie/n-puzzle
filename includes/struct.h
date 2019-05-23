@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:23:20 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 21:20:56 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/21 19:57:30 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct	s_state
 	int					zero;
 	int					board_size;
 	int					board_count;
-	int					moves_size;
 	int					hash_level;
 	uint64_t			hash;
 	uint64_t			hash2;

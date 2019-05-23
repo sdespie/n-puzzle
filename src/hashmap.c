@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:58:15 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/20 21:54:44 by sde-spie         ###   ########.fr       */
+/*   Updated: 2019/05/22 18:54:43 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ int			hash_init(t_puzzle *puzzle)
 	t_hashmap	*map;
 
 	if (!(map = (t_hashmap*)malloc(sizeof(t_hashmap))))
-		return (error_exit(puzzle, "Error: hashmap calloc"));
+		return (error_exit("Error: hashmap calloc"));
 	map->count = 0;
 	map->size = HASH_SIZE;
 	map->table = NULL;
 	map->colision = 0;
 	if (expand(map) != OK)
-		return (error_exit(puzzle, "Error: hash_expand calloc"));
+		return (error_exit("Error: hash_expand calloc"));
 	puzzle->map = map;
 	return (OK);
 }

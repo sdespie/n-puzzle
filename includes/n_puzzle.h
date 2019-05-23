@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/20 19:17:49 by sde-spie         ###   ########.fr       */
+/*   Updated: 2019/05/23 00:19:06 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void		board_copy(int *dst, int *src, int count);
 int			parse_cmd(t_puzzle *puzzle, int argc, char **argv, int index);
 
 int			put_data_in_board(t_puzzle *puzzle);
-void		del_split(char **split);
+int			del_split(char **split);
 int			parse_size(t_puzzle *puzzle, char *size);
 
 void		print_board(int *board, int count, int size);
 void		print_usage(t_puzzle *puzzle);
-void		print_state(t_state *state);
 void		print_step(t_state *state);
 void		print_queue(t_state	*queue);
 
@@ -43,7 +42,7 @@ void		left(t_state *state);
 void		right(t_state *state);
 int			move_add(t_state *pre_move, t_state *state, char move);
 
-int			check_error(t_puzzle *puzzle);
+int			check_error(t_state *state, int *goal);
 int			check_nextmoves(t_state *state, char next_moves[MAX_MOVES]);
 int			check_valid_start(t_puzzle *puzzle);
 
@@ -60,7 +59,7 @@ long		ft_atol2(char *s, t_puzzle *puzzle);
 int			ft_atoi2(char *s, t_puzzle *puzzle);
 char		*ft_strjoin_free(char *s1, char *s2, int nb);
 
-int			error_exit(t_puzzle *puzzle, char *str);
+int			error_exit(char *str);
 int			error_print(char *str);
 
 t_state		*state_create(int count, int size);
@@ -71,7 +70,7 @@ void		free_state(t_state *state);
 void		manhanttan(t_puzzle *puzzle, t_state *state);
 void		h(t_puzzle *puzzle, t_state *state);
 void		e(t_puzzle *puzzle, t_state *state);
-int			man_dist(t_puzzle *puzzle, t_state *state, int i);
+int			man_dist(t_state *state, int *goal, int i);
 
 uint64_t	hashing(t_state *state);
 uint64_t	hashing2(t_state *state);
@@ -93,5 +92,5 @@ int			astar(t_state *state);
 int			greedy(t_state *state);
 int			uniform(t_state *state);
 
-void		randomize(t_state *state);
+int			randomize(t_state *state, int *goal);
 #endif

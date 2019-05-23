@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/05 01:52:36 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 18:43:27 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:09:56 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	treat_new_state(t_puzzle *puzzle, t_state *new_state)
 	puzzle->search(new_state);
 	hash_state = hash_process(puzzle->map, new_state);
 	if (hash_state == ERROR)
-		return (KO);
+		return (error_exit("Error: calloc expand error."));
 	if (hash_state == OK)
 	{
 		if (!sort_newstate(puzzle, new_state))
@@ -51,17 +51,16 @@ static int	test_next_state(t_puzzle *puzzle, t_state *base_state)
 	while (++i < nb_moves)
 	{
 		if (!(new_state = state_newmove(base_state, next_moves[i])))
-			return (error_exit(puzzle, "Un state a planté.. mechant malloc!"));
+			return (error_exit("Error: Malloc error."));
 		if (treat_new_state(puzzle, new_state) == KO)
-			return (KO);
+			return (error_exit("Error: Malloc error."));
 	}
 	return (OK);
 }
 
 int			solve(t_puzzle *puzzle)
 {
-	print_state(puzzle->opened);
-	ft_printf("====\n");
+	ft_printf("==== START RESOLVING...\n");
 	puzzle->heuristic(puzzle, puzzle->opened);
 	puzzle->search(puzzle->opened);
 	if (hash_process(puzzle->map, puzzle->opened) != OK)
@@ -72,7 +71,7 @@ int			solve(t_puzzle *puzzle)
 	while (19)
 	{
 		if (!puzzle->opened)
-			return (KO);
+			return (error_exit("Error: Puzzle unsolvable."));
 		if (puzzle->opened->h == 0)
 			return (OK);
 		if (test_next_state(puzzle, puzzle->opened) == KO)

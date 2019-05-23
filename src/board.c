@@ -6,7 +6,7 @@
 /*   By: sde-spie <sde-spie@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/01 14:25:50 by sde-spie          #+#    #+#             */
-/*   Updated: 2019/05/18 21:06:36 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:05:30 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int			board_init(t_puzzle *p)
 		!(p->base = board_create(p->board_count)))
 		return (KO);
 	set_snail(p, &zero);
-	print_board(p->goal, p->board_count, p->board_size);
 	if (!(p->opened = state_create(p->board_count, p->board_size)))
 	{
 		free_all(p);
@@ -81,7 +80,9 @@ int			board_init(t_puzzle *p)
 	if (p->input == 0)
 	{
 		board_copy(p->opened->board, p->goal, p->board_count);
-		randomize(p->opened);
+		if (randomize(p->opened, p->goal) == KO)
+			return (KO);
+		p->input = 1;
 		board_copy(p->base, p->opened->board, p->board_count);
 		p->zero_base = p->opened->zero;
 	}

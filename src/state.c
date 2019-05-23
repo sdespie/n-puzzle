@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 19:28:37 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 18:45:09 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/21 19:57:43 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	copy(t_state *base, t_state *dst)
 	dst->g = base->g;
 	dst->eval = base->eval;
 	dst->zero = base->zero;
-	dst->moves_size = base->moves_size;
 	return (OK);
 }
 

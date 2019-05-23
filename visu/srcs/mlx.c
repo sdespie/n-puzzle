@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 18:14:03 by adefonta          #+#    #+#             */
-/*   Updated: 2019/02/18 18:06:55 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:42:56 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,16 @@ t_mlx		*mlx_init_window(int width, int height, char *title)
 
 	if (!(mlx = (t_mlx *)malloc(sizeof(t_mlx))))
 		return (NULL);
-	mlx->ptr = mlx_init();
-	mlx->win = mlx_new_window(mlx->ptr, width, height, title);
+	if (!(mlx->ptr = mlx_init()))
+	{
+		free(mlx);
+		return (NULL);
+	}
+	if (!(mlx->win = mlx_new_window(mlx->ptr, width, height, title)))
+	{
+		free(mlx);
+		return (NULL);
+	}
 	mlx->dim[0] = width;
 	mlx->dim[1] = height;
 	mlx->color = COLOR;

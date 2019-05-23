@@ -6,7 +6,7 @@
 /*   By: adefonta <adefonta@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:52:31 by adefonta          #+#    #+#             */
-/*   Updated: 2019/05/18 21:24:33 by adefonta         ###   ########.fr       */
+/*   Updated: 2019/05/23 20:27:21 by adefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int		init_modes(t_param *param, t_puzzle puzzle)
 		param->search = "Greedy";
 	else
 		param->search = "Uniform";
-	param->complex_size = puzzle.nb_state_create - puzzle.nb_state_del;
+	param->complex_size = puzzle.nb_state_create;
 	i = 0;
 	state = puzzle.closed;
 	while (state->next)
@@ -60,9 +60,9 @@ static int		init_param(t_param **param, char *title, t_puzzle puzzle)
 	return (OK);
 }
 
-int				visu_init(t_param *p, t_state *state, t_puzzle puzzle)
+int				visu_init(t_param *p, t_state *state, t_puzzle *puzzle)
 {
-	if (init_param(&p, T_WIN, puzzle) == KO)
+	if (init_param(&p, T_WIN, *puzzle) == KO)
 		return (KO);
 	p->state = state;
 	if (!(p->moves = get_moves(state)))
@@ -71,6 +71,7 @@ int				visu_init(t_param *p, t_state *state, t_puzzle puzzle)
 		return (KO);
 	}
 	p->current_step = 0;
+	p->puzzle = puzzle;
 	visu_print(p, state);
 	mlx_hook(p->mlx->win, KEYPRESS, KPMASK, event_keyboard, p);
 	mlx_loop_hook(p->mlx->ptr, event_loop, p);
@@ -99,13 +100,18 @@ static t_img	*new_map(t_mlx *mlx, int width, int height, t_state *state)
 void			visu_print(t_param *p, t_state *state)
 {
 	t_img	*img;
+	char	move;
 
+	move = '-';
 	if ((img = new_map(p->mlx, WIN_WIDTH, WIN_HEIGHT, state)))
 	{
 		display_board(p->state, img);
 		mlx_put_image_to_window(p->mlx->ptr, p->mlx->win, img->ptr, 0, 0);
-		display_info(*p, *(p->mlx), p->moves[p->current_step]);
-		display_numb(p->mlx, p->state, img->piece_size);
+		if (p->current_step < p->state->g)
+			move = p->moves[p->current_step];
+		display_info(*p, *(p->mlx), move);
+		if (p->display_num)
+			display_numb(p->mlx, p->state, img->piece_size);
 		free_image(p, img);
 	}
 }
